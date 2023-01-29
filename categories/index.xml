@@ -16,32 +16,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>category-2</title>
-      <link>http://localhost:1313/categories/category-2/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/category-2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>category-3</title>
-      <link>http://localhost:1313/categories/category-3/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/category-3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Theme preview</title>
-      <link>http://localhost:1313/categories/theme-preview/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/theme-preview/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
