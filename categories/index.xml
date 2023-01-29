@@ -16,5 +16,14 @@
       <description></description>
     </item>
     
+    <item>
+      <title>resume</title>
+      <link>http://localhost:1313/categories/resume/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/categories/resume/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

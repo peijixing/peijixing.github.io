@@ -8,21 +8,21 @@
     <language>zh-cn</language>
     <lastBuildDate>Sun, 29 Jan 2023 14:18:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>个人简历</title>
+      <link>http://localhost:1313/post/resume-oldpei/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/resume-oldpei/</guid>
+      <description>裴继星 18041107717 | mrpeijixing@163.com 在职，正在找工作 | java后台开发 | 14-20K 大连海事大学(211)·电气工程及其自动化专业 个人评价 熟练掌握诸如以下展示技能，并掌握my</description>
+    </item>
+    
+    <item>
       <title>My Frist Post</title>
       <link>http://localhost:1313/post/my-frist-post/</link>
       <pubDate>Sun, 29 Jan 2023 14:18:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/my-frist-post/</guid>
-      <description>这是我的第一篇博客 链接</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://localhost:1313/resume/resume-oldpei/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/resume/resume-oldpei/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 title: &amp;#34;Theme preview&amp;#34; date: 2018-07-10T00:00:00+08:00 lastmod: 2018-07-10T00:00:00+08:00 draft: false tags: [&amp;#34;resume&amp;#34;] categories: [&amp;#34;resume&amp;#34;] weight: 10 contentCopyright: MIT mathjax: true autoCollapseToc: true 裴继星 18041107717 | mrpeijixing@163.com 在职，正在找工作 | java后台开发 | 14-20K 大连海事大学(211)·电</description>
+      <description>这是我的第一篇博客</description>
     </item>
     
   </channel>
