@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>中文 on 老裴的个人博客</title>
+    <link>http://localhost:1313/categories/%E4%B8%AD%E6%96%87/</link>
+    <description>Recent content in 中文 on 老裴的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 29 Jan 2023 14:18:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E4%B8%AD%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Frist Post</title>
+      <link>http://localhost:1313/post/my-frist-post/</link>
+      <pubDate>Sun, 29 Jan 2023 14:18:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/my-frist-post/</guid>
+      <description>这是我的第一篇博客 链接</description>
+    </item>
+    
+  </channel>
+</rss>
