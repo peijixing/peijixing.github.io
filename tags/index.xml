@@ -25,32 +25,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>preview</title>
-      <link>http://localhost:1313/tags/preview/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/preview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tag-3</title>
-      <link>http://localhost:1313/tags/tag-3/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/tag-3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Theme preview</title>
-      <link>http://localhost:1313/tags/theme-preview/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/theme-preview/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
