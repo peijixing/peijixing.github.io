@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://localhost:1313/post/resume-oldpei/</loc>
+    <lastmod>2023-01-29T14:18:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/mybatis-plus-start/</loc>
     <lastmod>2023-02-02T16:05:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -46,6 +53,20 @@
   <url>
     <loc>http://localhost:1313/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
     <lastmod>2023-02-02T16:05:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/resume/</loc>
+    <lastmod>2023-01-29T14:18:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/resume/</loc>
+    <lastmod>2023-01-29T14:18:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
