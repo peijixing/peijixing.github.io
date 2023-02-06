@@ -6,7 +6,34 @@
     <description>Recent content in Posts on 老裴的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 06 Feb 2023 09:04:10 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Feb 2023 09:42:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unsafe</title>
+      <link>http://localhost:1313/post/java/unsafe/</link>
+      <pubDate>Mon, 06 Feb 2023 09:42:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java/unsafe/</guid>
+      <description>阅读过 JUC 源码的同学，一定会发现很多并发工具类都调用了一个叫做 Unsafe 的类。 那这个类主要是用来干什么的呢？有什么使用场景呢？这篇文章就带你搞清楚！ Unsafe</description>
+    </item>
+    
+    <item>
+      <title>Java语法糖</title>
+      <link>http://localhost:1313/post/java/java%E8%AF%AD%E6%B3%95%E7%B3%96/</link>
+      <pubDate>Mon, 06 Feb 2023 09:38:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java/java%E8%AF%AD%E6%B3%95%E7%B3%96/</guid>
+      <description>content: 这篇文章介绍了 12 种 Java 中常用的语法糖。所谓语法糖就是提供给开发人员便于开发的一种语法而已。但是这种语法只有开发人员认识。要想被执行，需要进行</description>
+    </item>
+    
+    <item>
+      <title>反射机制</title>
+      <link>http://localhost:1313/post/java/%E5%8F%8D%E5%B0%84/</link>
+      <pubDate>Mon, 06 Feb 2023 09:34:03 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java/%E5%8F%8D%E5%B0%84/</guid>
+      <description>何为反射？ 如果说大家研究过框架的底层原理或者咱们自己写过框架的话，一定对反射这个概念不陌生。 反射之所以被称为框架的灵魂，主要是因为它赋予了我</description>
+    </item>
+    
     <item>
       <title>序列化和反序列化</title>
       <link>http://localhost:1313/post/java/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>

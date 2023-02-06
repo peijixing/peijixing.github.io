@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Unsafe - 老裴的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oldpei" /><meta name="description" content="阅读过 JUC 源码的同学，一定会发现很多并发工具类都调用了一个叫做 Unsafe 的类。 那这个类主要是用来干什么的呢？有什么使用场景呢？这篇文章就带你搞清楚！ Unsafe" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.110.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java/unsafe/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Unsafe" />
+<meta property="og:description" content="阅读过 JUC 源码的同学，一定会发现很多并发工具类都调用了一个叫做 Unsafe 的类。 那这个类主要是用来干什么的呢？有什么使用场景呢？这篇文章就带你搞清楚！ Unsafe" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/java/unsafe/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-06T09:42:55+08:00" />
+<meta property="article:modified_time" content="2023-02-06T09:42:55+08:00" />
+<meta itemprop="name" content="Unsafe">
+<meta itemprop="description" content="阅读过 JUC 源码的同学，一定会发现很多并发工具类都调用了一个叫做 Unsafe 的类。 那这个类主要是用来干什么的呢？有什么使用场景呢？这篇文章就带你搞清楚！ Unsafe"><meta itemprop="datePublished" content="2023-02-06T09:42:55+08:00" />
+<meta itemprop="dateModified" content="2023-02-06T09:42:55+08:00" />
+<meta itemprop="wordCount" content="9674">
+<meta itemprop="keywords" content="java基础," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unsafe"/>
+<meta name="twitter:description" content="阅读过 JUC 源码的同学，一定会发现很多并发工具类都调用了一个叫做 Unsafe 的类。 那这个类主要是用来干什么的呢？有什么使用场景呢？这篇文章就带你搞清楚！ Unsafe"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">老裴的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">老裴的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Unsafe</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-02-06 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> java </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#unsafe-介绍">Unsafe 介绍</a></li>
+        <li><a href="#unsafe-创建">Unsafe 创建</a></li>
+        <li><a href="#unsafe-功能">Unsafe 功能</a>
+          <ul>
+            <li><a href="#内存操作">内存操作</a></li>
+            <li><a href="#内存屏障">内存屏障</a></li>
+            <li><a href="#对象操作">对象操作</a></li>
+            <li><a href="#数组操作">数组操作</a></li>
+            <li><a href="#cas-操作">CAS 操作</a></li>
+            <li><a href="#线程调度">线程调度</a></li>
+            <li><a href="#class-操作">Class 操作</a></li>
+            <li><a href="#系统信息">系统信息</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>阅读过 JUC 源码的同学，一定会发现很多并发工具类都调用了一个叫做 <code>Unsafe</code> 的类。</p>
+<p>那这个类主要是用来干什么的呢？有什么使用场景呢？这篇文章就带你搞清楚！</p>
+<h2 id="unsafe-介绍">Unsafe 介绍</h2>
+<p><code>Unsafe</code> 是位于 <code>sun.misc</code> 包下的一个类，主要提供一些用于执行低级别、不安全操作的方法，如直接访问系统内存资源、自主管理内存资源等，这些方法在提升 Java 运行效率、增强 Java 语言底层资源操作能力方面起到了很大的作用。但由于 <code>Unsafe</code> 类使 Java 语言拥有了类似 C 语言指针一样操作内存空间的能力，这无疑也增加了程序发生相关指针问题的风险。在程序中过度、不正确使用 <code>Unsafe</code> 类会使得程序出错的概率变大，使得 Java 这种安全的语言变得不再“安全”，因此对 <code>Unsafe</code> 的使用一定要慎重。</p>
+<p>另外，<code>Unsafe</code> 提供的这些功能的实现需要依赖本地方法（Native Method）。你可以将本地方法看作是 Java 中使用其他编程语言编写的方法。本地方法使用 <strong><code>native</code></strong> 关键字修饰，Java 代码中只是声明方法头，具体的实现则交给 <strong>本地代码</strong>。</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/native.png" alt="代码"></p>
+<p><strong>为什么要使用本地方法呢？</strong></p>
+<ol>
+<li>需要用到 Java 中不具备的依赖于操作系统的特性，Java 在实现跨平台的同时要实现对底层的控制，需要借助其他语言发挥作用。</li>
+<li>对于其他语言已经完成的一些现成功能，可以使用 Java 直接调用。</li>
+<li>程序对时间敏感或对性能要求非常高时，有必要使用更加底层的语言，例如 C/C++甚至是汇编。</li>
+</ol>
+<p>在 JUC 包的很多并发工具类在实现并发机制时，都调用了本地方法，通过它们打破了 Java 运行时的界限，能够接触到操作系统底层的某些功能。对于同一本地方法，不同的操作系统可能会通过不同的方式来实现，但是对于使用者来说是透明的，最终都会得到相同的结果。</p>
+<h2 id="unsafe-创建">Unsafe 创建</h2>
+<p><code>sun.misc.Unsafe</code> 部分源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Unsafe</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 单例对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Unsafe</span> <span class="n">theUnsafe</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">......</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">private</span> <span class="nf">Unsafe</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@CallerSensitive</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Unsafe</span> <span class="nf">getUnsafe</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Class</span> <span class="n">var0</span> <span class="o">=</span> <span class="n">Reflection</span><span class="o">.</span><span class="na">getCallerClass</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 仅在引导类加载器`BootstrapClassLoader`加载时才合法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="o">(!</span><span class="n">VM</span><span class="o">.</span><span class="na">isSystemDomainLoader</span><span class="o">(</span><span class="n">var0</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">()))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="n">SecurityException</span><span class="o">(</span><span class="s">&#34;Unsafe&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">theUnsafe</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Unsafe</code> 类为一单例实现，提供静态方法 <code>getUnsafe</code> 获取 <code>Unsafe</code>实例。这个看上去貌似可以用来获取 <code>Unsafe</code> 实例。但是，当我们直接调用这个静态方法的时候，会抛出 <code>SecurityException</code> 异常：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Exception in thread <span class="s2">&#34;main&#34;</span> java.lang.SecurityException: Unsafe
+</span></span><span class="line"><span class="cl"> at sun.misc.Unsafe.getUnsafe<span class="o">(</span>Unsafe.java:90<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> at com.cn.test.GetUnsafeTest.main<span class="o">(</span>GetUnsafeTest.java:12<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>为什么 <code>public static</code> 方法无法被直接调用呢？</strong></p>
+<p>这是因为在<code>getUnsafe</code>方法中，会对调用者的<code>classLoader</code>进行检查，判断当前类是否由<code>Bootstrap classLoader</code>加载，如果不是的话那么就会抛出一个<code>SecurityException</code>异常。也就是说，只有启动类加载器加载的类才能够调用 Unsafe 类中的方法，来防止这些方法在不可信的代码中被调用。</p>
+<p><strong>为什么要对 Unsafe 类进行这么谨慎的使用限制呢?</strong></p>
+<p><code>Unsafe</code> 提供的功能过于底层（如直接访问系统内存资源、自主管理内存资源等），安全隐患也比较大，使用不当的话，很容易出现很严重的问题。</p>
+<p><strong>如若想使用 <code>Unsafe</code> 这个类的话，应该如何获取其实例呢？</strong></p>
+<p>这里介绍两个可行的方案。</p>
+<p>1、利用反射获得 Unsafe 类中已经实例化完成的单例对象 <code>theUnsafe</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">Unsafe</span> <span class="nf">reflectGetUnsafe</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="n">Unsafe</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;theUnsafe&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">field</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">(</span><span class="n">Unsafe</span><span class="o">)</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、从<code>getUnsafe</code>方法的使用限制条件出发，通过 Java 命令行命令<code>-Xbootclasspath/a</code>把调用 Unsafe 相关方法的类 A 所在 jar 包路径追加到默认的 bootstrap 路径中，使得 A 被引导类加载器加载，从而通过<code>Unsafe.getUnsafe</code>方法安全的获取 Unsafe 实例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -Xbootclasspath/a: <span class="si">${</span><span class="nv">path</span><span class="si">}</span>   // 其中path为调用Unsafe相关方法的类所在jar包路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="unsafe-功能">Unsafe 功能</h2>
+<p>概括的来说，<code>Unsafe</code> 类实现功能可以被分为下面 8 类：</p>
+<ol>
+<li>内存操作</li>
+<li>内存屏障</li>
+<li>对象操作</li>
+<li>数据操作</li>
+<li>CAS 操作</li>
+<li>线程调度</li>
+<li>Class 操作</li>
+<li>系统信息</li>
+</ol>
+<h3 id="内存操作">内存操作</h3>
+<h4 id="介绍">介绍</h4>
+<p>如果你是一个写过 C 或者 C++ 的程序员，一定对内存操作不会陌生，而在 Java 中是不允许直接对内存进行操作的，对象内存的分配和回收都是由 JVM 自己实现的。但是在 <code>Unsafe</code> 中，提供的下列接口可以直接进行内存操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//分配新的本地空间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">long</span> <span class="nf">allocateMemory</span><span class="o">(</span><span class="kt">long</span> <span class="n">bytes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//重新调整内存空间的大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">long</span> <span class="nf">reallocateMemory</span><span class="o">(</span><span class="kt">long</span> <span class="n">address</span><span class="o">,</span> <span class="kt">long</span> <span class="n">bytes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//将内存设置为指定值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">setMemory</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">long</span> <span class="n">bytes</span><span class="o">,</span> <span class="kt">byte</span> <span class="n">value</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//内存拷贝
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">copyMemory</span><span class="o">(</span><span class="n">Object</span> <span class="n">srcBase</span><span class="o">,</span> <span class="kt">long</span> <span class="n">srcOffset</span><span class="o">,</span><span class="n">Object</span> <span class="n">destBase</span><span class="o">,</span> <span class="kt">long</span> <span class="n">destOffset</span><span class="o">,</span><span class="kt">long</span> <span class="n">bytes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//清除内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">freeMemory</span><span class="o">(</span><span class="kt">long</span> <span class="n">address</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用下面的代码进行测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">memoryTest</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">allocateMemory</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">addr3</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">reallocateMemory</span><span class="o">(</span><span class="n">addr</span><span class="o">,</span> <span class="n">size</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;addr: &#34;</span><span class="o">+</span><span class="n">addr</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;addr3: &#34;</span><span class="o">+</span><span class="n">addr3</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unsafe</span><span class="o">.</span><span class="na">setMemory</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span><span class="n">addr</span> <span class="o">,</span><span class="n">size</span><span class="o">,(</span><span class="kt">byte</span><span class="o">)</span><span class="mi">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">unsafe</span><span class="o">.</span><span class="na">copyMemory</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span><span class="n">addr</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="n">addr3</span><span class="o">+</span><span class="n">size</span><span class="o">*</span><span class="n">i</span><span class="o">,</span><span class="mi">4</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">unsafe</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">addr</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">unsafe</span><span class="o">.</span><span class="na">getLong</span><span class="o">(</span><span class="n">addr3</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unsafe</span><span class="o">.</span><span class="na">freeMemory</span><span class="o">(</span><span class="n">addr</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unsafe</span><span class="o">.</span><span class="na">freeMemory</span><span class="o">(</span><span class="n">addr3</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先看结果输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">addr: 2433733895744
+</span></span><span class="line"><span class="cl">addr3: 2433733894944
+</span></span><span class="line"><span class="cl">16843009
+</span></span><span class="line"><span class="cl">72340172838076673
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>分析一下运行结果，首先使用<code>allocateMemory</code>方法申请 4 字节长度的内存空间，调用<code>setMemory</code>方法向每个字节写入内容为<code>byte</code>类型的 1，当使用 Unsafe 调用<code>getInt</code>方法时，因为一个<code>int</code>型变量占 4 个字节，会一次性读取 4 个字节，组成一个<code>int</code>的值，对应的十进制结果为 16843009。</p>
+<p>你可以通过下图理解这个过程：</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/%E5%86%85%E5%AD%98%E5%88%86%E6%9E%901.png" alt="内存分析1"></p>
+<p>在代码中调用<code>reallocateMemory</code>方法重新分配了一块 8 字节长度的内存空间，通过比较<code>addr</code>和<code>addr3</code>可以看到和之前申请的内存地址是不同的。在代码中的第二个 for 循环里，调用<code>copyMemory</code>方法进行了两次内存的拷贝，每次拷贝内存地址<code>addr</code>开始的 4 个字节，分别拷贝到以<code>addr3</code>和<code>addr3+4</code>开始的内存空间上：</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/%E5%86%85%E5%AD%98%E5%88%86%E6%9E%902.png" alt="内存分析2"></p>
+<p>拷贝完成后，使用<code>getLong</code>方法一次性读取 8 个字节，得到<code>long</code>类型的值为 72340172838076673。</p>
+<p>需要注意，通过这种方式分配的内存属于 堆外内存 ，是无法进行垃圾回收的，需要我们把这些内存当做一种资源去手动调用<code>freeMemory</code>方法进行释放，否则会产生内存泄漏。通用的操作内存方式是在<code>try</code>中执行对内存的操作，最终在<code>finally</code>块中进行内存的释放。</p>
+<p><strong>为什么要使用堆外内存？</strong></p>
+<ul>
+<li>对垃圾回收停顿的改善。由于堆外内存是直接受操作系统管理而不是 JVM，所以当我们使用堆外内存时，即可保持较小的堆内内存规模。从而在 GC 时减少回收停顿对于应用的影响。</li>
+<li>提升程序 I/O 操作的性能。通常在 I/O 通信过程中，会存在堆内内存到堆外内存的数据拷贝操作，对于需要频繁进行内存间数据拷贝且生命周期较短的暂存数据，都建议存储到堆外内存。</li>
+</ul>
+<h4 id="典型应用">典型应用</h4>
+<p><code>DirectByteBuffer</code> 是 Java 用于实现堆外内存的一个重要类，通常用在通信过程中做缓冲池，如在 Netty、MINA 等 NIO 框架中应用广泛。<code>DirectByteBuffer</code> 对于堆外内存的创建、使用、销毁等逻辑均由 Unsafe 提供的堆外内存 API 来实现。</p>
+<p>下图为 <code>DirectByteBuffer</code> 构造函数，创建 <code>DirectByteBuffer</code> 的时候，通过 <code>Unsafe.allocateMemory</code> 分配内存、<code>Unsafe.setMemory</code> 进行内存初始化，而后构建 <code>Cleaner</code> 对象用于跟踪 <code>DirectByteBuffer</code> 对象的垃圾回收，以实现当 <code>DirectByteBuffer</code> 被垃圾回收时，分配的堆外内存一起被释放。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">DirectByteBuffer</span><span class="o">(</span><span class="kt">int</span> <span class="n">cap</span><span class="o">)</span> <span class="o">{</span>                   <span class="c1">// package-private
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">cap</span><span class="o">,</span> <span class="n">cap</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="n">pa</span> <span class="o">=</span> <span class="n">VM</span><span class="o">.</span><span class="na">isDirectMemoryPageAligned</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">Bits</span><span class="o">.</span><span class="na">pageSize</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">size</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="mi">1L</span><span class="o">,</span> <span class="o">(</span><span class="kt">long</span><span class="o">)</span><span class="n">cap</span> <span class="o">+</span> <span class="o">(</span><span class="n">pa</span> <span class="o">?</span> <span class="n">ps</span> <span class="o">:</span> <span class="mi">0</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Bits</span><span class="o">.</span><span class="na">reserveMemory</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">cap</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 分配内存并返回基地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">base</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">allocateMemory</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OutOfMemoryError</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Bits</span><span class="o">.</span><span class="na">unreserveMemory</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">cap</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="n">x</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 内存初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">unsafe</span><span class="o">.</span><span class="na">setMemory</span><span class="o">(</span><span class="n">base</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">pa</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">base</span> <span class="o">%</span> <span class="n">ps</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Round up to page boundary
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">address</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="n">ps</span> <span class="o">-</span> <span class="o">(</span><span class="n">base</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">ps</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">address</span> <span class="o">=</span> <span class="n">base</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 跟踪 DirectByteBuffer 对象的垃圾回收，以实现堆外内存释放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cleaner</span> <span class="o">=</span> <span class="n">Cleaner</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="k">new</span> <span class="n">Deallocator</span><span class="o">(</span><span class="n">base</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">cap</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">att</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="内存屏障">内存屏障</h3>
+<h4 id="介绍-1">介绍</h4>
+<p>在介绍内存屏障前，需要知道编译器和 CPU 会在保证程序输出结果一致的情况下，会对代码进行重排序，从指令优化角度提升性能。而指令重排序可能会带来一个不好的结果，导致 CPU 的高速缓存和内存中数据的不一致，而内存屏障（<code>Memory Barrier</code>）就是通过阻止屏障两边的指令重排序从而避免编译器和硬件的不正确优化情况。</p>
+<p>在硬件层面上，内存屏障是 CPU 为了防止代码进行重排序而提供的指令，不同的硬件平台上实现内存屏障的方法可能并不相同。在 Java8 中，引入了 3 个内存屏障的函数，它屏蔽了操作系统底层的差异，允许在代码中定义、并统一由 JVM 来生成内存屏障指令，来实现内存屏障的功能。</p>
+<p><code>Unsafe</code> 中提供了下面三个内存屏障相关方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//内存屏障，禁止load操作重排序。屏障前的load操作不能被重排序到屏障后，屏障后的load操作不能被重排序到屏障前
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">loadFence</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//内存屏障，禁止store操作重排序。屏障前的store操作不能被重排序到屏障后，屏障后的store操作不能被重排序到屏障前
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">storeFence</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//内存屏障，禁止load、store操作重排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">fullFence</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>内存屏障可以看做对内存随机访问的操作中的一个同步点，使得此点之前的所有读写操作都执行后才可以开始执行此点之后的操作。以<code>loadFence</code>方法为例，它会禁止读操作重排序，保证在这个屏障之前的所有读操作都已经完成，并且将缓存数据设为无效，重新从主存中进行加载。</p>
+<p>看到这估计很多小伙伴们会想到<code>volatile</code>关键字了，如果在字段上添加了<code>volatile</code>关键字，就能够实现字段在多线程下的可见性。基于读内存屏障，我们也能实现相同的功能。下面定义一个线程方法，在线程中去修改<code>flag</code>标志位，注意这里的<code>flag</code>是没有被<code>volatile</code>修饰的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Getter</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">ChangeThread</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**volatile**/</span> <span class="kt">boolean</span> <span class="n">flag</span><span class="o">=</span><span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;subThread change flag to:&#34;</span> <span class="o">+</span> <span class="n">flag</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在主线程的<code>while</code>循环中，加入内存屏障，测试是否能够感知到<code>flag</code>的修改变化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ChangeThread</span> <span class="n">changeThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ChangeThread</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">changeThread</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">boolean</span> <span class="n">flag</span> <span class="o">=</span> <span class="n">changeThread</span><span class="o">.</span><span class="na">isFlag</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unsafe</span><span class="o">.</span><span class="na">loadFence</span><span class="o">();</span> <span class="c1">//加入读内存屏障
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">flag</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;detected flag changed&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;main thread end&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">subThread change flag to:false
+</span></span><span class="line"><span class="cl">detected flag changed
+</span></span><span class="line"><span class="cl">main thread end
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>而如果删掉上面代码中的<code>loadFence</code>方法，那么主线程将无法感知到<code>flag</code>发生的变化，会一直在<code>while</code>中循环。可以用图来表示上面的过程：</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/loadFence.png" alt="loadFence"></p>
+<p>了解 Java 内存模型（<code>JMM</code>）的小伙伴们应该清楚，运行中的线程不是直接读取主内存中的变量的，只能操作自己工作内存中的变量，然后同步到主内存中，并且线程的工作内存是不能共享的。上面的图中的流程就是子线程借助于主内存，将修改后的结果同步给了主线程，进而修改主线程中的工作空间，跳出循环。</p>
+<h4 id="典型应用-1">典型应用</h4>
+<p>在 Java 8 中引入了一种锁的新机制——<code>StampedLock</code>，它可以看成是读写锁的一个改进版本。<code>StampedLock</code> 提供了一种乐观读锁的实现，这种乐观读锁类似于无锁的操作，完全不会阻塞写线程获取写锁，从而缓解读多写少时写线程“饥饿”现象。由于 <code>StampedLock</code> 提供的乐观读锁不阻塞写线程获取读锁，当线程共享变量从主内存 load 到线程工作内存时，会存在数据不一致问题。</p>
+<p>为了解决这个问题，<code>StampedLock</code> 的 <code>validate</code> 方法会通过 <code>Unsafe</code> 的 <code>loadFence</code> 方法加入一个 <code>load</code> 内存屏障。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">validate</span><span class="o">(</span><span class="kt">long</span> <span class="n">stamp</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">U</span><span class="o">.</span><span class="na">loadFence</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="o">(</span><span class="n">stamp</span> <span class="o">&amp;</span> <span class="n">SBITS</span><span class="o">)</span> <span class="o">==</span> <span class="o">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">SBITS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="对象操作">对象操作</h3>
+<h4 id="介绍-2">介绍</h4>
+<p><strong>对象属性</strong></p>
+<p>对象成员属性的内存偏移量获取，以及字段属性值的修改，在上面的例子中我们已经测试过了。除了前面的<code>putInt</code>、<code>getInt</code>方法外，Unsafe 提供了全部 8 种基础数据类型以及<code>Object</code>的<code>put</code>和<code>get</code>方法，并且所有的<code>put</code>方法都可以越过访问权限，直接修改内存中的数据。阅读 openJDK 源码中的注释发现，基础数据类型和<code>Object</code>的读写稍有不同，基础数据类型是直接操作的属性值（<code>value</code>），而<code>Object</code>的操作则是基于引用值（<code>reference value</code>）。下面是<code>Object</code>的读写方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//在对象的指定偏移地址获取一个对象引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="n">Object</span> <span class="nf">getObject</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//在对象指定偏移地址写入一个对象引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">putObject</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="n">Object</span> <span class="n">x</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>除了对象属性的普通读写外，<code>Unsafe</code> 还提供了 <strong>volatile 读写</strong>和<strong>有序写入</strong>方法。<code>volatile</code>读写方法的覆盖范围与普通读写相同，包含了全部基础数据类型和<code>Object</code>类型，以<code>int</code>类型为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//在对象的指定偏移地址处读取一个int值，支持volatile load语义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">getIntVolatile</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//在对象指定偏移地址处写入一个int，支持volatile store语义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">putIntVolatile</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>相对于普通读写来说，<code>volatile</code>读写具有更高的成本，因为它需要保证可见性和有序性。在执行<code>get</code>操作时，会强制从主存中获取属性值，在使用<code>put</code>方法设置属性值时，会强制将值更新到主存中，从而保证这些变更对其他线程是可见的。</p>
+<p>有序写入的方法有以下三个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">putOrderedObject</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="n">Object</span> <span class="n">x</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">putOrderedInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">putOrderedLong</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">long</span> <span class="n">x</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有序写入的成本相对<code>volatile</code>较低，因为它只保证写入时的有序性，而不保证可见性，也就是一个线程写入的值不能保证其他线程立即可见。为了解决这里的差异性，需要对内存屏障的知识点再进一步进行补充，首先需要了解两个指令的概念：</p>
+<ul>
+<li><code>Load</code>：将主内存中的数据拷贝到处理器的缓存中</li>
+<li><code>Store</code>：将处理器缓存的数据刷新到主内存中</li>
+</ul>
+<p>顺序写入与<code>volatile</code>写入的差别在于，在顺序写时加入的内存屏障类型为<code>StoreStore</code>类型，而在<code>volatile</code>写入时加入的内存屏障是<code>StoreLoad</code>类型，如下图所示：</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/volatile.png" alt="volatile"></p>
+<p>在有序写入方法中，使用的是<code>StoreStore</code>屏障，该屏障确保<code>Store1</code>立刻刷新数据到内存，这一操作先于<code>Store2</code>以及后续的存储指令操作。而在<code>volatile</code>写入中，使用的是<code>StoreLoad</code>屏障，该屏障确保<code>Store1</code>立刻刷新数据到内存，这一操作先于<code>Load2</code>及后续的装载指令，并且，<code>StoreLoad</code>屏障会使该屏障之前的所有内存访问指令，包括存储指令和访问指令全部完成之后，才执行该屏障之后的内存访问指令。</p>
+<p>综上所述，在上面的三类写入方法中，在写入效率方面，按照<code>put</code>、<code>putOrder</code>、<code>putVolatile</code>的顺序效率逐渐降低。</p>
+<p><strong>对象实例化</strong></p>
+<p>使用 <code>Unsafe</code> 的 <code>allocateInstance</code> 方法，允许我们使用非常规的方式进行对象的实例化，首先定义一个实体类，并且在构造函数中对其成员变量进行赋值操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Data</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">b</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">A</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">b</span> <span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>分别基于构造函数、反射以及 <code>Unsafe</code> 方法的不同方式创建对象进行比较：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">objTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="n">a1</span><span class="o">=</span><span class="k">new</span> <span class="n">A</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a1</span><span class="o">.</span><span class="na">getB</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a2</span><span class="o">.</span><span class="na">getB</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="n">a3</span><span class="o">=</span> <span class="o">(</span><span class="n">A</span><span class="o">)</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">allocateInstance</span><span class="o">(</span><span class="n">A</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a3</span><span class="o">.</span><span class="na">getB</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打印结果分别为 1、1、0，说明通过<code>allocateInstance</code>方法创建对象过程中，不会调用类的构造方法。使用这种方式创建对象时，只用到了<code>Class</code>对象，所以说如果想要跳过对象的初始化阶段或者跳过构造器的安全检查，就可以使用这种方法。在上面的例子中，如果将 A 类的构造函数改为<code>private</code>类型，将无法通过构造函数和反射创建对象，但<code>allocateInstance</code>方法仍然有效。</p>
+<h4 id="典型应用-2">典型应用</h4>
+<ul>
+<li><strong>常规对象实例化方式</strong>：我们通常所用到的创建对象的方式，从本质上来讲，都是通过 new 机制来实现对象的创建。但是，new 机制有个特点就是当类只提供有参的构造函数且无显示声明无参构造函数时，则必须使用有参构造函数进行对象构造，而使用有参构造函数时，必须传递相应个数的参数才能完成对象实例化。</li>
+<li><strong>非常规的实例化方式</strong>：而 Unsafe 中提供 allocateInstance 方法，仅通过 Class 对象就可以创建此类的实例对象，而且不需要调用其构造函数、初始化代码、JVM 安全检查等。它抑制修饰符检测，也就是即使构造器是 private 修饰的也能通过此方法实例化，只需提类对象即可创建相应的对象。由于这种特性，allocateInstance 在 java.lang.invoke、Objenesis（提供绕过类构造器的对象生成方式）、Gson（反序列化时用到）中都有相应的应用。</li>
+</ul>
+<h3 id="数组操作">数组操作</h3>
+<h4 id="介绍-3">介绍</h4>
+<p><code>arrayBaseOffset</code> 与 <code>arrayIndexScale</code> 这两个方法配合起来使用，即可定位数组中每个元素在内存中的位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//返回数组中第一个元素的偏移地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">arrayBaseOffset</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">arrayClass</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//返回数组中一个元素占用的大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">arrayIndexScale</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">arrayClass</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="典型应用-3">典型应用</h4>
+<p>这两个与数据操作相关的方法，在 <code>java.util.concurrent.atomic</code> 包下的 <code>AtomicIntegerArray</code>（可以实现对 <code>Integer</code> 数组中每个元素的原子性操作）中有典型的应用，如下图 <code>AtomicIntegerArray</code> 源码所示，通过 <code>Unsafe</code> 的 <code>arrayBaseOffset</code> 、<code>arrayIndexScale</code> 分别获取数组首元素的偏移地址 <code>base</code> 及单个元素大小因子 <code>scale</code> 。后续相关原子性操作，均依赖于这两个值进行数组中元素的定位，如下图二所示的 <code>getAndAdd</code> 方法即通过 <code>checkedByteOffset</code> 方法获取某数组元素的偏移地址，而后通过 CAS 实现原子性操作。</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/checkedByteOffset.png" alt="checkedByteOffset"></p>
+<h3 id="cas-操作">CAS 操作</h3>
+<h4 id="介绍-4">介绍</h4>
+<p>这部分主要为 CAS 相关操作的方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *  CAS
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @param o         包含要修改field的对象
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @param offset    对象中某field的偏移量
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @param expected  期望值
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @param update    更新值
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @return          true | false
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">compareAndSwapObject</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span>  <span class="n">Object</span> <span class="n">expected</span><span class="o">,</span> <span class="n">Object</span> <span class="n">update</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">compareAndSwapInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expected</span><span class="o">,</span><span class="kt">int</span> <span class="n">update</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">compareAndSwapLong</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">long</span> <span class="n">expected</span><span class="o">,</span> <span class="kt">long</span> <span class="n">update</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>什么是 CAS?</strong> CAS 即比较并替换（Compare And Swap)，是实现并发算法时常用到的一种技术。CAS 操作包含三个操作数——内存位置、预期原值及新值。执行 CAS 操作的时候，将内存位置的值与预期原值比较，如果相匹配，那么处理器会自动将该位置值更新为新值，否则，处理器不做任何操作。我们都知道，CAS 是一条 CPU 的原子指令（cmpxchg 指令），不会造成所谓的数据不一致问题，<code>Unsafe</code> 提供的 CAS 方法（如 <code>compareAndSwapXXX</code>）底层实现即为 CPU 指令 <code>cmpxchg</code> 。</p>
+<h4 id="典型应用-4">典型应用</h4>
+<p>在 JUC 包的并发工具类中大量地使用了 CAS 操作，像在前面介绍<code>synchronized</code>和<code>AQS</code>的文章中也多次提到了 CAS，其作为乐观锁在并发工具类中广泛发挥了作用。在 <code>Unsafe</code> 类中，提供了<code>compareAndSwapObject</code>、<code>compareAndSwapInt</code>、<code>compareAndSwapLong</code>方法来实现的对<code>Object</code>、<code>int</code>、<code>long</code>类型的 CAS 操作。以<code>compareAndSwapInt</code>方法为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">compareAndSwapInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="o">,</span><span class="kt">int</span> <span class="n">expected</span><span class="o">,</span><span class="kt">int</span> <span class="n">x</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数中<code>o</code>为需要更新的对象，<code>offset</code>是对象<code>o</code>中整形字段的偏移量，如果这个字段的值与<code>expected</code>相同，则将字段的值设为<code>x</code>这个新值，并且此更新是不可被中断的，也就是一个原子操作。下面是一个使用<code>compareAndSwapInt</code>的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">a</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">CasTest</span> <span class="n">casTest</span><span class="o">=</span><span class="k">new</span> <span class="n">CasTest</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">casTest</span><span class="o">.</span><span class="na">increment</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">casTest</span><span class="o">.</span><span class="na">a</span><span class="o">+</span><span class="s">&#34; &#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span><span class="mi">10</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">casTest</span><span class="o">.</span><span class="na">increment</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">casTest</span><span class="o">.</span><span class="na">a</span><span class="o">+</span><span class="s">&#34; &#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">fieldOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">objectFieldOffset</span><span class="o">(</span><span class="n">CasTest</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span><span class="n">fieldOffset</span><span class="o">,</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">x</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchFieldException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行代码会依次输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1 2 3 4 5 6 7 8 9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的例子中，使用两个线程去修改<code>int</code>型属性<code>a</code>的值，并且只有在<code>a</code>的值等于传入的参数<code>x</code>减一时，才会将<code>a</code>的值变为<code>x</code>，也就是实现对<code>a</code>的加一的操作。流程如下所示：</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/image7.png" alt="image7"></p>
+<p>需要注意的是，在调用<code>compareAndSwapInt</code>方法后，会直接返回<code>true</code>或<code>false</code>的修改结果，因此需要我们在代码中手动添加自旋的逻辑。在<code>AtomicInteger</code>类的设计中，也是采用了将<code>compareAndSwapInt</code>的结果作为循环条件，直至修改成功才退出死循环的方式来实现的原子性的自增操作。</p>
+<h3 id="线程调度">线程调度</h3>
+<h4 id="介绍-5">介绍</h4>
+<p><code>Unsafe</code> 类中提供了<code>park</code>、<code>unpark</code>、<code>monitorEnter</code>、<code>monitorExit</code>、<code>tryMonitorEnter</code>方法进行线程调度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//取消阻塞线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">unpark</span><span class="o">(</span><span class="n">Object</span> <span class="n">thread</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//阻塞线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">park</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">isAbsolute</span><span class="o">,</span> <span class="kt">long</span> <span class="n">time</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//获得对象锁（可重入锁）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Deprecated</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">monitorEnter</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//释放对象锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Deprecated</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">monitorExit</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//尝试获取对象锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Deprecated</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">tryMonitorEnter</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法 <code>park</code>、<code>unpark</code> 即可实现线程的挂起与恢复，将一个线程进行挂起是通过 <code>park</code> 方法实现的，调用 <code>park</code> 方法后，线程将一直阻塞直到超时或者中断等条件出现；<code>unpark</code> 可以终止一个挂起的线程，使其恢复正常。</p>
+<p>此外，<code>Unsafe</code> 源码中<code>monitor</code>相关的三个方法已经被标记为<code>deprecated</code>，不建议被使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//获得对象锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Deprecated</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">monitorEnter</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//释放对象锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Deprecated</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">monitorExit</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//尝试获得对象锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Deprecated</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">tryMonitorEnter</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>monitorEnter</code>方法用于获得对象锁，<code>monitorExit</code>用于释放对象锁，如果对一个没有被<code>monitorEnter</code>加锁的对象执行此方法，会抛出<code>IllegalMonitorStateException</code>异常。<code>tryMonitorEnter</code>方法尝试获取对象锁，如果成功则返回<code>true</code>，反之返回<code>false</code>。</p>
+<h4 id="典型应用-5">典型应用</h4>
+<p>Java 锁和同步器框架的核心类 <code>AbstractQueuedSynchronizer</code> (AQS)，就是通过调用<code>LockSupport.park()</code>和<code>LockSupport.unpark()</code>实现线程的阻塞和唤醒的，而 <code>LockSupport</code> 的 <code>park</code> 、<code>unpark</code> 方法实际是调用 <code>Unsafe</code> 的 <code>park</code> 、<code>unpark</code> 方式实现的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">park</span><span class="o">(</span><span class="n">Object</span> <span class="n">blocker</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setBlocker</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">blocker</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">UNSAFE</span><span class="o">.</span><span class="na">park</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="mi">0</span><span class="n">L</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setBlocker</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">unpark</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">thread</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UNSAFE</span><span class="o">.</span><span class="na">unpark</span><span class="o">(</span><span class="n">thread</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>LockSupport</code> 的<code>park</code>方法调用了 <code>Unsafe</code> 的<code>park</code>方法来阻塞当前线程，此方法将线程阻塞后就不会继续往后执行，直到有其他线程调用<code>unpark</code>方法唤醒当前线程。下面的例子对 <code>Unsafe</code> 的这两个方法进行测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">mainThread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;subThread try to unpark mainThread&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">unsafe</span><span class="o">.</span><span class="na">unpark</span><span class="o">(</span><span class="n">mainThread</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;park main mainThread&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unsafe</span><span class="o">.</span><span class="na">park</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span><span class="mi">0</span><span class="n">L</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;unpark mainThread success&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序输出为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">park main mainThread
+</span></span><span class="line"><span class="cl">subThread try to unpark mainThread
+</span></span><span class="line"><span class="cl">unpark mainThread success
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序运行的流程也比较容易看懂，子线程开始运行后先进行睡眠，确保主线程能够调用<code>park</code>方法阻塞自己，子线程在睡眠 5 秒后，调用<code>unpark</code>方法唤醒主线程，使主线程能继续向下执行。整个流程如下图所示：</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/image8.png" alt="image8"></p>
+<h3 id="class-操作">Class 操作</h3>
+<h4 id="介绍-6">介绍</h4>
+<p><code>Unsafe</code> 对<code>Class</code>的相关操作主要包括类加载和静态变量的操作方法。</p>
+<p><strong>静态属性读取相关的方法</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//获取静态属性的偏移量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">long</span> <span class="nf">staticFieldOffset</span><span class="o">(</span><span class="n">Field</span> <span class="n">f</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//获取静态属性的对象指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="n">Object</span> <span class="nf">staticFieldBase</span><span class="o">(</span><span class="n">Field</span> <span class="n">f</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//判断类是否需要实例化（用于获取类的静态属性前进行检测）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">shouldBeInitialized</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建一个包含静态属性的类，进行测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Data</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">name</span><span class="o">=</span><span class="s">&#34;Hydra&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">staticTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span> <span class="n">user</span><span class="o">=</span><span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">unsafe</span><span class="o">.</span><span class="na">shouldBeInitialized</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Field</span> <span class="n">sexField</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;name&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">fieldOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">staticFieldOffset</span><span class="o">(</span><span class="n">sexField</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span> <span class="n">fieldBase</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">staticFieldBase</span><span class="o">(</span><span class="n">sexField</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getObject</span><span class="o">(</span><span class="n">fieldBase</span><span class="o">,</span> <span class="n">fieldOffset</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">falseHydra
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 <code>Unsafe</code> 的对象操作中，我们学习了通过<code>objectFieldOffset</code>方法获取对象属性偏移量并基于它对变量的值进行存取，但是它不适用于类中的静态属性，这时候就需要使用<code>staticFieldOffset</code>方法。在上面的代码中，只有在获取<code>Field</code>对象的过程中依赖到了<code>Class</code>，而获取静态变量的属性时不再依赖于<code>Class</code>。</p>
+<p>在上面的代码中首先创建一个<code>User</code>对象，这是因为如果一个类没有被实例化，那么它的静态属性也不会被初始化，最后获取的字段属性将是<code>null</code>。所以在获取静态属性前，需要调用<code>shouldBeInitialized</code>方法，判断在获取前是否需要初始化这个类。如果删除创建 User 对象的语句，运行结果会变为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">truenull
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用<code>defineClass</code>方法允许程序在运行时动态地创建一个类</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">defineClass</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span><span class="o">,</span> <span class="kt">int</span> <span class="n">off</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">,</span> <span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span><span class="n">ProtectionDomain</span> <span class="n">protectionDomain</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在实际使用过程中，可以只传入字节数组、起始字节的下标以及读取的字节长度，默认情况下，类加载器（<code>ClassLoader</code>）和保护域（<code>ProtectionDomain</code>）来源于调用此方法的实例。下面的例子中实现了反编译生成后的 class 文件的功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">defineTest</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">fileName</span><span class="o">=</span><span class="s">&#34;F:\\workspace\\unsafe-test\\target\\classes\\com\\cn\\model\\User.class&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="o">(</span><span class="n">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">byte</span><span class="o">[]</span> <span class="n">content</span><span class="o">=</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[(</span><span class="kt">int</span><span class="o">)</span><span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">content</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Class</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">defineClass</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">content</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">content</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Object</span> <span class="n">age</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">&#34;getAge&#34;</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">age</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的代码中，首先读取了一个<code>class</code>文件并通过文件流将它转化为字节数组，之后使用<code>defineClass</code>方法动态的创建了一个类，并在后续完成了它的实例化工作，流程如下图所示，并且通过这种方式创建的类，会跳过 JVM 的所有安全检查。</p>
+<p><img src="../../../java%E5%9F%BA%E7%A1%80/unsafe/image9.png" alt="image9"></p>
+<p>除了<code>defineClass</code>方法外，Unsafe 还提供了一个<code>defineAnonymousClass</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">native</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">defineAnonymousClass</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">hostClass</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">cpPatches</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用该方法可以用来动态的创建一个匿名类，在<code>Lambda</code>表达式中就是使用 ASM 动态生成字节码，然后利用该方法定义实现相应的函数式接口的匿名类。在 JDK 15 发布的新特性中，在隐藏类（<code>Hidden classes</code>）一条中，指出将在未来的版本中弃用 <code>Unsafe</code> 的<code>defineAnonymousClass</code>方法。</p>
+<h4 id="典型应用-6">典型应用</h4>
+<p>Lambda 表达式实现需要依赖 <code>Unsafe</code> 的 <code>defineAnonymousClass</code> 方法定义实现相应的函数式接口的匿名类。</p>
+<h3 id="系统信息">系统信息</h3>
+<h4 id="介绍-7">介绍</h4>
+<p>这部分包含两个获取系统相关信息的方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//返回系统指针的大小。返回值为4（32位系统）或 8（64位系统）。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">addressSize</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//内存页的大小，此值为2的幂次方。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">pageSize</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="典型应用-7">典型应用</h4>
+<p>这两个方法的应用场景比较少，在<code>java.nio.Bits</code>类中，在使用<code>pageCount</code>计算所需的内存页的数量时，调用了<code>pageSize</code>方法获取内存页的大小。另外，在使用<code>copySwapMemory</code>方法拷贝内存时，调用了<code>addressSize</code>方法，检测 32 位系统的情况。</p>
+<h2 id="总结">总结</h2>
+<p>在本文中，我们首先介绍了 <code>Unsafe</code> 的基本概念、工作原理，并在此基础上，对它的 API 进行了说明与实践。相信大家通过这一过程，能够发现 <code>Unsafe</code> 在某些场景下，确实能够为我们提供编程中的便利。但是回到开头的话题，在使用这些便利时，确实存在着一些安全上的隐患，在我看来，一项技术具有不安全因素并不可怕，可怕的是它在使用过程中被滥用。尽管之前有传言说会在 Java9 中移除 <code>Unsafe</code> 类，不过它还是照样已经存活到了 Java16。按照存在即合理的逻辑，只要使用得当，它还是能给我们带来不少的帮助，因此最后还是建议大家，在使用 <code>Unsafe</code> 的过程中一定要做到使用谨慎使用、避免滥用。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oldpei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-02-06
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/pay/wechatpay-qr-code.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/pay/alipay-qr-code.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/java/java%E8%AF%AD%E6%B3%95%E7%B3%96/">
+            <span class="next-text nav-default">Java语法糖</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:mrpeijixing@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://gitee.com/laopei" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>oldpei</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
