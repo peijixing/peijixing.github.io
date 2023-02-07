@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java基础 on 老裴的个人博客</title>
+    <link>http://localhost:1313/categories/java%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in java基础 on 老裴的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 06 Feb 2023 08:53:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>权限修饰符</title>
+      <link>http://localhost:1313/post/java%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+      <pubDate>Mon, 06 Feb 2023 08:53:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+      <description>final 关键字 final 关键字，意思是最终的、不可修改的，最见不得变化 ，用来修饰类、方法和变量，具有以下特点： final 修饰的类不能被继承，final 类中的所有成</description>
+    </item>
+    
+  </channel>
+</rss>
