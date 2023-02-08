@@ -6,7 +6,7 @@
     <description>Recent content on 老裴的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 06 Feb 2023 09:42:55 +0800</lastBuildDate><atom:link href="https://oldpei.site/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 13:48:11 +0800</lastBuildDate><atom:link href="https://oldpei.site/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>个人简历</title>
       <link>https://oldpei.site/post/%E7%AE%80%E5%8E%86/</link>
@@ -17,12 +17,12 @@
     </item>
     
     <item>
-      <title>MyBatis-Plus初级运用</title>
-      <link>https://oldpei.site/post/%E4%B8%AD%E9%97%B4%E4%BB%B6/mybatis-plus-start/</link>
-      <pubDate>Thu, 02 Feb 2023 16:05:47 +0800</pubDate>
+      <title>自用软件推荐</title>
+      <link>https://oldpei.site/post/%E8%B5%84%E6%BA%90/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</link>
+      <pubDate>Wed, 08 Feb 2023 13:48:11 +0800</pubDate>
       
-      <guid>https://oldpei.site/post/%E4%B8%AD%E9%97%B4%E4%BB%B6/mybatis-plus-start/</guid>
-      <description>使用之前需要掌握： 拥有 Java 开发环境以及相应 IDE 熟悉 Spring Boot 熟悉 Maven 1.数据表准备 以User表为例 id name age email 1 Jone 18 test1@baomidou.com 2 Jack 20 test2@baomidou.com 3 Tom 28 test3@baomidou.com 4 Sandy 21 test4@baomidou.com 5 Billie 24 test5@baomidou.com 其数据</description>
+      <guid>https://oldpei.site/post/%E8%B5%84%E6%BA%90/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</guid>
+      <description>小说软件 阅读 主要功能 PS:非常好用的小说阅读器,可以导入网络大神的书源 推荐一波书源 https://oldpei.site/书源.json 自定</description>
     </item>
     
     <item>
@@ -77,6 +77,15 @@
       
       <guid>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%9F%BA%E7%A1%80/bigdecimal/</guid>
       <description>《阿里巴巴 Java 开发手册》中提到：“为了避免精度丢失，可以使用 BigDecimal 来进行浮点数的运算”。 浮点数的运算竟然还会有精度丢失的风险吗？确实会！ 示例代码：</description>
+    </item>
+    
+    <item>
+      <title>MyBatis-Plus初级运用</title>
+      <link>https://oldpei.site/post/%E4%B8%AD%E9%97%B4%E4%BB%B6/mybatis-plus-start/</link>
+      <pubDate>Thu, 02 Feb 2023 16:05:47 +0800</pubDate>
+      
+      <guid>https://oldpei.site/post/%E4%B8%AD%E9%97%B4%E4%BB%B6/mybatis-plus-start/</guid>
+      <description>使用之前需要掌握： 拥有 Java 开发环境以及相应 IDE 熟悉 Spring Boot 熟悉 Maven 1.数据表准备 以User表为例 id name age email 1 Jone 18 test1@baomidou.com 2 Jack 20 test2@baomidou.com 3 Tom 28 test3@baomidou.com 4 Sandy 21 test4@baomidou.com 5 Billie 24 test5@baomidou.com 其数据</description>
     </item>
     
   </channel>
