@@ -9,6 +9,20 @@
   </url>
   
   <url>
+    <loc>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day02.%E5%9F%BA%E6%9C%ACdos%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day01.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2023-02-19T11:49:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://oldpei.site/post/%E8%B5%84%E6%BA%90/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</loc>
     <lastmod>2023-02-08T13:48:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -66,28 +80,42 @@
   
   <url>
     <loc>https://oldpei.site/categories/</loc>
-    <lastmod>2023-02-08T13:48:11+08:00</lastmod>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://oldpei.site/tags/java%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/post/</loc>
-    <lastmod>2023-02-08T13:48:11+08:00</lastmod>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/tags/</loc>
-    <lastmod>2023-02-08T13:48:11+08:00</lastmod>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://oldpei.site/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/</loc>
-    <lastmod>2023-02-08T13:48:11+08:00</lastmod>
+    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -108,13 +136,6 @@
   
   <url>
     <loc>https://oldpei.site/tags/java%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2023-02-06T09:42:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://oldpei.site/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
     <lastmod>2023-02-06T09:42:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -6,7 +6,7 @@
     <description>Recent content in Posts on 老裴的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 08 Feb 2023 13:48:11 +0800</lastBuildDate><atom:link href="https://oldpei.site/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 12:14:16 +0800</lastBuildDate><atom:link href="https://oldpei.site/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>个人简历</title>
       <link>https://oldpei.site/post/%E7%AE%80%E5%8E%86/</link>
@@ -14,6 +14,24 @@
       
       <guid>https://oldpei.site/post/%E7%AE%80%E5%8E%86/</guid>
       <description>裴继星 18041107717 | mrpeijixing@163.com 在职，正在找工作 | java后台开发 | 14-20K 大连海事大学(211)·电气工程及其自动化专业 个人评价 熟练掌握诸如以下展示技能，并掌握my</description>
+    </item>
+    
+    <item>
+      <title>基本DOS命令</title>
+      <link>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day02.%E5%9F%BA%E6%9C%ACdos%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 19 Feb 2023 12:14:16 +0800</pubDate>
+      
+      <guid>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day02.%E5%9F%BA%E6%9C%ACdos%E5%91%BD%E4%BB%A4/</guid>
+      <description>基本命令之跳转 切换盘符： 盘符 + 冒号 ,例【 D: 】 查看目录下的目录和文件 ： dir 切换目录： cd + 位置 ,例【 cd /path 】 /d参数可以使cd宁陵夸盘符跳转，例【 cd</description>
+    </item>
+    
+    <item>
+      <title>计算机基础</title>
+      <link>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day01.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sun, 19 Feb 2023 11:49:20 +0800</pubDate>
+      
+      <guid>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day01.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</guid>
+      <description>计算机硬件 冯诺依曼体系结构 计算机软件 系统软件 Linux Windows Unix Mac &amp;hellip; 应用软件</description>
     </item>
     
     <item>
