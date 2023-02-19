@@ -13,7 +13,7 @@
       <pubDate>Sun, 19 Feb 2023 12:14:16 +0800</pubDate>
       
       <guid>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day02.%E5%9F%BA%E6%9C%ACdos%E5%91%BD%E4%BB%A4/</guid>
-      <description>基本命令之跳转 切换盘符： 盘符 + 冒号 ,例【 D: 】 查看目录下的目录和文件 ： dir 切换目录： cd + 位置 ,例【 cd /path 】 /d参数可以使cd宁陵夸盘符跳转，例【 cd</description>
+      <description>基本命令之跳转 切换盘符： 盘符 + 冒号 ,例【 D: 】 查看目录下的目录和文件 ： dir 切换目录： cd + 位置 ,例【 cd /path 】 /d参数可以使cd命令跨盘符跳转，例【 cd</description>
     </item>
     
     <item>
