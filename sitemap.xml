@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://oldpei.site/post/%E7%AE%80%E5%8E%86/</loc>
-    <lastmod>2023-01-29T14:18:00+08:00</lastmod>
+    <loc>https://oldpei.site/post/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/day03.java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF/</loc>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -80,42 +80,42 @@
   
   <url>
     <loc>https://oldpei.site/categories/</loc>
-    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/tags/java%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/post/</loc>
-    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/tags/</loc>
-    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://oldpei.site/</loc>
-    <lastmod>2023-02-19T12:14:16+08:00</lastmod>
+    <lastmod>2023-02-19T12:33:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -151,20 +151,6 @@
   <url>
     <loc>https://oldpei.site/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
     <lastmod>2023-02-02T16:05:47+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://oldpei.site/tags/resume/</loc>
-    <lastmod>2023-01-29T14:18:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://oldpei.site/categories/resume/</loc>
-    <lastmod>2023-01-29T14:18:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
