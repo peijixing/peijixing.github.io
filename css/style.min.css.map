@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "F:/ws/oldpei-pages",
+	"sourceRoot": "/Users/peijixing/Documents/develop/ws/vs/oldpei-pages",
 	"sources": [
 		"themes/LoveIt/assets/css/style.scss",
 		"themes/LoveIt/assets/css/_variables.scss",
