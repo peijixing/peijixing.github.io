@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://oldpei.site/en/sitemap.xml
+Sitemap: https://oldpei.site/sitemap.xml

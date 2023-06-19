@@ -1,8 +1,0 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Tags - Tag - 老裴的个人博客，分享一些没什么卵用的知识！</title>
-        <link>https://oldpei.site/en/tags/</link>
-        <description>Tags - Tag - 老裴的个人博客，分享一些没什么卵用的知识！</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
-            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://oldpei.site/en/tags/" rel="self" type="application/rss+xml" /></channel>
-</rss>
