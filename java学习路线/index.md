@@ -24,7 +24,7 @@
 
 ### 3.7 [黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot + mybatis plus开发核心技术的真java实战项目](https://www.bilibili.com/video/BV13a411q753/)
 
-## 4. 中间件&微服务框架-中级程序员热门技术<br /
+## 4. 中间件&微服务框架-中级程序员热门技术
 
 ### 4.1 [SpringCloud+RabbitMQ+Docker+Redis+搜索+分布式，系统详解springcloud微服务技术栈课程|黑马程序员Java微服务](https://www.bilibili.com/video/BV1LQ4y127n4/)
 
