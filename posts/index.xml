@@ -4,7 +4,15 @@
         <link>https://oldpei.site/posts/</link>
         <description>所有文章 | 老裴的个人博客，分享一些没什么卵用的知识！</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
-            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 19 Feb 2023 12:33:41 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 20 Jun 2023 09:00:20 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Java学习路线</title>
+    <link>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+    <pubDate>Tue, 20 Jun 2023 09:00:20 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
+    <description><![CDATA[1. Java基础入门 2. Java Web-能制作中小型网站&amp;企业管理系统 2.1 Javaweb 2.2 MySQL数据库 3. Java开发框架-Java企业级服务端开发技能 3.1]]></description>
+</item>
+<item>
     <title>Day03.java的特性和优势</title>
     <link>https://oldpei.site/day03.java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF/</link>
     <pubDate>Sun, 19 Feb 2023 12:33:41 &#43;0800</pubDate>

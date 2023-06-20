@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Java学习路线 - 老裴的个人博客，分享一些没什么卵用的知识！</title><meta name="Description" content="老裴的个人博客，分享一些没什么卵用的知识！"><meta property="og:title" content="Java学习路线" />
+<meta property="og:description" content="1. Java基础入门 2. Java Web-能制作中小型网站&amp;企业管理系统 2.1 Javaweb 2.2 MySQL数据库 3. Java开发框架-Java企业级服务端开发技能 3.1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" /><meta property="og:image" content="https://oldpei.site/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-20T09:00:20+08:00" />
+<meta property="article:modified_time" content="2023-02-19T11:49:20+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://oldpei.site/logo.png"/>
+
+<meta name="twitter:title" content="Java学习路线"/>
+<meta name="twitter:description" content="1. Java基础入门 2. Java Web-能制作中小型网站&amp;企业管理系统 2.1 Javaweb 2.2 MySQL数据库 3. Java开发框架-Java企业级服务端开发技能 3.1"/>
+<meta name="application-name" content="老裴的个人博客，分享一些没什么卵用的知识！">
+<meta name="apple-mobile-web-app-title" content="老裴的个人博客，分享一些没什么卵用的知识！"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" /><link rel="prev" href="https://oldpei.site/day03.java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Java学习路线",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/oldpei.site\/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF\/"
+        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java学习","wordcount":  825 ,
+        "url": "https:\/\/oldpei.site\/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF\/","datePublished": "2023-06-20T09:00:20+08:00","dateModified": "2023-02-19T11:49:20+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/oldpei.site\/logo\/java.jepg"},"author": {
+                "@type": "Person",
+                "name": "老裴"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="老裴的个人博客，分享一些没什么卵用的知识！"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span><span id="id-1" class="typeit"></span><span class="header-title-post"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://gitee.com/laopei" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="老裴的个人博客，分享一些没什么卵用的知识！"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span><span id="id-2" class="typeit"></span><span class="header-title-post"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://gitee.com/laopei" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java学习路线</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://gitee.com/laopei" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>老裴</a>
+</span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java学习路线</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-20">2023-06-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 825 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" class="leancloud_visitors" data-flag-title="Java学习路线">
+                        <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-java基础入门httpswwwbilibilicomvideobv1cv411372m">1. <a href="https://www.bilibili.com/video/BV1Cv411372m/">Java基础入门</a></a></li>
+    <li><a href="#2-java-web-能制作中小型网站企业管理系统">2. Java Web-能制作中小型网站&amp;企业管理系统</a>
+      <ul>
+        <li><a href="#21-javawebhttpswwwbilibilicomvideobv1m84y1w7tb">2.1 <a href="https://www.bilibili.com/video/BV1m84y1w7Tb/">Javaweb</a></a></li>
+        <li><a href="#22-mysql数据库httpswwwbilibilicomvideobv1kr4y1i7ru">2.2 <a href="https://www.bilibili.com/video/BV1Kr4y1i7ru/">MySQL数据库</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#3-java开发框架-java企业级服务端开发技能">3. Java开发框架-Java企业级服务端开发技能</a>
+      <ul>
+        <li><a href="#31-mavenhttpswwwbilibilicomvideobv1ah411s7ze">3.1 <a href="https://www.bilibili.com/video/BV1Ah411S7ZE/">Maven</a></a></li>
+        <li><a href="#32-githttpswwwbilibilicomvideobv1mu4y1y7h5">3.2 <a href="https://www.bilibili.com/video/BV1MU4y1Y7h5/">GIT</a></a></li>
+        <li><a href="#33-ssm框架httpswwwbilibilicomvideobv1wz4y1p7bp">3.3 <a href="https://www.bilibili.com/video/BV1WZ4y1P7Bp/">SSM框架</a></a></li>
+        <li><a href="#34-springhttpswwwbilibilicomvideobv1p44y1n7qg">3.4 <a href="https://www.bilibili.com/video/BV1P44y1N7QG/">Spring</a></a></li>
+        <li><a href="#35-mybatisplushttpswwwbilibilicomvideobv1re41197jr">3.5 <a href="https://www.bilibili.com/video/BV1rE41197jR/">MybatisPlus</a></a></li>
+        <li><a href="#36-spring-boothttpswwwbilibilicomvideobv15b4y1a7yg">3.6 <a href="https://www.bilibili.com/video/BV15b4y1a7yG/">Spring Boot</a></a></li>
+        <li><a href="#37-黑马程序员java项目实战瑞吉外卖轻松掌握springboot--mybatis-plus开发核心技术的真java实战项目httpswwwbilibilicomvideobv13a411q753">3.7 <a href="https://www.bilibili.com/video/BV13a411q753/">黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot + mybatis plus开发核心技术的真java实战项目</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-中间件微服务框架-中级程序员热门技术br-">4. 中间件&amp;微服务框架-中级程序员热门技术&lt;br /</a>
+      <ul>
+        <li><a href="#41-springcloudrabbitmqdockerredis搜索分布式系统详解springcloud微服务技术栈课程黑马程序员java微服务httpswwwbilibilicomvideobv1lq4y127n4">4.1 <a href="https://www.bilibili.com/video/BV1LQ4y127n4/">SpringCloud+RabbitMQ+Docker+Redis+搜索+分布式，系统详解springcloud微服务技术栈课程|黑马程序员Java微服务</a></a></li>
+        <li><a href="#42-dubbohttpswwwbilibilicomvideobv1ve411q7dx">4.2 <a href="https://www.bilibili.com/video/BV1VE411q7dX/">Dubbo</a></a></li>
+        <li><a href="#43-zookeeperhttpswwwbilibilicomvideobv1m741137qy">4.3 <a href="https://www.bilibili.com/video/BV1M741137qY/">Zookeeper</a></a></li>
+        <li><a href="#44-rabbitmqhttpswwwbilibilicomvideobv15k4y1k7ep">4.4 <a href="https://www.bilibili.com/video/BV15k4y1k7Ep/">RabbitMQ</a></a></li>
+        <li><a href="#45-rocketmqhttpswwwbilibilicomvideobv1l4411y7mn">4.5 <a href="https://www.bilibili.com/video/BV1L4411y7mn/">RocketMQ</a></a></li>
+        <li><a href="#46-dockerhttpswwwbilibilicomvideobv1cj411t7bk">4.6 <a href="https://www.bilibili.com/video/BV1CJ411T7BK/">Docker</a></a></li>
+        <li><a href="#47-redishttpswwwbilibilicomvideobv1cr4y1671t">4.7 <a href="https://www.bilibili.com/video/BV1cr4y1671t/">Redis</a></a></li>
+        <li><a href="#48-mongodbhttpswwwbilibilicomvideobv1bj411x7mq">4.8 <a href="https://www.bilibili.com/video/BV1bJ411x7mq/">MongoDB</a></a></li>
+        <li><a href="#49-搜索技术java中级教程-elk高级搜索深度详解elasticstack技术栈httpswwwbilibilicomvideobv1nt4y1m7ql">4.9 <a href="https://www.bilibili.com/video/BV1Nt4y1m7qL/">搜索技术,java中级教程-ELK高级搜索，深度详解ElasticStack技术栈</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#5-项目实战-企业级项目开发掌握行业3年开发经验">5. 项目实战-企业级项目开发，掌握行业3年开发经验</a>
+      <ul>
+        <li><a href="#51-黑马程序员java企业级实战开发学成在线微服务项目基于springcloudspringcloudalibaba技术栈开发项目搭建到选课支付学习全通关httpswwwbilibilicomvideobv1j8411n7bm">5.1 <a href="https://www.bilibili.com/video/BV1j8411N7Bm/">黑马程序员Java企业级实战开发《学成在线》微服务项目，基于SpringCloud、SpringCloudAlibaba技术栈开发，项目搭建到选课支付学习全通关</a></a></li>
+        <li><a href="#52-黑马程序员java微服务项目黑马头条快速开发全套视频教程基于springbootspringcloudnacos等企业级微服务架构项目解决方案httpswwwbilibilicomvideobv1qs4y1v7x4">5.2 <a href="https://www.bilibili.com/video/BV1Qs4y1v7x4/">黑马程序员Java微服务项目《黑马头条》快速开发全套视频教程，基于SpringBoot+SpringCloud+Nacos等企业级微服务架构项目解决方案</a></a></li>
+        <li><a href="#53-黑马程序员java项目saas移动办公完整版ihrm-人力资源管理系统跨行业saas办公整合性解决方案httpswwwbilibilicomvideobv18a411l7ux">5.3 <a href="https://www.bilibili.com/video/BV18A411L7UX/">黑马程序员Java项目SaaS移动办公完整版《iHRM 人力资源管理系统》，跨行业SaaS办公整合性解决方案</a></a></li>
+        <li><a href="#54-黑马程序员java企业级项目集信达短信平台从零打造高可用大吞吐java企业级短信平台解决方案httpswwwbilibilicomvideobv1jb4y1d7gyvd_source0f1da69361f56e3a2e6c283e179c225e">5.4 <a href="https://www.bilibili.com/video/BV1Jb4y1d7GY/?vd_source=0f1da69361f56e3a2e6c283e179c225e">黑马程序员Java企业级项目《集信达短信平台》，从零打造高可用、大吞吐Java企业级短信平台解决方案</a></a></li>
+        <li><a href="#55-黑马程序员java品达通用权限项目基于springcloud-springboot-的微服务框架的权限管理解决方案httpswwwbilibilicomvideobv1tw411f79evd_source0f1da69361f56e3a2e6c283e179c225e">5.5 <a href="https://www.bilibili.com/video/BV1tw411f79E/?vd_source=0f1da69361f56e3a2e6c283e179c225e">黑马程序员Java品达通用权限项目，基于SpringCloud SpringBoot 的微服务框架的权限管理解决方案</a></a></li>
+        <li><a href="#56-2023新版数据结构与算法java视频教程上篇java高级程序员必学的数据结构与算法httpswwwbilibilicomvideobv1lv4y1e7hl">5.6 <a href="https://www.bilibili.com/video/BV1Lv4y1e7HL/">2023新版数据结构与算法Java视频教程（上篇），java高级程序员必学的数据结构与算法</a></a></li>
+        <li><a href="#57-2023新版数据结构与算法java视频教程下篇java高级程序员必学的数据结构与算法httpswwwbilibilicomvideobv1rv4y1h7o6">5.7 <a href="https://www.bilibili.com/video/BV1rv4y1H7o6/">2023新版数据结构与算法Java视频教程（下篇），java高级程序员必学的数据结构与算法</a></a></li>
+        <li><a href="#58-新版java面试专题视频教程java八股文面试全套真题深度详解含大厂高频面试真题httpswwwbilibilicomvideobv1yt411h7yk">5.8 <a href="https://www.bilibili.com/video/BV1yT411H7YK/">新版Java面试专题视频教程，java八股文面试全套真题+深度详解（含大厂高频面试真题）</a></a></li>
+        <li><a href="#59-新版java面试专题视频教程java八股文面试全套真题深度详解含大厂高频面试真题httpswwwbilibilicomvideobv1yt411h7yk">5.9 <a href="https://www.bilibili.com/video/BV1yT411H7YK/">新版Java面试专题视频教程，java八股文面试全套真题+深度详解（含大厂高频面试真题）</a></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-java基础入门httpswwwbilibilicomvideobv1cv411372m">1. <a href="https://www.bilibili.com/video/BV1Cv411372m/" target="_blank" rel="noopener noreffer">Java基础入门</a>
+</h2>
+<h2 id="2-java-web-能制作中小型网站企业管理系统">2. Java Web-能制作中小型网站&amp;企业管理系统</h2>
+<h3 id="21-javawebhttpswwwbilibilicomvideobv1m84y1w7tb">2.1 <a href="https://www.bilibili.com/video/BV1m84y1w7Tb/" target="_blank" rel="noopener noreffer">Javaweb</a>
+</h3>
+<h3 id="22-mysql数据库httpswwwbilibilicomvideobv1kr4y1i7ru">2.2 <a href="https://www.bilibili.com/video/BV1Kr4y1i7ru/" target="_blank" rel="noopener noreffer">MySQL数据库</a>
+</h3>
+<h2 id="3-java开发框架-java企业级服务端开发技能">3. Java开发框架-Java企业级服务端开发技能</h2>
+<h3 id="31-mavenhttpswwwbilibilicomvideobv1ah411s7ze">3.1 <a href="https://www.bilibili.com/video/BV1Ah411S7ZE/" target="_blank" rel="noopener noreffer">Maven</a>
+</h3>
+<h3 id="32-githttpswwwbilibilicomvideobv1mu4y1y7h5">3.2 <a href="https://www.bilibili.com/video/BV1MU4y1Y7h5/" target="_blank" rel="noopener noreffer">GIT</a>
+</h3>
+<h3 id="33-ssm框架httpswwwbilibilicomvideobv1wz4y1p7bp">3.3 <a href="https://www.bilibili.com/video/BV1WZ4y1P7Bp/" target="_blank" rel="noopener noreffer">SSM框架</a>
+</h3>
+<h3 id="34-springhttpswwwbilibilicomvideobv1p44y1n7qg">3.4 <a href="https://www.bilibili.com/video/BV1P44y1N7QG/" target="_blank" rel="noopener noreffer">Spring</a>
+</h3>
+<h3 id="35-mybatisplushttpswwwbilibilicomvideobv1re41197jr">3.5 <a href="https://www.bilibili.com/video/BV1rE41197jR/" target="_blank" rel="noopener noreffer">MybatisPlus</a>
+</h3>
+<h3 id="36-spring-boothttpswwwbilibilicomvideobv15b4y1a7yg">3.6 <a href="https://www.bilibili.com/video/BV15b4y1a7yG/" target="_blank" rel="noopener noreffer">Spring Boot</a>
+</h3>
+<h3 id="37-黑马程序员java项目实战瑞吉外卖轻松掌握springboot--mybatis-plus开发核心技术的真java实战项目httpswwwbilibilicomvideobv13a411q753">3.7 <a href="https://www.bilibili.com/video/BV13a411q753/" target="_blank" rel="noopener noreffer">黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot + mybatis plus开发核心技术的真java实战项目</a>
+</h3>
+<h2 id="4-中间件微服务框架-中级程序员热门技术br-">4. 中间件&amp;微服务框架-中级程序员热门技术&lt;br /</h2>
+<h3 id="41-springcloudrabbitmqdockerredis搜索分布式系统详解springcloud微服务技术栈课程黑马程序员java微服务httpswwwbilibilicomvideobv1lq4y127n4">4.1 <a href="https://www.bilibili.com/video/BV1LQ4y127n4/" target="_blank" rel="noopener noreffer">SpringCloud+RabbitMQ+Docker+Redis+搜索+分布式，系统详解springcloud微服务技术栈课程|黑马程序员Java微服务</a>
+</h3>
+<h3 id="42-dubbohttpswwwbilibilicomvideobv1ve411q7dx">4.2 <a href="https://www.bilibili.com/video/BV1VE411q7dX/" target="_blank" rel="noopener noreffer">Dubbo</a>
+</h3>
+<h3 id="43-zookeeperhttpswwwbilibilicomvideobv1m741137qy">4.3 <a href="https://www.bilibili.com/video/BV1M741137qY/" target="_blank" rel="noopener noreffer">Zookeeper</a>
+</h3>
+<h3 id="44-rabbitmqhttpswwwbilibilicomvideobv15k4y1k7ep">4.4 <a href="https://www.bilibili.com/video/BV15k4y1k7Ep/" target="_blank" rel="noopener noreffer">RabbitMQ</a>
+</h3>
+<h3 id="45-rocketmqhttpswwwbilibilicomvideobv1l4411y7mn">4.5 <a href="https://www.bilibili.com/video/BV1L4411y7mn/" target="_blank" rel="noopener noreffer">RocketMQ</a>
+</h3>
+<h3 id="46-dockerhttpswwwbilibilicomvideobv1cj411t7bk">4.6 <a href="https://www.bilibili.com/video/BV1CJ411T7BK/" target="_blank" rel="noopener noreffer">Docker</a>
+</h3>
+<h3 id="47-redishttpswwwbilibilicomvideobv1cr4y1671t">4.7 <a href="https://www.bilibili.com/video/BV1cr4y1671t/" target="_blank" rel="noopener noreffer">Redis</a>
+</h3>
+<h3 id="48-mongodbhttpswwwbilibilicomvideobv1bj411x7mq">4.8 <a href="https://www.bilibili.com/video/BV1bJ411x7mq/" target="_blank" rel="noopener noreffer">MongoDB</a>
+</h3>
+<h3 id="49-搜索技术java中级教程-elk高级搜索深度详解elasticstack技术栈httpswwwbilibilicomvideobv1nt4y1m7ql">4.9 <a href="https://www.bilibili.com/video/BV1Nt4y1m7qL/" target="_blank" rel="noopener noreffer">搜索技术,java中级教程-ELK高级搜索，深度详解ElasticStack技术栈</a>
+</h3>
+<h2 id="5-项目实战-企业级项目开发掌握行业3年开发经验">5. 项目实战-企业级项目开发，掌握行业3年开发经验</h2>
+<h3 id="51-黑马程序员java企业级实战开发学成在线微服务项目基于springcloudspringcloudalibaba技术栈开发项目搭建到选课支付学习全通关httpswwwbilibilicomvideobv1j8411n7bm">5.1 <a href="https://www.bilibili.com/video/BV1j8411N7Bm/" target="_blank" rel="noopener noreffer">黑马程序员Java企业级实战开发《学成在线》微服务项目，基于SpringCloud、SpringCloudAlibaba技术栈开发，项目搭建到选课支付学习全通关</a>
+</h3>
+<h3 id="52-黑马程序员java微服务项目黑马头条快速开发全套视频教程基于springbootspringcloudnacos等企业级微服务架构项目解决方案httpswwwbilibilicomvideobv1qs4y1v7x4">5.2 <a href="https://www.bilibili.com/video/BV1Qs4y1v7x4/" target="_blank" rel="noopener noreffer">黑马程序员Java微服务项目《黑马头条》快速开发全套视频教程，基于SpringBoot+SpringCloud+Nacos等企业级微服务架构项目解决方案</a>
+</h3>
+<h3 id="53-黑马程序员java项目saas移动办公完整版ihrm-人力资源管理系统跨行业saas办公整合性解决方案httpswwwbilibilicomvideobv18a411l7ux">5.3 <a href="https://www.bilibili.com/video/BV18A411L7UX/" target="_blank" rel="noopener noreffer">黑马程序员Java项目SaaS移动办公完整版《iHRM 人力资源管理系统》，跨行业SaaS办公整合性解决方案</a>
+</h3>
+<h3 id="54-黑马程序员java企业级项目集信达短信平台从零打造高可用大吞吐java企业级短信平台解决方案httpswwwbilibilicomvideobv1jb4y1d7gyvd_source0f1da69361f56e3a2e6c283e179c225e">5.4 <a href="https://www.bilibili.com/video/BV1Jb4y1d7GY/?vd_source=0f1da69361f56e3a2e6c283e179c225e" target="_blank" rel="noopener noreffer">黑马程序员Java企业级项目《集信达短信平台》，从零打造高可用、大吞吐Java企业级短信平台解决方案</a>
+</h3>
+<h3 id="55-黑马程序员java品达通用权限项目基于springcloud-springboot-的微服务框架的权限管理解决方案httpswwwbilibilicomvideobv1tw411f79evd_source0f1da69361f56e3a2e6c283e179c225e">5.5 <a href="https://www.bilibili.com/video/BV1tw411f79E/?vd_source=0f1da69361f56e3a2e6c283e179c225e" target="_blank" rel="noopener noreffer">黑马程序员Java品达通用权限项目，基于SpringCloud SpringBoot 的微服务框架的权限管理解决方案</a>
+</h3>
+<h3 id="56-2023新版数据结构与算法java视频教程上篇java高级程序员必学的数据结构与算法httpswwwbilibilicomvideobv1lv4y1e7hl">5.6 <a href="https://www.bilibili.com/video/BV1Lv4y1e7HL/" target="_blank" rel="noopener noreffer">2023新版数据结构与算法Java视频教程（上篇），java高级程序员必学的数据结构与算法</a>
+</h3>
+<h3 id="57-2023新版数据结构与算法java视频教程下篇java高级程序员必学的数据结构与算法httpswwwbilibilicomvideobv1rv4y1h7o6">5.7 <a href="https://www.bilibili.com/video/BV1rv4y1H7o6/" target="_blank" rel="noopener noreffer">2023新版数据结构与算法Java视频教程（下篇），java高级程序员必学的数据结构与算法</a>
+</h3>
+<h3 id="58-新版java面试专题视频教程java八股文面试全套真题深度详解含大厂高频面试真题httpswwwbilibilicomvideobv1yt411h7yk">5.8 <a href="https://www.bilibili.com/video/BV1yT411H7YK/" target="_blank" rel="noopener noreffer">新版Java面试专题视频教程，java八股文面试全套真题+深度详解（含大厂高频面试真题）</a>
+</h3>
+<h3 id="59-新版java面试专题视频教程java八股文面试全套真题深度详解含大厂高频面试真题httpswwwbilibilicomvideobv1yt411h7yk">5.9 <a href="https://www.bilibili.com/video/BV1yT411H7YK/" target="_blank" rel="noopener noreffer">新版Java面试专题视频教程，java八股文面试全套真题+深度详解（含大厂高频面试真题）</a>
+</h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" data-title="Java学习路线" data-hashtags="java学习"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" data-hashtag="java学习"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" data-title="Java学习路线"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" data-title="Java学习路线"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" data-title="Java学习路线" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java%E5%AD%A6%E4%B9%A0/">java学习</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/day03.java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF/" class="prev" rel="prev" title="Day03.java的特性和优势"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Day03.java的特性和优势</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.113.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://gitee.com/laopei" target="_blank">老裴</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.18/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.5.4/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@14.0.0/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"data":{"id-1":"老裴的个人博客，分享一些没什么卵用的知识！","id-2":"老裴的个人博客，分享一些没什么卵用的知识！"},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
