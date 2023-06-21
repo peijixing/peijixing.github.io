@@ -4,29 +4,13 @@
         <link>https://oldpei.site/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
         <description>基础知识 - 分类 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
-            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 19 Feb 2023 12:33:41 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml" /><item>
-    <title>Day03.java的特性和优势</title>
-    <link>https://oldpei.site/day03.java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF/</link>
-    <pubDate>Sun, 19 Feb 2023 12:33:41 &#43;0800</pubDate>
+            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 21 Jun 2023 09:03:18 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml" /><item>
+    <title>Java基础</title>
+    <link>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Wed, 21 Jun 2023 09:03:18 &#43;0800</pubDate>
     <author>老裴</author>
-    <guid>https://oldpei.site/day03.java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF/</guid>
-    <description><![CDATA[java的特性和优势 简单性 面向对象 可移植性 高性能 分布性 动态性 多线程 安全性 健壮性]]></description>
-</item>
-<item>
-    <title>Day02.基本DOS命令</title>
-    <link>https://oldpei.site/day02.%E5%9F%BA%E6%9C%ACdos%E5%91%BD%E4%BB%A4/</link>
-    <pubDate>Sun, 19 Feb 2023 12:14:16 &#43;0800</pubDate>
-    <author>老裴</author>
-    <guid>https://oldpei.site/day02.%E5%9F%BA%E6%9C%ACdos%E5%91%BD%E4%BB%A4/</guid>
-    <description><![CDATA[基本命令之跳转 切换盘符： 盘符 + 冒号 ,例【 D: 】 查看目录下的目录和文件 ： dir 切换目录： cd + 位置 ,例【 cd /path 】 /d参数可以使cd命令跨盘符跳转，例【 cd]]></description>
-</item>
-<item>
-    <title>Day01.计算机基础</title>
-    <link>https://oldpei.site/day01.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</link>
-    <pubDate>Sun, 19 Feb 2023 11:49:20 &#43;0800</pubDate>
-    <author>老裴</author>
-    <guid>https://oldpei.site/day01.%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</guid>
-    <description><![CDATA[计算机硬件 冯诺依曼体系结构 计算机软件 系统软件 Linux Windows Unix Mac &hellip; 应用软件]]></description>
+    <guid>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c]]></description>
 </item>
 </channel>
 </rss>
