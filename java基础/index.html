@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/"
-        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java","wordcount":  367 ,
+        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java","wordcount":  560 ,
         "url": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/","datePublished": "2023-06-21T09:03:18+08:00","dateModified": "2023-06-21T09:03:18+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/oldpei.site\/logo\/java.jepg"},"author": {
@@ -103,8 +103,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java基础</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://gitee.com/laopei" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>老裴</a>
 </span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>基础知识</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-21">2023-06-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 367 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/java%E5%9F%BA%E7%A1%80/" class="leancloud_visitors" data-flag-title="Java基础">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-21">2023-06-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 560 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/java%E5%9F%BA%E7%A1%80/" class="leancloud_visitors" data-flag-title="Java基础">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -114,82 +114,150 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#1-基础语法">1. 基础语法</a>
-      <ul>
-        <li><a href="#11-注释">1.1 注释</a></li>
-        <li><a href="#12-字面量">1.2 字面量</a></li>
-        <li><a href="#13-变量">1.3 变量</a></li>
-        <li><a href="#14-关键字和标识符">1.4 关键字和标识符</a></li>
-        <li><a href="#15-数据类型">1.5 数据类型</a>
-          <ul>
-            <li><a href="#151-基础数据类型byteshortintlongfloatdoublecharboolean">1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean</a></li>
-            <li><a href="#152-引用数据类型string">1.5.2 引用数据类型：String</a></li>
-            <li><a href="#153-数据类型转换自动转换强制转换">1.5.3 数据类型转换：自动转换、强制转换</a></li>
-          </ul>
-        </li>
-        <li><a href="#16-运算符">1.6 运算符</a>
-          <ul>
-            <li><a href="#161-算数运算符-----">1.6.1 算数运算符：+ - * / %</a></li>
-            <li><a href="#162-自增自减运算符">1.6.2 自增自减运算符</a></li>
-            <li><a href="#163-赋值运算符">1.6.3 赋值运算符</a></li>
-            <li><a href="#164-关系运算符">1.6.4 关系运算符</a></li>
-            <li><a href="#165-逻辑运算符">1.6.5 逻辑运算符</a></li>
-            <li><a href="#166-三元运算符">1.6.6 三元运算符</a></li>
-            <li><a href="#167-学习使用java-api-----java17apihttpswwworaclecomjavatechnologiesjavase-jdk17-doc-downloadshtml">1.6.7 学习使用Java Api     <a href="https://www.oracle.com/java/technologies/javase-jdk17-doc-downloads.html">Java17Api</a></a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#2-流程控制">2. 流程控制</a>
-      <ul>
-        <li><a href="#21-分支结构if-else-switch-switch-穿透性">2.1 分支结构：if else 、switch 、switch 穿透性</a></li>
-      </ul>
-    </li>
-    <li><a href="#3-数组">3. 数组</a>
-      <ul>
-        <li><a href="#31-静态初始化数组">3.1 静态初始化数组</a></li>
-        <li><a href="#32-数组遍历">3.2 数组遍历</a></li>
-        <li><a href="#33-动态初始化数组">3.3 动态初始化数组</a></li>
-        <li><a href="#34-组的内存执行原理">3.4 组的内存执行原理</a>
-          <ul>
-            <li><a href="#341-方法区字节码文件加载栈方法运行时加载变量加载堆变量实际数值或者对象的实例本地方法栈寄存器">3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器</a></li>
-            <li><a href="#342-多个变量指向同一个数组的问题修改其中一个导致堆内的数据变化会导致另一个数组跟着变化">3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    <li><a href="#1-基础语法">1. 基础语法</a></li>
+    <li><a href="#2-流程控制">2. 流程控制</a></li>
+    <li><a href="#3-数组">3. 数组</a></li>
     <li><a href="#4-方法">4. 方法</a></li>
     <li><a href="#5-java案例">5. Java案例</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="1-基础语法">1. 基础语法</h2>
-<h3 id="11-注释">1.1 注释</h3>
-<h3 id="12-字面量">1.2 字面量</h3>
-<h3 id="13-变量">1.3 变量</h3>
-<h3 id="14-关键字和标识符">1.4 关键字和标识符</h3>
-<h3 id="15-数据类型">1.5 数据类型</h3>
-<h4 id="151-基础数据类型byteshortintlongfloatdoublecharboolean">1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean</h4>
-<h4 id="152-引用数据类型string">1.5.2 引用数据类型：String</h4>
-<h4 id="153-数据类型转换自动转换强制转换">1.5.3 数据类型转换：自动转换、强制转换</h4>
-<h3 id="16-运算符">1.6 运算符</h3>
-<h4 id="161-算数运算符-----">1.6.1 算数运算符：+ - * / %</h4>
-<h4 id="162-自增自减运算符">1.6.2 自增自减运算符</h4>
-<h4 id="163-赋值运算符">1.6.3 赋值运算符</h4>
-<h4 id="164-关系运算符">1.6.4 关系运算符</h4>
-<h4 id="165-逻辑运算符">1.6.5 逻辑运算符</h4>
-<h4 id="166-三元运算符">1.6.6 三元运算符</h4>
-<h4 id="167-学习使用java-api-----java17apihttpswwworaclecomjavatechnologiesjavase-jdk17-doc-downloadshtml">1.6.7 学习使用Java Api     <a href="https://www.oracle.com/java/technologies/javase-jdk17-doc-downloads.html" target="_blank" rel="noopener noreffer">Java17Api</a>
-</h4>
+<ul>
+<li>
+<p>1.1 注释</p>
+</li>
+<li>
+<p>1.2 字面量</p>
+</li>
+<li>
+<p>1.3 变量</p>
+</li>
+<li>
+<p>1.4 关键字和标识符</p>
+</li>
+<li>
+<p>1.5 数据类型</p>
+<ul>
+<li>
+<p>1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean</p>
+</li>
+<li>
+<p>1.5.2 引用数据类型：String</p>
+</li>
+<li>
+<p>1.5.3 数据类型转换：自动转换、强制转换</p>
+</li>
+</ul>
+</li>
+<li>
+<p>1.6 运算符</p>
+<ul>
+<li>
+<p>1.6.1 算数运算符：+ - * / %</p>
+</li>
+<li>
+<p>1.6.2 自增自减运算符</p>
+</li>
+<li>
+<p>1.6.3 赋值运算符</p>
+</li>
+<li>
+<p>1.6.4 关系运算符</p>
+</li>
+<li>
+<p>1.6.5 逻辑运算符</p>
+</li>
+<li>
+<p>1.6.6 三元运算符</p>
+</li>
+<li>
+<p>1.6.7 学习使用Java Api     <a href="https://www.oracle.com/java/technologies/javase-jdk17-doc-downloads.html" target="_blank" rel="noopener noreffer">Java17Api</a>
+</p>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="2-流程控制">2. 流程控制</h2>
-<h3 id="21-分支结构if-else-switch-switch-穿透性">2.1 分支结构：if else 、switch 、switch 穿透性</h3>
-<p>switch需要使用break防止穿透访问。</p>
+<ul>
+<li>
+<p>2.1 分支结构：if else 、switch 、switch 穿透性
+switch需要使用break防止穿透访问。</p>
+</li>
+<li>
+<p>2.2 循环结构 for 、while、do while</p>
+</li>
+<li>
+<p>2.3 跳转关键字：break、continue</p>
+</li>
+<li>
+<p>2.4 随机数 Random</p>
+</li>
+</ul>
 <h2 id="3-数组">3. 数组</h2>
-<h3 id="31-静态初始化数组">3.1 静态初始化数组</h3>
-<h3 id="32-数组遍历">3.2 数组遍历</h3>
-<h3 id="33-动态初始化数组">3.3 动态初始化数组</h3>
-<h3 id="34-组的内存执行原理">3.4 组的内存执行原理</h3>
-<h4 id="341-方法区字节码文件加载栈方法运行时加载变量加载堆变量实际数值或者对象的实例本地方法栈寄存器">3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器</h4>
-<h4 id="342-多个变量指向同一个数组的问题修改其中一个导致堆内的数据变化会导致另一个数组跟着变化">3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化</h4>
+<ul>
+<li>
+<p>3.1 静态初始化数组</p>
+</li>
+<li>
+<p>3.2 数组遍历</p>
+</li>
+<li>
+<p>3.3 动态初始化数组</p>
+</li>
+<li>
+<p>3.4 组的内存执行原理</p>
+<ul>
+<li>
+<p>3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器</p>
+</li>
+<li>
+<p>3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化</p>
+</li>
+<li>
+<p>3.4.3 数组赋值为null时，说明在数组没有指向堆中的实例</p>
+</li>
+</ul>
+</li>
+<li>
+<p>3.5 数组使用的简单案例</p>
+<ul>
+<li>
+<p>数组求最值</p>
+<ul>
+<li>定义一个变量用于保存最终的最大值，从数组第一个数据开始</li>
+<li>从第二个数据开始辨遍历，如果该值大于变量，则替换变量的值</li>
+</ul>
+</li>
+<li>
+<p>数组反转</p>
+<ul>
+<li>方法一：逆向循环，插入新的数组</li>
+<li>方法二：依次前后交换数据
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">j</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">;</span><span class="n">i</span><span class="o">++,</span><span class="n">j</span><span class="o">--){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>数组随机排名</p>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="4-方法">4. 方法</h2>
 <h2 id="5-java案例">5. Java案例</h2>
 </div><div class="post-footer" id="post-footer">

@@ -48,7 +48,7 @@ INSERT INTO user (id, name, age, email) VALUES
 (5, 'Billie', 24, 'test5@baomidou.com');
 ~~~
 
-### 2.框架搭建
++ 2.框架搭建
 
 1. 使用 [Spring Initializer (opens new window)](https://start.spring.io/)快速初始化一个 Spring Boot 工程
 
@@ -86,7 +86,7 @@ INSERT INTO user (id, name, age, email) VALUES
             data-locations: classpath:db/data-h2.sql
       ~~~
 
-### 3.编码
++ 3.编码
 
 编写实体类 `User.java`（此处使用了 `Lombok` 简化代码）
 
@@ -108,7 +108,7 @@ public interface UserMapper extends BaseMapper<User> {
 }
 ~~~
 
-### 4.开始使用
++ 4.开始使用
 
 添加测试类，进行功能测试：
 
