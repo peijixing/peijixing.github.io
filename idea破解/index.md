@@ -1,6 +1,6 @@
 # Idea破解
 
-
+## 破解步骤
 1. 从官网下载idea 2023.1.3版
 2. [下载破解插件](/idea%E7%A0%B4%E8%A7%A3/JetBrains%E6%BF%80%E6%B4%BB%E6%8F%92%E4%BB%B6.zip)
 3. 运行破解scripts文件夹下的破解脚本install-all-users.vbs

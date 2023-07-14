@@ -62,5 +62,5 @@
 
 + 下载
 
-[下载地址](/影音壳子.apk)
+[下载地址](https://github.com/o0HalfLife0o/TVBoxOSC/releases/)
 
