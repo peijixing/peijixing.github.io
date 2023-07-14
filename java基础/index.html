@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://oldpei.site/java%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="https://oldpei.site/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-21T09:03:18+08:00" />
-<meta property="article:modified_time" content="2023-07-12T18:42:02+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-07-14T16:45:07+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://oldpei.site/logo.png"/>
 
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/"
-        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java","wordcount":  560 ,
-        "url": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/","datePublished": "2023-06-21T09:03:18+08:00","dateModified": "2023-07-12T18:42:02+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java","wordcount":  1672 ,
+        "url": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/","datePublished": "2023-06-21T09:03:18+08:00","dateModified": "2023-07-14T16:45:07+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/oldpei.site\/logo\/java.jepg"},"author": {
                 "@type": "Person",
@@ -103,8 +103,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java基础</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://gitee.com/laopei" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>老裴</a>
 </span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>基础知识</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-21">2023-06-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 560 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/java%E5%9F%BA%E7%A1%80/" class="leancloud_visitors" data-flag-title="Java基础">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-21">2023-06-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1672 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id="/java%E5%9F%BA%E7%A1%80/" class="leancloud_visitors" data-flag-title="Java基础">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -119,6 +119,20 @@
     <li><a href="#3-数组">3. 数组</a></li>
     <li><a href="#4-方法">4. 方法</a></li>
     <li><a href="#5-java案例">5. Java案例</a></li>
+    <li><a href="#6面向对象">6.面向对象</a></li>
+    <li><a href="#7常用api">7.常用API</a></li>
+    <li><a href="#8项目介绍">8.项目介绍</a></li>
+    <li><a href="#9面向对象高级">9.面向对象高级</a></li>
+    <li><a href="#10常用api-2">10.常用API 2</a></li>
+    <li><a href="#11java进阶">11.Java进阶</a></li>
+    <li><a href="#12集合框架">12.集合框架</a></li>
+    <li><a href="#13java8新特性">13.java8新特性</a></li>
+    <li><a href="#14io流">14.IO流</a></li>
+    <li><a href="#15特殊文件">15.特殊文件</a></li>
+    <li><a href="#16日志技术">16.日志技术</a></li>
+    <li><a href="#17多线程">17.多线程</a></li>
+    <li><a href="#18网络通讯">18.网络通讯</a></li>
+    <li><a href="#19java高级">19.Java高级</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="1-基础语法">1. 基础语法</h2>
@@ -254,18 +268,203 @@ switch需要使用break防止穿透访问。</p>
 </li>
 <li>
 <p>数组随机排名</p>
+<ul>
+<li>动态初始化数字，后期手动录入数据</li>
+<li>依次遍历数组数据，随机生成一个索引，交换遍历处和生成索引的两个数据</li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
 <h2 id="4-方法">4. 方法</h2>
+<ul>
+<li>
+<p>方法初识</p>
+<ul>
+<li>方法是什么：方法是一种语法结构，它可以把一段代码封装起来，方便反复调用</li>
+<li>方法的完整格式
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">修饰符</span> <span class="err">返回值类型</span> <span class="err">方法名</span><span class="o">(</span><span class="err">参数类型</span> <span class="err">参数</span> <span class="o">...){</span>
+</span></span><span class="line"><span class="cl">  <span class="err">方法体代码</span><span class="o">(</span><span class="err">需要执行的代码</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="err">返回值；</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>使用方法的好处
+<ul>
+<li>提高代码的复用性，提高开发效率</li>
+<li>让代码逻辑更清晰</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>方法的其他形式：无返回值时使用 <strong>void</strong> 代替返回类型</p>
+</li>
+<li>
+<p>方法使用时的常见问题</p>
+<ul>
+<li>方法不能嵌套声明</li>
+<li>void修饰的方法不能返回值</li>
+<li>return后不能写代码</li>
+</ul>
+</li>
+<li>
+<p>方法的案例</p>
+<ul>
+<li>设计方法的技巧
+<ul>
+<li>1、方法是否需要收集数据-&gt;形参</li>
+<li>方法是否返回数据-&gt;返回值</li>
+<li>方法要处理的业务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>方法再计算机中的执行原理</p>
+<blockquote>
+<p>方法被调用的时候，是进入栈内存中运行（栈是先进后出，保证方法调用执行后可以返回到main方法中，并且执行后可以清除运行过的方法，防止内存溢出）</p>
+</blockquote>
+</li>
+<li>
+<p>Java的参数传递机制</p>
+<ul>
+<li>1、基础类型是值传递</li>
+<li>2、引用类型的参数传递</li>
+</ul>
+</li>
+<li>
+<p>方法重载</p>
+<ul>
+<li>一个类中相同方法名但是参数个数或类型不同 统称为重载</li>
+<li>知识补充：方法中单独使用return关键字</li>
+</ul>
+</li>
+</ul>
 <h2 id="5-java案例">5. Java案例</h2>
+<ul>
+<li>
+<p>买飞机票</p>
+<blockquote>
+<p>根据月份区分淡季旺季，根据作为类型计算折扣，和价格相乘得出结果</p>
+</blockquote>
+</li>
+<li>
+<p>验证码2</p>
+<blockquote>
+<p>按位循环，先随机选择数字（0-9）、小写字母（97+26）、大写字母（65+26），在随机生成ASCII码转换为char型</p>
+</blockquote>
+</li>
+<li>
+<p>打分</p>
+<ul>
+<li>需求：接受多个分数，去掉一个最小和一个最大值后取平均分</li>
+<li>
+<blockquote>
+<p>因为不清楚人数，所以使用动态数组保存，循环人数次使用Scanner录入分数，再次循环数组，得到最小和最大值和全部分数的和，最后计算返回值</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>加密</p>
+</li>
+<li>
+<p>拷贝</p>
+</li>
+<li>
+<p>抢红包</p>
+</li>
+<li>
+<p>找素数的三种做法</p>
+</li>
+<li>
+<p>打印乘法表、打印三角形</p>
+</li>
+<li>
+<p>实现双色球</p>
+</li>
+</ul>
+<h2 id="6面向对象">6.面向对象</h2>
+<ul>
+<li>面向对象含义</li>
+<li>对象执行原理类与对象的注意事项</li>
+<li>this关键字</li>
+<li>构造器</li>
+<li>成员变量、局部变量的区别</li>
+</ul>
+<h2 id="7常用api">7.常用API</h2>
+<ul>
+<li>包的概念</li>
+<li>String API</li>
+<li>ArrayList</li>
+</ul>
+<h2 id="8项目介绍">8.项目介绍</h2>
+<ul>
+<li>ATM项目</li>
+</ul>
+<h2 id="9面向对象高级">9.面向对象高级</h2>
+<ul>
+<li>static</li>
+<li>继承</li>
+<li>多态</li>
+<li>final、常量</li>
+<li>抽象类</li>
+<li>接口</li>
+<li>匿名内部类</li>
+<li>枚举</li>
+<li>泛型</li>
+</ul>
+<h2 id="10常用api-2">10.常用API 2</h2>
+<ul>
+<li>Object类</li>
+<li>StringBuilder、StringBuffer</li>
+<li>Math、System、Runtime</li>
+<li>BigDecimal</li>
+<li>传统时间 Date、SimpleDateFormat</li>
+<li>传统时间 秒杀案例、Calendar</li>
+<li>Java8新增时间：LocalDate、LocalTime、LocalDateTime、ZoneId、ZoneDateTime、Instant</li>
+<li>DateTimeFormater、Period、Duration</li>
+<li>Arrays</li>
+<li>Lamda表达式</li>
+</ul>
+<h2 id="11java进阶">11.Java进阶</h2>
+<ul>
+<li>算法
+<ul>
+<li>认识、冒泡排序、选择排序及优化</li>
+<li>二分法查找</li>
+</ul>
+</li>
+<li>正则表达式</li>
+<li>异常</li>
+</ul>
+<h2 id="12集合框架">12.集合框架</h2>
+<h2 id="13java8新特性">13.java8新特性</h2>
+<ul>
+<li>Stream流</li>
+</ul>
+<h2 id="14io流">14.IO流</h2>
+<h2 id="15特殊文件">15.特殊文件</h2>
+<h2 id="16日志技术">16.日志技术</h2>
+<h2 id="17多线程">17.多线程</h2>
+<h2 id="18网络通讯">18.网络通讯</h2>
+<h2 id="19java高级">19.Java高级</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-07-12&nbsp;<a class="git-hash" href="https://gitee.com/laopei/commit/77d4f1fb459dadebc4c95385cfcbe9664fedf030" target="_blank" title="commit by oldpei(mrpeijixing@163.com) 77d4f1fb459dadebc4c95385cfcbe9664fedf030: 2023年07月12日 18:42:01修改">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>77d4f1f</a></span>
+                <span>更新于 2023-07-14&nbsp;<a class="git-hash" href="https://gitee.com/laopei/commit/c29b25d34f78087b7e4ec2e5f3c78bf66e16ed76" target="_blank" title="commit by oldpei(mrpeijixing@gmail.com) c29b25d34f78087b7e4ec2e5f3c78bf66e16ed76: 2023年 7月14日 星期五 16时45分07秒 CST修改">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c29b25d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
