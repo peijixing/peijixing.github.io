@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://oldpei.site/java%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="https://oldpei.site/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-21T09:03:18+08:00" />
-<meta property="article:modified_time" content="2023-07-14T16:45:07+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-07-14T16:58:13+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://oldpei.site/logo.png"/>
 
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/"
-        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java","wordcount":  1672 ,
-        "url": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/","datePublished": "2023-06-21T09:03:18+08:00","dateModified": "2023-07-14T16:45:07+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/oldpei.site\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "java","wordcount":  1860 ,
+        "url": "https:\/\/oldpei.site\/java%E5%9F%BA%E7%A1%80\/","datePublished": "2023-06-21T09:03:18+08:00","dateModified": "2023-07-14T16:58:13+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/oldpei.site\/logo\/java.jepg"},"author": {
                 "@type": "Person",
@@ -103,7 +103,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java基础</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://gitee.com/laopei" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>老裴</a>
 </span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>基础知识</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-21">2023-06-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1672 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-21">2023-06-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1860 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id="/java%E5%9F%BA%E7%A1%80/" class="leancloud_visitors" data-flag-title="Java基础">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -377,12 +377,45 @@ switch需要使用break防止穿透访问。</p>
 </li>
 <li>
 <p>加密</p>
+<ul>
+<li>需求：传入一个数字，需要将其每一位加5，并对10取余，后将所有数字反转</li>
+<li>
+<blockquote>
+<p>方法1：定义一个数组，将数字每一位放到数组中，循环数组并计算每一位，计算后放入数组，逆向循环数组，输出结果</p>
+</blockquote>
 </li>
 <li>
-<p>拷贝</p>
+<blockquote>
+<p>方法2:定义一个数组，将数字每一位放到数组中，双向循环数组并计算每一位直达前后索引相遇，计算后放入数组，输出数组内的数字既可</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">j</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">;</span><span class="n">i</span><span class="o">++,</span><span class="n">j</span><span class="o">--){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Object</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 </li>
 <li>
-<p>抢红包</p>
+<p>数组拷贝</p>
+<blockquote>
+<p>创建一个新数组，不能使用相同的实例</p>
+</blockquote>
+</li>
+<li>
+<p>抢红包
++</p>
 </li>
 <li>
 <p>找素数的三种做法</p>
@@ -463,8 +496,8 @@ switch需要使用break防止穿透访问。</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-07-14&nbsp;<a class="git-hash" href="https://gitee.com/laopei/commit/c29b25d34f78087b7e4ec2e5f3c78bf66e16ed76" target="_blank" title="commit by oldpei(mrpeijixing@gmail.com) c29b25d34f78087b7e4ec2e5f3c78bf66e16ed76: 2023年 7月14日 星期五 16时45分07秒 CST修改">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c29b25d</a></span>
+                <span>更新于 2023-07-14&nbsp;<a class="git-hash" href="https://gitee.com/laopei/commit/15c151daf96f1a171ae7ec2a6b622d554963dda0" target="_blank" title="commit by oldpei(mrpeijixing@gmail.com) 15c151daf96f1a171ae7ec2a6b622d554963dda0: 2023年 7月14日 星期五 16时58分12秒 CST修改">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>15c151d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
