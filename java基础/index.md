@@ -212,8 +212,19 @@ switch需要使用break防止穿透访问。
       |boolean startWith(String prefix)|判断字符串是否以某个字符串开头|
       |String[] split(String regex)|字符串按照某个字符串分割，并返回字符串数组|
 
+  3. String的注意事项
+     - String对象的内容不可改变，被称为不可改变字符串对象
+     - 只要是以“...”方式写出的字符串对象，会存储带字符串常量池，切内容的字符串只存储一份
+     - 但是通过new方式创建的字符串对象，每new一次都会穿生一个新的对象放在堆内存中
+        ~~~java
+          String aaa= "abd";
+          String bbb = "a"+"b"+"c";
+          //  java对固定值拼接有优化，所以两个变量相等
+          //aaa==bbb 为true
 
-  3. 
+          String ccc = new String("abd");
+          //由于是new出的新对象，所以aaa和ccc不相同
+        ~~~
 + ArrayList
 ## 8.项目介绍
 + ATM项目
