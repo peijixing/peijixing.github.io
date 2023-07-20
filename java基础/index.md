@@ -198,19 +198,19 @@ switch需要使用break防止穿透访问。
      2. String aaa= new String("aa");
      3. String aaa= new String({'a'});//字节数组转换
   2. 常用方法
-      |方法名 | 说明|
-      |---|---|
-      |int length() | 获取字符串的长度返回|
-      |char charAt(int index)|获取某个索引出的字符返回|
-      |char[] toCharArray()|将当前字符串转换为字符数组返回|
-      |boolean equals(Object object)|判断当前字符串与另一个字符串内容是否一样，一样返回truw|
-      |boolean equalsIgnoreCase(String anotherString)|判断当前字符串与另一个字符串的内容是否一样（忽略大小写）|
-      |String subString(int beginIndex,int endIndex)|从传入所引出截取到末尾，得到新的字符串返回|
-      |String subString(int beginIndex)|字符串截取|
-      |String replace(CharSequnce target,CharSequnce replacement)|字符串替换，得到新的字符串返回|
-      |boolean contains(CharSequnce s)|判断字符串中是否包含某个字符串|
-      |boolean startWith(String prefix)|判断字符串是否以某个字符串开头|
-      |String[] split(String regex)|字符串按照某个字符串分割，并返回字符串数组|
+      | 方法名                                                     | 说明                                                     |
+      | ---------------------------------------------------------- | -------------------------------------------------------- |
+      | int length()                                               | 获取字符串的长度返回                                     |
+      | char charAt(int index)                                     | 获取某个索引出的字符返回                                 |
+      | char[] toCharArray()                                       | 将当前字符串转换为字符数组返回                           |
+      | boolean equals(Object object)                              | 判断当前字符串与另一个字符串内容是否一样，一样返回truw   |
+      | boolean equalsIgnoreCase(String anotherString)             | 判断当前字符串与另一个字符串的内容是否一样（忽略大小写） |
+      | String subString(int beginIndex,int endIndex)              | 从传入所引出截取到末尾，得到新的字符串返回               |
+      | String subString(int beginIndex)                           | 字符串截取                                               |
+      | String replace(CharSequnce target,CharSequnce replacement) | 字符串替换，得到新的字符串返回                           |
+      | boolean contains(CharSequnce s)                            | 判断字符串中是否包含某个字符串                           |
+      | boolean startWith(String prefix)                           | 判断字符串是否以某个字符串开头                           |
+      | String[] split(String regex)                               | 字符串按照某个字符串分割，并返回字符串数组               |
 
   3. String的注意事项
      - String对象的内容不可改变，被称为不可改变字符串对象
