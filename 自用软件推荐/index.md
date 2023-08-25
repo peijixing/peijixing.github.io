@@ -56,5 +56,7 @@
 
 + [多仓库源](/TVBOX/多线路.json)
 
-+ [下载地址](https://github.com/o0HalfLife0o/TVBoxOSC/releases/)
++ [github下载地址](https://github.com/o0HalfLife0o/TVBoxOSC/releases/)
++ [第三方下载地址](https://qiqi2020.lanzouw.com/b09svqv1c)
+
 
