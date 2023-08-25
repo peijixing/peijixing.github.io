@@ -54,8 +54,6 @@
 
 `自用源`
 
-+ [单仓库源](/TVBOX/单数据源.json)
-
 + [多仓库源](/TVBOX/多线路.json)
 
 + [源](/TVBOX/adult-1.json)
