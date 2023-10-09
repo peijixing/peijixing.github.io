@@ -19,7 +19,7 @@
 ## [Mac软件破解下载](https://www.macyy.cn/)
 ## [final cut pro插件下载](https://www.macbl.com/plugin/final-cut-pro)
 ## 去除更新设置的红点
-  ~~~
+  ~~~shell
   defaults write com.apple.systempreferences AttentionPrefBundleIDs 0 && killall Dock
   ~~~
   
