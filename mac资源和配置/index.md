@@ -1,5 +1,7 @@
 # Mac资源和配置
 
+## [Mac安装翻墙软件ClashX Pro](https://ghproxy.com/?q=https%3A%2F%2Fgithub.com%2Fhasefukashi%2Fhasefukashi%2Fblob%2Fmain%2FClashX%2520Pro.dmg)
+## [机场地址](https://xn--i8s3q176n.xyz/)
 ## Mac安装HomeBrew
   + [下载安装git](https://sourceforge.net/projects/git-osx-installer/)
   + 命令行安装HomeBrew：

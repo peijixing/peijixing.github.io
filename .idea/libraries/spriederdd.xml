@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="spriederdd">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/TVBOX/spriederdd.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
