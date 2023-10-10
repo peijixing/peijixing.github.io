@@ -811,15 +811,6 @@
   ],
   "sites": [
     {
-      "api": "csp_XPathMacFilter",
-      "filterable": 1,
-      "key": "csp_xpath_xxj",
-      "name": "新香蕉(XP)",
-      "quickSearch": 1,
-      "searchable": 1,
-      "type": 3
-    },
-    {
       "api": "https://www.xrbsp.com/api/xml.php",
       "filterable": 1,
       "key": "饮水机2",
