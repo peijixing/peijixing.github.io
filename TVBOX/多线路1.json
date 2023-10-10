@@ -1,16 +1,8 @@
 {
 	"urls": [
 		{
-			"name": "PG one",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/0825.json"
-		},
-		{
 			"name": "高天流云 XYQ",
 			"url": "https://ghproxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/XYQ.json"
-		},
-		{
-			"name": "霜辉月明 py",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/lm317379829/PyramidStore/pyramid/py.json"
 		},
 		{
 			"name": "纯一骚零",
@@ -34,7 +26,7 @@
 		},
 		{
 			"name": "运输车",
-			"url": "https://weixine.net/ysc.json"
+			"url": "https://oldpei.site/TVBOX/运输车/ysc.json"
 		},
 		{
 			"name": "菜妮丝",
@@ -45,20 +37,8 @@
 			"url": "http://home.jundie.top:81/top98.json"
 		},
 		{
-			"name": "巧技",
-			"url": "http://pandown.pro/tvbox/tvbox.json"
-		},
-		{
-			"name": "高天流云 js",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js.json"
-		},
-		{
 			"name": "巧儿",
 			"url": "http://pandown.pro/tvbox/tvbox.json"
-		},
-		{
-			"name": "唐三",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/0828.json"
 		},
 		{
 			"name": "肥猫",
@@ -67,22 +47,6 @@
 		{
 			"name": "小米 小暴脾气",
 			"url": "http://xhww.fun:63/小米/DEMO.json"
-		},
-		{
-			"name": "菜妮丝 XBPQ",
-			"url": "https://tvbox.cainisi.cf"
-		},
-		{
-			"name": "FongMi",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/FongMi/CatVodSpider/main/json/config.json"
-		},
-		{
-			"name": "FongMI",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/0827.json"
-		},
-		{
-			"name": "小雅",
-			"url": "http://drpy.site/js1"
 		},
 		{
 			"name": "南风",
