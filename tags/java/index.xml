@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>java - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/tags/java/</link>
+        <description>java - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
+            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 21 Jun 2023 09:03:18 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/tags/java/" rel="self" type="application/rss+xml" /><item>
+    <title>Java基础</title>
+    <link>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Wed, 21 Jun 2023 09:03:18 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c]]></description>
+</item>
+</channel>
+</rss>

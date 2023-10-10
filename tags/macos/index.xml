@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>MacOS - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/tags/macos/</link>
+        <description>MacOS - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
+            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/tags/macos/" rel="self" type="application/rss+xml" /><item>
+    <title>Mac资源和配置</title>
+    <link>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[Mac安装翻墙软件ClashX Pro 机场地址 Mac安装HomeBrew 下载安装git 命令行安装HomeBrew： intel芯片： 1 /bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34; M1]]></description>
+</item>
+</channel>
+</rss>

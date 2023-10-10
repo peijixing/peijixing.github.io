@@ -1,0 +1,58 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/</link>
+        <description>老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
+            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</lastBuildDate>
+            <atom:link href="https://oldpei.site/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>Mac资源和配置</title>
+    <link>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[Mac安装翻墙软件ClashX Pro 机场地址 Mac安装HomeBrew 下载安装git 命令行安装HomeBrew： intel芯片： 1 /bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34; M1]]></description>
+</item>
+<item>
+    <title>Idea破解</title>
+    <link>https://oldpei.site/idea%E7%A0%B4%E8%A7%A3/</link>
+    <pubDate>Tue, 04 Jul 2023 10:24:08 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/idea%E7%A0%B4%E8%A7%A3/</guid>
+    <description><![CDATA[破解步骤 下载激活码 ，直接激活即可]]></description>
+</item>
+<item>
+    <title>Java基础</title>
+    <link>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Wed, 21 Jun 2023 09:03:18 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c]]></description>
+</item>
+<item>
+    <title>Java学习路线</title>
+    <link>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+    <pubDate>Tue, 20 Jun 2023 09:00:20 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
+    <description><![CDATA[1. Java基础入门 2. Java Web-能制作中小型网站&amp;企业管理系统 2.1 Javaweb 2.2 MySQL数据库 3. Java开发框架-Java企业级服务端开发技能 3.1]]></description>
+</item>
+<item>
+    <title>自用软件推荐</title>
+    <link>https://oldpei.site/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</link>
+    <pubDate>Wed, 08 Feb 2023 13:48:11 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</guid>
+    <description><![CDATA[阅读 主要功能 PS:非常好用的小说阅读器,可以导入网络大神的书源 推荐一波书源 https://oldpei.site/书源.json 书源2 htt]]></description>
+</item>
+<item>
+    <title>MyBatis-Plus初级运用</title>
+    <link>https://oldpei.site/mybatis-plus-start/</link>
+    <pubDate>Thu, 02 Feb 2023 16:05:47 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/mybatis-plus-start/</guid>
+    <description><![CDATA[使用之前需要掌握： 拥有 Java 开发环境以及相应 IDE 熟悉 Spring Boot 熟悉 Maven 1.数据表准备 以User表为例 id name age email 1 Jone 18 test1@baomidou.com 2 Jack 20 test2@baomidou.com 3 Tom 28 test3@baomidou.com 4 Sandy 21 test4@baomidou.com 5 Billie 24 test5@baomidou.com 其数据]]></description>
+</item>
+</channel>
+</rss>
