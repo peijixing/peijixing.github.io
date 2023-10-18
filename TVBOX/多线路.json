@@ -47,6 +47,10 @@
 		{
 			"name": "南风",
 			"url": "https://agit.ai/Yoursmile7/TVBox/raw/branch/master/XC.json"
+		},
+		{
+			"url": "https://oldpei.site/TVBOX/yydf.json",
+			"name": "yydf"
 		}
 	]
 }
