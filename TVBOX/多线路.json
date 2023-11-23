@@ -1,6 +1,10 @@
 {
   "urls": [
     {
+      "name": "CH猫友",
+      "url": "https://freed.yuanhsing.cf/TVBox/meowcf.json"
+    },
+    {
       "name": "agit",
       "url": "https://agit.ai/66666/mao/src/branch/master/000.json"
     },

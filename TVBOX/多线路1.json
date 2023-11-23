@@ -4,10 +4,13 @@
       "name": "普通",
       "url": "https://oldpei.site/TVBOX/多线路.json"
     },
-
     {
       "url": "https://oldpei.site/TVBOX/adult-1.json",
       "name": "adult线路"
+    },
+    {
+      "url": " https://agit.ai/66666/mao/src/branch/master/00/ziyong.json",
+      "name": "agit"
     }
   ]
 }
