@@ -1,56 +1,40 @@
 {
-	"urls": [
-		{
-			"name": "高天流云 XYQ",
-			"url": "https://ghproxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/XYQ.json"
-		},
-		{
-			"name": "纯一骚零",
-			"url": "https://100km.top/0"
-		},
-		{
-			"name": "饭太硬",
-			"url": "http://饭太硬.top/tv"
-		},
-		{
-			"name": "神器",
-			"url": "https://神器每日推送.tk/pz.json"
-		},
-		{
-			"name": "云星",
-			"url": "http://itvbox.cc/tvbox/云星日记/1.m3u8"
-		},
-		{
-			"name": "多多",
-			"url": "https://yydsys.top/duo"
-		},
-		{
-			"name": "菜妮丝",
-			"url": "https://tvbox.cainisi.cf"
-		},
-		{
-			"name": "俊哥",
-			"url": "http://home.jundie.top:81/top98.json"
-		},
-		{
-			"name": "巧儿",
-			"url": "http://pandown.pro/tvbox/tvbox.json"
-		},
-		{
-			"name": "肥猫",
-			"url": "http://我不是.肥猫.love:63/接口禁止贩卖"
-		},
-		{
-			"name": "小米 小暴脾气",
-			"url": "http://xhww.fun:63/小米/DEMO.json"
-		},
-		{
-			"name": "南风",
-			"url": "https://agit.ai/Yoursmile7/TVBox/raw/branch/master/XC.json"
-		},
-		{
-			"url": "https://oldpei.site/TVBOX/yydf.json",
-			"name": "yydf"
-		}
-	]
+  "urls": [
+    {
+      "name": "agit",
+      "url": "https://agit.ai/66666/mao/src/branch/master/000.json"
+    },
+    {
+      "name": "🌙吾爱",
+      "url": "http://52bsj.vip:98/wuai"
+    },
+    {
+      "url": "https://weixine.net/ysc.json",
+      "name": "🦜运输车姐"
+    },
+    {
+      "name": "饭太硬",
+      "url": "http://饭太硬.top/tv"
+    },
+    {
+      "name": "菜妮丝",
+      "url": "https://tvbox.cainisi.cf"
+    },
+    {
+      "name": "巧儿",
+      "url": "http://pandown.pro/tvbox/tvbox.json"
+    },
+    {
+      "name": "小米 小暴脾气",
+      "url": "http://xhww.fun:63/小米/DEMO.json"
+    },
+    {
+      "name": "南风",
+      "url": "https://agit.ai/Yoursmile7/TVBox/raw/branch/master/XC.json"
+    },
+    {
+      "url": "https://oldpei.site/TVBOX/yydf.json",
+      "name": "yydf"
+    }
+  ]
 }
