@@ -1,16 +1,16 @@
 {
   "urls": [
     {
-      "name": "CH猫友",
-      "url": "https://freed.yuanhsing.cf/TVBox/meowcf.json"
+      "name": "动漫",
+      "url": "https://www.yingm.cc/dm/dm.json"
+    },
+    {
+      "name": "荷城茶秀",
+      "url": "http://rihou.cc:88/荷城茶秀"
     },
     {
       "name": "🌙吾爱",
       "url": "http://52bsj.vip:98/wuai"
-    },
-    {
-      "url": "https://weixine.net/ysc.json",
-      "name": "🦜运输车姐"
     },
     {
       "name": "饭太硬",
