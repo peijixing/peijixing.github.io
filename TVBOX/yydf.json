@@ -3,30 +3,6 @@
     "wallpaper": "http://饭太硬.ga/深色壁纸/api.php",
     "lives": [
         {
-            "name": "♻️live",
-            "type": 0,
-            "url": "http://ftp6587948.host121.Sanfengyun.cn/yydf/lib/live.txt",
-            "playerType": 1,
-            "epg": "http://epg.112114.xyz/?ch={name}&date={date}",
-            "logo": "https://epg.112114.xyz/logo/{name}.png"
-        },
-        {
-            "name": "♻️TV",
-            "type": 0,
-            "url": "http://ftp6587948.host121.Sanfengyun.cn/yydf/lib/zhibo.txt",
-            "playerType": 1,
-            "epg": "http://epg.112114.xyz/?ch={name}&date={date}",
-            "logo": "https://epg.112114.xyz/logo/{name}.png"
-        },
-        {
-            "name": "♻️MTV",
-            "type": 0,
-            "url": "http://ftp6587948.host121.Sanfengyun.cn/yydf/lib/MTV.txt",
-            "playerType": 1,
-            "epg": "http://epg.112114.xyz/?ch={name}&date={date}",
-            "logo": "https://epg.112114.xyz/logo/{name}.png"
-        },
-        {
             "name": "七星IPTV",
             "type": 0,
             "url": "http://tvkj.top/七星IPTV.txt",
@@ -34,8 +10,6 @@
             "epg": "http://epg.112114.xyz/?ch={name}&date={date}",
             "logo": "https://epg.112114.xyz/logo/{name}.png"
         }
-
-        
     ],
     "sites": [
         {
