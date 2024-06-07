@@ -4,7 +4,7 @@
         <link>https://oldpei.site/</link>
         <description>老裴的个人博客，分享一些没什么卵用的知识！</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
-            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</lastBuildDate>
+            <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</lastBuildDate>
             <atom:link href="https://oldpei.site/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>个人简历</title>
@@ -61,6 +61,14 @@
     <author>老裴</author>
     <guid>https://oldpei.site/mybatis-plus-start/</guid>
     <description><![CDATA[使用之前需要掌握： 拥有 Java 开发环境以及相应 IDE 熟悉 Spring Boot 熟悉 Maven 1.数据表准备 以User表为例 id name age email 1 Jone 18 test1@baomidou.com 2 Jack 20 test2@baomidou.com 3 Tom 28 test3@baomidou.com 4 Sandy 21 test4@baomidou.com 5 Billie 24 test5@baomidou.com 其数据]]></description>
+</item>
+<item>
+    <title>Quartz框架学习</title>
+    <link>https://oldpei.site/quartz/</link>
+    <pubDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</pubDate>
+    <author>老裴</author>
+    <guid>https://oldpei.site/quartz/</guid>
+    <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

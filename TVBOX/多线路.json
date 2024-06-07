@@ -1,40 +1,9 @@
 {
   "urls": [
-    {
-      "name": "动漫",
-      "url": "https://www.yingm.cc/dm/dm.json"
-    },
-    {
-      "name": "荷城茶秀",
-      "url": "http://rihou.cc:88/荷城茶秀"
-    },
-    {
-      "name": "🌙吾爱",
-      "url": "http://52bsj.vip:98/wuai"
-    },
+   
     {
       "name": "饭太硬",
-      "url": "http://饭太硬.top/tv"
-    },
-    {
-      "name": "菜妮丝",
-      "url": "https://tvbox.cainisi.cf"
-    },
-    {
-      "name": "巧儿",
-      "url": "http://pandown.pro/tvbox/tvbox.json"
-    },
-    {
-      "name": "小米 小暴脾气",
-      "url": "http://xhww.fun:63/小米/DEMO.json"
-    },
-    {
-      "name": "南风",
-      "url": "https://agit.ai/Yoursmile7/TVBox/raw/branch/master/XC.json"
-    },
-    {
-      "url": "https://oldpei.site/TVBOX/yydf.json",
-      "name": "yydf"
+      "url": "http://www.饭太硬.top/tv/"
     }
   ]
 }
