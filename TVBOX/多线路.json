@@ -53,56 +53,8 @@
       "name": "俊佬线路"
     },
     {
-      "name": "2hacc",
-      "url": "https://oldpei.site/TVBOX/local/2hacc.json"
-    },
-    {
-      "name": "app",
-      "url": "https://oldpei.site/TVBOX/local/app.json"
-    },
-    {
-      "name": "hk",
-      "url": "https://oldpei.site/TVBOX/local/hk.json"
-    },
-    {
-      "name": "js",
-      "url": "https://oldpei.site/TVBOX/local/js.json"
-    },
-    {
-      "name": "py",
-      "url": "https://oldpei.site/TVBOX/local/py.json"
-    },
-    {
-      "name": "sp",
-      "url": "https://oldpei.site/TVBOX/local/sp.json"
-    },
-    {
-      "name": "tvbox",
-      "url": "https://oldpei.site/TVBOX/local/tvbox.json"
-    },
-    {
-      "name": "tvbox2",
-      "url": "https://oldpei.site/TVBOX/local/tvbox2.json"
-    },
-    {
-      "name": "xb",
-      "url": "https://oldpei.site/TVBOX/local/xb.json"
-    },
-    {
-      "name": "xbpq",
-      "url": "https://oldpei.site/TVBOX/local/xbpq.json"
-    },
-    {
-      "name": "xp",
-      "url": "https://oldpei.site/TVBOX/local/xp.json"
-    },
-    {
-      "name": "xyq",
-      "url": "https://oldpei.site/TVBOX/local/xyq.json"
-    },
-    {
-      "name": "xyqh",
-      "url": "https://oldpei.site/TVBOX/local/xyqh.json"
+      "url": "https://oldpei.site/TVBOX/2hacc.json",
+      "name": "2hacc"
     }
   ]
 }
