@@ -4,17 +4,22 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Java基础 - 老裴的个人博客，分享一些没什么卵用的知识！</title><meta name="Description" content="老裴的个人博客，分享一些没什么卵用的知识！"><meta property="og:title" content="Java基础" />
-<meta property="og:description" content="1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://oldpei.site/java%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="https://oldpei.site/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-21T09:03:18+08:00" />
-<meta property="article:modified_time" content="2023-06-21T09:03:18+08:00" /><meta property="og:site_name" content="My cool site" />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://oldpei.site/logo.png"/>
+        <title>Java基础 - 老裴的个人博客，分享一些没什么卵用的知识！</title><meta name="Description" content="老裴的个人博客，分享一些没什么卵用的知识！"><meta property="og:url" content="https://oldpei.site/java%E5%9F%BA%E7%A1%80/">
+  <meta property="og:site_name" content="老裴的个人博客，分享一些没什么卵用的知识！">
+  <meta property="og:title" content="Java基础">
+  <meta property="og:description" content="1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-06-21T09:03:18+08:00">
+    <meta property="article:modified_time" content="2023-06-21T09:03:18+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="og:image" content="https://oldpei.site/logo.png">
 
-<meta name="twitter:title" content="Java基础"/>
-<meta name="twitter:description" content="1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://oldpei.site/logo.png">
+  <meta name="twitter:title" content="Java基础">
+  <meta name="twitter:description" content="1. 基础语法 1.1 注释 1.2 字面量 1.3 变量 1.4 关键字和标识符 1.5 数据类型 1.5.1 基础数据类型：byte、short、int、long、float、double、c">
 <meta name="application-name" content="老裴的个人博客，分享一些没什么卵用的知识！">
 <meta name="apple-mobile-web-app-title" content="老裴的个人博客，分享一些没什么卵用的知识！"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -255,12 +260,12 @@ switch需要使用break防止穿透访问。</p>
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">j</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">;</span><span class="n">i</span><span class="o">++,</span><span class="n">j</span><span class="o">--){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Object</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">,</span><span class="n">j</span><span class="o">--</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -290,11 +295,11 @@ switch需要使用break防止穿透访问。</p>
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">修饰符</span> <span class="n">返回值类型</span> <span class="nf">方法名</span><span class="o">(</span><span class="n">参数类型</span> <span class="n">参数</span> <span class="o">...){</span>
-</span></span><span class="line"><span class="cl">  <span class="n">方法体代码</span><span class="o">(</span><span class="n">需要执行的代码</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">返回值</span><span class="err">；</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">修饰符</span><span class="w"> </span><span class="n">返回值类型</span><span class="w"> </span><span class="nf">方法名</span><span class="p">(</span><span class="n">参数类型</span><span class="w"> </span><span class="n">参数</span><span class="w"> </span><span class="p">...){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">方法体代码</span><span class="p">(</span><span class="n">需要执行的代码</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">返回值</span><span class="err">；</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>使用方法的好处
@@ -396,12 +401,12 @@ switch需要使用break防止穿透访问。</p>
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">j</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="o">;</span><span class="n">i</span><span class="o">++,</span><span class="n">j</span><span class="o">--){</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Object</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">        <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">,</span><span class="n">j</span><span class="o">--</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -586,13 +591,13 @@ switch需要使用break防止穿透访问。</p>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="n">String</span> <span class="n">aaa</span><span class="o">=</span> <span class="s">&#34;abd&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">String</span> <span class="n">bbb</span> <span class="o">=</span> <span class="s">&#34;a&#34;</span><span class="o">+</span><span class="s">&#34;b&#34;</span><span class="o">+</span><span class="s">&#34;c&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//  java对固定值拼接有优化，所以两个变量相等
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//aaa==bbb 为true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">  <span class="n">String</span> <span class="n">ccc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abd&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//由于是new出的新对象，所以aaa和ccc不相同
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">aaa</span><span class="o">=</span><span class="w"> </span><span class="s">&#34;abd&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">bbb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;a&#34;</span><span class="o">+</span><span class="s">&#34;b&#34;</span><span class="o">+</span><span class="s">&#34;c&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//  java对固定值拼接有优化，所以两个变量相等</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//aaa==bbb 为true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">ccc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&#34;abd&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//由于是new出的新对象，所以aaa和ccc不相同</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -740,7 +745,7 @@ switch需要使用break防止穿透访问。</p>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">java</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">Java</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
@@ -753,7 +758,7 @@ switch需要使用break防止穿透访问。</p>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.128.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://gitee.com/laopei" target="_blank">老裴</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

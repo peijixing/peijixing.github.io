@@ -5,7 +5,7 @@
         <description>Categories - 分类 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mepeijixing@gmail.com (老裴)</managingEditor>
             <webMaster>mepeijixing@gmail.com (老裴)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/categories/" rel="self" type="application/rss+xml" /><item>
-    <title>java框架</title>
+    <title>Java框架</title>
     <link>https://oldpei.site/categories/java%E6%A1%86%E6%9E%B6/</link>
     <pubDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</pubDate>
     <author>老裴</author>
@@ -45,7 +45,7 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>resume</title>
+    <title>Resume</title>
     <link>https://oldpei.site/categories/resume/</link>
     <pubDate>Sun, 29 Jan 2023 14:18:00 &#43;0800</pubDate>
     <author>老裴</author>
