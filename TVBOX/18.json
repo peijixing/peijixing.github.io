@@ -1,0 +1,20 @@
+{
+  "urls": [
+    {
+      "name": "18",
+      "url": "https://oldpei.site/TVBOX/18/18.json"
+    },
+    {
+      "name": "19",
+      "url": "https://oldpei.site/TVBOX/18/19.json"
+    },
+    {
+      "name": "juyou",
+      "url": "https://oldpei.site/TVBOX/18/juyou.json"
+    },
+    {
+      "name": "vip",
+      "url": "https://oldpei.site/TVBOX/18/vip.json"
+    }
+  ]
+}

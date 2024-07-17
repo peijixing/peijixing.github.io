@@ -1,8 +1,8 @@
 {
   "urls": [
     {
-      "name": "肥猫",
-      "url": "http://like.肥猫.com"
+      "url": "http://我不是.肥猫.love:63/接口禁止贩卖",
+      "name": "肥猫线路"
     },
     {
       "name": "动漫",
@@ -13,32 +13,12 @@
       "url": "http://pandown.pro/tvbox/tvbox.json"
     },
     {
-      "url": "https://raw.gitmirror.com/159ecn/xh2/main/t.json",
-      "name": "小荷线路备用"
-    },
-    {
       "url": "http://cdn.yydsys.top/duo",
       "name": "应用多多备用"
     },
     {
-      "url": "https://d.kstore.space/download/4679/cally.json",
-      "name": "cally线路"
-    },
-    {
-      "url": "https://raw.gitmirror.com/yydfys/yydf/main/yydf/yydf.json",
-      "name": "业余线路备用"
-    },
-    {
-      "url": "https://ghps.cc/https://raw.githubusercontent.com/xmbjm/xmbjm/main/xmbjm.json",
-      "name": "时光线路"
-    },
-    {
       "url": "https://raw.gitmirror.com/159ecn/vip/main/sx/t.json",
       "name": "神仙影视备用"
-    },
-    {
-      "url": "https://raw.gitmirror.com/159ecn/vip/main/4k/t.json",
-      "name": "4k视界"
     },
     {
       "url": "https://weixine.net/ysc.json",
@@ -49,44 +29,8 @@
       "name": "动漫频道"
     },
     {
-      "url": "http://itvbox.cc/tvbox/云星日记/1.m3u8",
-      "name": "云星线路"
-    },
-    {
-      "url": "http://tv.nxog.top/m/111.php?ou=%E6%AC%A7%E6%AD%8C&mz=index2&xl=&jar=index2",
-      "name": "欧歌线路"
-    },
-    {
-      "url": "http://tv.nxog.top/m/111.php?ou=%E6%AC%A7%E6%AD%8C&xl=4",
-      "name": "欧歌线路备用"
-    },
-    {
-      "url": "https://jihulab.com/yw88075/tvbox/-/raw/main/dr/js.json",
-      "name": "心中之魔"
-    },
-    {
-      "url": "https://jihulab.com/shenxianyingshi/sxys/-/raw/main/beiyong.json",
-      "name": "小仙影视"
-    },
-    {
-      "url": "https://jihulab.com/clear1/yingmi/-/raw/main/xh.txt",
-      "name": "XH线路"
-    },
-    {
-      "url": "https://ghps.cc/https://raw.githubusercontent.com/yydfys/yydf/main/XYQTVBox/xyq.json",
-      "name": "香佬线路"
-    },
-    {
-      "url": "https://ghps.cc/https://raw.githubusercontent.com/gaotianliuyun/gao/master/XYQ.json",
-      "name": "高天流云XYQ"
-    },
-    {
       "url": "https://raw.gitmirror.com/159ecn/vip/main/ysc/t.json",
       "name": "大件运输"
-    },
-    {
-      "url": "https://gitee.com/okjack/okk/raw/master/op.txt",
-      "name": "OK线路"
     },
     {
       "url": "https://git.acwing.com/iduoduo/orange/-/raw/main/jsm.json",
@@ -107,6 +51,58 @@
     {
       "url": "http://home.jundie.top:81/top98.json",
       "name": "俊佬线路"
+    },
+    {
+      "name": "2hacc",
+      "url": "https://oldpei.site/TVBOX/local/2hacc.json"
+    },
+    {
+      "name": "app",
+      "url": "https://oldpei.site/TVBOX/local/app.json"
+    },
+    {
+      "name": "hk",
+      "url": "https://oldpei.site/TVBOX/local/hk.json"
+    },
+    {
+      "name": "js",
+      "url": "https://oldpei.site/TVBOX/local/js.json"
+    },
+    {
+      "name": "py",
+      "url": "https://oldpei.site/TVBOX/local/py.json"
+    },
+    {
+      "name": "sp",
+      "url": "https://oldpei.site/TVBOX/local/sp.json"
+    },
+    {
+      "name": "tvbox",
+      "url": "https://oldpei.site/TVBOX/local/tvbox.json"
+    },
+    {
+      "name": "tvbox2",
+      "url": "https://oldpei.site/TVBOX/local/tvbox2.json"
+    },
+    {
+      "name": "xb",
+      "url": "https://oldpei.site/TVBOX/local/xb.json"
+    },
+    {
+      "name": "xbpq",
+      "url": "https://oldpei.site/TVBOX/local/xbpq.json"
+    },
+    {
+      "name": "xp",
+      "url": "https://oldpei.site/TVBOX/local/xp.json"
+    },
+    {
+      "name": "xyq",
+      "url": "https://oldpei.site/TVBOX/local/xyq.json"
+    },
+    {
+      "name": "xyqh",
+      "url": "https://oldpei.site/TVBOX/local/xyqh.json"
     }
   ]
 }
