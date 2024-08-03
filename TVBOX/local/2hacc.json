@@ -3,15 +3,6 @@
     "wallpaper": "http://www.kf666888.cn/api/tvbox/img",
     "lives": [
         {
-            "name": "裴继星",
-            "type": 0,
-            "url": "https://oldpei.site/TVBOX/live/18TV.txt",
-            "playerType": 1,
-            "ua": "okhttp/3.15",
-            "epg": "http://epg.112114.xyz/?ch=live&date={date}",
-            "logo": "https://epg.112114.xyz/logo/live.png"
-        },
-        {
             "name": "live",
             "type": 0,
             "url": "https://raw.fgit.cf/2hacc/TVBox/main/live/live.txt",
