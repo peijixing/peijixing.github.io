@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Java学习路线 | 我的第一个 Hugo 网站</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="https://oldpei.site/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://oldpei.site/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://oldpei.site/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://oldpei.site/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://oldpei.site/apple-touch-icon.png">
+<link rel="mask-icon" href="https://oldpei.site/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://oldpei.site/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://oldpei.site/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://oldpei.site/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
+  <meta property="og:site_name" content="我的第一个 Hugo 网站">
+  <meta property="og:title" content="Java学习路线">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java学习路线">
+<meta name="twitter:description" content="">
+
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://oldpei.site/" accesskey="h" title="我的第一个 Hugo 网站 (Alt + H)">我的第一个 Hugo 网站</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    Java学习路线
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Java学习路线
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>1. Java基础入门 2. Java Web-能制作中小型网站&amp;企业管理系统 2.1 Javaweb
+2.2 MySQL数据库
+3. Java开发框架-Java企业级服务端开发技能 3.1 Maven
+3.2 GIT
+3.3 SSM框架
+3.4 Spring
+3.5 MybatisPlus
+3.6 Spring Boot
+3.7 黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot &#43; mybatis plus开发核心技术的真java实战项目
+4. 中间件&amp;微服务框架-中级程序员热门技术 4.1 SpringCloud&#43;RabbitMQ&#43;Docker&#43;Redis&#43;搜索&#43;分布式，系统详解springcloud微服务技术栈课程|黑马程序员Java微服务
+4.2 Dubbo
+4.3 Zookeeper
+4.4 RabbitMQ
+4.5 RocketMQ
+4.6 Docker
+4.7 Redis
+4.8 MongoDB
+4.9 搜索技术,java中级教程-ELK高级搜索，深度详解ElasticStack技术栈
+5. 项目实战-企业级项目开发，掌握行业3年开发经验 5.1 黑马程序员Java企业级实战开发《学成在线》微服务项目，基于SpringCloud、SpringCloudAlibaba技术栈开发，项目搭建到选课支付学习全通关
+5.2 黑马程序员Java微服务项目《黑马头条》快速开发全套视频教程，基于SpringBoot&#43;SpringCloud&#43;Nacos等企业级微服务架构项目解决方案
+5.3 黑马程序员Java项目SaaS移动办公完整版《iHRM 人力资源管理系统》，跨行业SaaS办公整合性解决方案
+5.4 黑马程序员Java企业级项目《集信达短信平台》，从零打造高可用、大吞吐Java企业级短信平台解决方案
+5.5 黑马程序员Java品达通用权限项目，基于SpringCloud SpringBoot 的微服务框架的权限管理解决方案
+5.6 2023新版数据结构与算法Java视频教程（上篇），java高级程序员必学的数据结构与算法
+5.7 2023新版数据结构与算法Java视频教程（下篇），java高级程序员必学的数据结构与算法
+5.8 新版Java面试专题视频教程，java八股文面试全套真题&#43;深度详解（含大厂高频面试真题）
+5.9 新版Java面试专题视频教程，java八股文面试全套真题&#43;深度详解（含大厂高频面试真题）
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-06-20 09:00:20 +0800 CST'>June 20, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Java学习路线" href="https://oldpei.site/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://oldpei.site/">我的第一个 Hugo 网站</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

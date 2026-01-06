@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Java基础 | 我的第一个 Hugo 网站</title>
+<meta name="keywords" content="java">
+<meta name="description" content="1. 基础语法
+
+
+1.1 注释
+
+
+1.2 字面量
+
+
+1.3 变量
+
+
+1.4 关键字和标识符
+
+
+1.5 数据类型
+
+
+1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean
+
+
+1.5.2 引用数据类型：String
+
+
+1.5.3 数据类型转换：自动转换、强制转换
+
+
+
+
+1.6 运算符
+
+
+1.6.1 算数运算符：&#43; - * / %
+
+
+1.6.2 自增自减运算符
+
+
+1.6.3 赋值运算符
+
+
+1.6.4 关系运算符
+
+
+1.6.5 逻辑运算符
+
+
+1.6.6 三元运算符
+
+
+1.6.7 学习使用Java Api     Java17Api
+
+
+
+
+2. 流程控制
+
+
+2.1 分支结构：if else 、switch 、switch 穿透性
+switch需要使用break防止穿透访问。
+
+
+2.2 循环结构 for 、while、do while
+
+
+2.3 跳转关键字：break、continue
+
+
+2.4 随机数 Random
+
+
+3. 数组
+
+
+3.1 静态初始化数组
+
+
+3.2 数组遍历
+
+
+3.3 动态初始化数组
+
+
+3.4 组的内存执行原理
+
+
+3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器
+
+
+3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化">
+<meta name="author" content="">
+<link rel="canonical" href="https://oldpei.site/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%9F%BA%E7%A1%80/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://oldpei.site/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://oldpei.site/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://oldpei.site/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://oldpei.site/apple-touch-icon.png">
+<link rel="mask-icon" href="https://oldpei.site/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://oldpei.site/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%9F%BA%E7%A1%80/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://oldpei.site/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%9F%BA%E7%A1%80/">
+  <meta property="og:site_name" content="我的第一个 Hugo 网站">
+  <meta property="og:title" content="Java基础">
+  <meta property="og:description" content="1. 基础语法 1.1 注释
+1.2 字面量
+1.3 变量
+1.4 关键字和标识符
+1.5 数据类型
+1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean
+1.5.2 引用数据类型：String
+1.5.3 数据类型转换：自动转换、强制转换
+1.6 运算符
+1.6.1 算数运算符：&#43; - * / %
+1.6.2 自增自减运算符
+1.6.3 赋值运算符
+1.6.4 关系运算符
+1.6.5 逻辑运算符
+1.6.6 三元运算符
+1.6.7 学习使用Java Api Java17Api
+2. 流程控制 2.1 分支结构：if else 、switch 、switch 穿透性 switch需要使用break防止穿透访问。
+2.2 循环结构 for 、while、do while
+2.3 跳转关键字：break、continue
+2.4 随机数 Random
+3. 数组 3.1 静态初始化数组
+3.2 数组遍历
+3.3 动态初始化数组
+3.4 组的内存执行原理
+3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器
+3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-06-21T09:03:18+08:00">
+    <meta property="article:modified_time" content="2023-06-21T09:03:18+08:00">
+    <meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础">
+<meta name="twitter:description" content="1. 基础语法
+
+
+1.1 注释
+
+
+1.2 字面量
+
+
+1.3 变量
+
+
+1.4 关键字和标识符
+
+
+1.5 数据类型
+
+
+1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean
+
+
+1.5.2 引用数据类型：String
+
+
+1.5.3 数据类型转换：自动转换、强制转换
+
+
+
+
+1.6 运算符
+
+
+1.6.1 算数运算符：&#43; - * / %
+
+
+1.6.2 自增自减运算符
+
+
+1.6.3 赋值运算符
+
+
+1.6.4 关系运算符
+
+
+1.6.5 逻辑运算符
+
+
+1.6.6 三元运算符
+
+
+1.6.7 学习使用Java Api     Java17Api
+
+
+
+
+2. 流程控制
+
+
+2.1 分支结构：if else 、switch 、switch 穿透性
+switch需要使用break防止穿透访问。
+
+
+2.2 循环结构 for 、while、do while
+
+
+2.3 跳转关键字：break、continue
+
+
+2.4 随机数 Random
+
+
+3. 数组
+
+
+3.1 静态初始化数组
+
+
+3.2 数组遍历
+
+
+3.3 动态初始化数组
+
+
+3.4 组的内存执行原理
+
+
+3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器
+
+
+3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://oldpei.site/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Java基础",
+      "item": "https://oldpei.site/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%9F%BA%E7%A1%80/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java基础",
+  "name": "Java基础",
+  "description": "1. 基础语法 1.1 注释\n1.2 字面量\n1.3 变量\n1.4 关键字和标识符\n1.5 数据类型\n1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean\n1.5.2 引用数据类型：String\n1.5.3 数据类型转换：自动转换、强制转换\n1.6 运算符\n1.6.1 算数运算符：+ - * / %\n1.6.2 自增自减运算符\n1.6.3 赋值运算符\n1.6.4 关系运算符\n1.6.5 逻辑运算符\n1.6.6 三元运算符\n1.6.7 学习使用Java Api Java17Api\n2. 流程控制 2.1 分支结构：if else 、switch 、switch 穿透性 switch需要使用break防止穿透访问。\n2.2 循环结构 for 、while、do while\n2.3 跳转关键字：break、continue\n2.4 随机数 Random\n3. 数组 3.1 静态初始化数组\n3.2 数组遍历\n3.3 动态初始化数组\n3.4 组的内存执行原理\n3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器\n3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化\n",
+  "keywords": [
+    "java"
+  ],
+  "articleBody": "1. 基础语法 1.1 注释\n1.2 字面量\n1.3 变量\n1.4 关键字和标识符\n1.5 数据类型\n1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean\n1.5.2 引用数据类型：String\n1.5.3 数据类型转换：自动转换、强制转换\n1.6 运算符\n1.6.1 算数运算符：+ - * / %\n1.6.2 自增自减运算符\n1.6.3 赋值运算符\n1.6.4 关系运算符\n1.6.5 逻辑运算符\n1.6.6 三元运算符\n1.6.7 学习使用Java Api Java17Api\n2. 流程控制 2.1 分支结构：if else 、switch 、switch 穿透性 switch需要使用break防止穿透访问。\n2.2 循环结构 for 、while、do while\n2.3 跳转关键字：break、continue\n2.4 随机数 Random\n3. 数组 3.1 静态初始化数组\n3.2 数组遍历\n3.3 动态初始化数组\n3.4 组的内存执行原理\n3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器\n3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化\n3.4.3 数组赋值为null时，说明在数组没有指向堆中的实例\n3.5 数组使用的简单案例\n数组求最值\n定义一个变量用于保存最终的最大值，从数组第一个数据开始 从第二个数据开始辨遍历，如果该值大于变量，则替换变量的值 数组反转\n方法一：逆向循环，插入新的数组 方法二：依次前后交换数据 for(int i=0,j=arr.length-1;i\u003cj;i++,j--){ Object temp = arr[j]; arr[j] = arr[i]; arr[i] = arr[temp] } 数组随机排名\n动态初始化数字，后期手动录入数据 依次遍历数组数据，随机生成一个索引，交换遍历处和生成索引的两个数据 4. 方法 方法初识\n方法是什么：方法是一种语法结构，它可以把一段代码封装起来，方便反复调用 方法的完整格式 修饰符 返回值类型 方法名(参数类型 参数 ...){ 方法体代码(需要执行的代码) return 返回值； } 使用方法的好处 提高代码的复用性，提高开发效率 让代码逻辑更清晰 方法的其他形式：无返回值时使用 void 代替返回类型\n方法使用时的常见问题\n方法不能嵌套声明 void修饰的方法不能返回值 return后不能写代码 方法的案例\n设计方法的技巧 1、方法是否需要收集数据-\u003e形参 方法是否返回数据-\u003e返回值 方法要处理的业务 方法再计算机中的执行原理\n方法被调用的时候，是进入栈内存中运行（栈是先进后出，保证方法调用执行后可以返回到main方法中，并且执行后可以清除运行过的方法，防止内存溢出）\nJava的参数传递机制\n1、基础类型是值传递 2、引用类型的参数传递 方法重载\n一个类中相同方法名但是参数个数或类型不同 统称为重载 知识补充：方法中单独使用return关键字 5. Java案例 买飞机票\n根据月份区分淡季旺季，根据作为类型计算折扣，和价格相乘得出结果\n验证码2\n按位循环，先随机选择数字（0-9）、小写字母（97+26）、大写字母（65+26），在随机生成ASCII码转换为char型\n打分\n需求：接受多个分数，去掉一个最小和一个最大值后取平均分 因为不清楚人数，所以使用动态数组保存，循环人数次使用Scanner录入分数，再次循环数组，得到最小和最大值和全部分数的和，最后计算返回值\n加密\n需求：传入一个数字，需要将其每一位加5，并对10取余，后将所有数字反转 方法1：定义一个数组，将数字每一位放到数组中，循环数组并计算每一位，计算后放入数组，逆向循环数组，输出结果\n方法2:定义一个数组，将数字每一位放到数组中，双向循环数组并计算每一位直达前后索引相遇，计算后放入数组，输出数组内的数字既可\nfor(int i=0,j=arr.length-1;i\u003cj;i++,j--){ Object temp = arr[j]; arr[j] = arr[i]; arr[i] = arr[temp] } 数组拷贝\n创建一个新数组，不能使用相同的实例\n抢红包\n需求：5个红包给人抢，抢到一个后不允许选中同一个 方法1: 循环等待抽奖，抽中后将选中的值赋0，选中0时死循环重新选\n方法2: 直接打乱顺序输出\n找素数\n循环入参，对每一个数字循环除以一个从2自增到一半的数字，如果可以整除则不符合，否则为素数\n打印乘法表\n打印三角形\n实现双色球\n6.面向对象 面向对象含义 含义：把数据交给对象，再调用对象的方法，用于处理数据的方法叫面向对象 面向对象的好处：符合人类的习惯，更直观 对象执行原理类与对象的注意事项 执行原理：class先加载到方法区，再将运行的方法加载到栈内存，为方法中的变量开辟一块区域到栈内存，变量初始化时会再堆内存中创建一个实例 补充知识：引用类型的概念，是存储的数据为引用地址的变量。 类的一些注意事项： 类名建议使用首字母大写的驼峰命名 类中定义的变量和方法叫成员变量和成员方法，成员变量在初始化变量实例的时候会有默认值 一个文件中只能有一个用public关键字修饰的类 ，并且文件名也要和这个类同名 如果一个实例没有变量引用它，则该对象无法被操作，就成为了垃圾对象 this关键字:代指当前运行的实例，主要解决变量名称冲突的问题\n构造器：\n无返回值的和类同名的方法 创建实例时会调用构造器 如果不指定构造方法，java会自动生成一个无参构造器，一旦定义了有参的构造方法，就不会生成无参的方法，需要手动添加 可以用来初始化创建对象时赋值 封装、实体JavaBean\n面向对象三大特性：封装、继承、多态 封装：用类设计对象处理某一个事物的数据时，应该吧要处理的数据以及处理数据的方法涉及到同一个对象中 封装需要遵守的规则：合理隐藏，合理暴露 实体JavaBean： 指有私有的成员变量并为它们都提供getset方法 存在一个无参构造方法 7.常用API 包的概念:分门别类管理程序的文件夹 String API 创建String对象\nString aaa = “q”; String aaa= new String(“aa”); String aaa= new String({‘a’});//字节数组转换 常用方法\n方法名 说明 int length() 获取字符串的长度返回 char charAt(int index) 获取某个索引出的字符返回 char[] toCharArray() 将当前字符串转换为字符数组返回 boolean equals(Object object) 判断当前字符串与另一个字符串内容是否一样，一样返回truw boolean equalsIgnoreCase(String anotherString) 判断当前字符串与另一个字符串的内容是否一样（忽略大小写） String subString(int beginIndex,int endIndex) 从传入所引出截取到末尾，得到新的字符串返回 String subString(int beginIndex) 字符串截取 String replace(CharSequnce target,CharSequnce replacement) 字符串替换，得到新的字符串返回 boolean contains(CharSequnce s) 判断字符串中是否包含某个字符串 boolean startWith(String prefix) 判断字符串是否以某个字符串开头 String[] split(String regex) 字符串按照某个字符串分割，并返回字符串数组 String的注意事项\nString对象的内容不可改变，被称为不可改变字符串对象 只要是以“…”方式写出的字符串对象，会存储带字符串常量池，切内容的字符串只存储一份 但是通过new方式创建的字符串对象，每new一次都会穿生一个新的对象放在堆内存中 String aaa= \"abd\"; String bbb = \"a\"+\"b\"+\"c\"; // java对固定值拼接有优化，所以两个变量相等 //aaa==bbb 为true String ccc = new String(\"abd\"); //由于是new出的新对象，所以aaa和ccc不相同 ArrayList:增删改查 8.面向对象高级 1、封装\nstatic 两种方法 类方法：常用的工具类方法 特殊说明，为了避免工具类被错误的创建对象，可以采用将构造方法私有化的方式避免。\n实例方法:普通方法，需要创建实例才可以调用 代码块 static静态代码块：类加载时执行一次 实例代码块：：创建实例时执行一次 单例模式: 2、继承\n继承的特性 子类继承父类的非私有方法和成员变量 子类的对象创建是由子类和父类共同完成的 继承的注意事项 权限修饰符：private \u003c 缺省 \u003c protected \u003c public 单继承：Java类只可以继承一个类，但是接口可以继承多个 Object类：java类的公共父类，也决定了java类不能同时拥有两个父类 方法重写： 1、子类对父类的方法进行重写 2、重写方法后调用采用就近原则 子类中访问其他成员的特点 1、没有特殊代指的话遵循九九原则 2、可有使用this和super代指当前类和父类 子类构造器的特点 子类的全部构造器都会调用父类的构造器在调用自己的 子类中可以使用this()去调用兄弟构造器 3、多态\nfinal、常量\n抽象类\n接口\n匿名内部类\n枚举\n泛型\n9.常用API 2 Object类 StringBuilder、StringBuffer Math、System、Runtime BigDecimal 传统时间 Date、SimpleDateFormat 传统时间 秒杀案例、Calendar Java8新增时间：LocalDate、LocalTime、LocalDateTime、ZoneId、ZoneDateTime、Instant DateTimeFormater、Period、Duration Arrays Lamda表达式 10.Java进阶 算法 认识、冒泡排序、选择排序及优化 二分法查找 正则表达式 异常 11.集合框架 12.java8新特性 Stream流 13.IO流 14.特殊文件 15.日志技术 16.多线程 17.网络通讯 18.Java高级 ",
+  "wordCount" : "358",
+  "inLanguage": "en",
+  "datePublished": "2023-06-21T09:03:18+08:00",
+  "dateModified": "2023-06-21T09:03:18+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://oldpei.site/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%9F%BA%E7%A1%80/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的第一个 Hugo 网站",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://oldpei.site/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://oldpei.site/" accesskey="h" title="我的第一个 Hugo 网站 (Alt + H)">我的第一个 Hugo 网站</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Java基础
+    </h1>
+    <div class="post-meta"><span title='2023-06-21 09:03:18 +0800 CST'>June 21, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="1-基础语法">1. 基础语法<a hidden class="anchor" aria-hidden="true" href="#1-基础语法">#</a></h2>
+<ul>
+<li>
+<p>1.1 注释</p>
+</li>
+<li>
+<p>1.2 字面量</p>
+</li>
+<li>
+<p>1.3 变量</p>
+</li>
+<li>
+<p>1.4 关键字和标识符</p>
+</li>
+<li>
+<p>1.5 数据类型</p>
+<ul>
+<li>
+<p>1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean</p>
+</li>
+<li>
+<p>1.5.2 引用数据类型：String</p>
+</li>
+<li>
+<p>1.5.3 数据类型转换：自动转换、强制转换</p>
+</li>
+</ul>
+</li>
+<li>
+<p>1.6 运算符</p>
+<ul>
+<li>
+<p>1.6.1 算数运算符：+ - * / %</p>
+</li>
+<li>
+<p>1.6.2 自增自减运算符</p>
+</li>
+<li>
+<p>1.6.3 赋值运算符</p>
+</li>
+<li>
+<p>1.6.4 关系运算符</p>
+</li>
+<li>
+<p>1.6.5 逻辑运算符</p>
+</li>
+<li>
+<p>1.6.6 三元运算符</p>
+</li>
+<li>
+<p>1.6.7 学习使用Java Api     <a href="https://www.oracle.com/java/technologies/javase-jdk17-doc-downloads.html">Java17Api</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-流程控制">2. 流程控制<a hidden class="anchor" aria-hidden="true" href="#2-流程控制">#</a></h2>
+<ul>
+<li>
+<p>2.1 分支结构：if else 、switch 、switch 穿透性
+switch需要使用break防止穿透访问。</p>
+</li>
+<li>
+<p>2.2 循环结构 for 、while、do while</p>
+</li>
+<li>
+<p>2.3 跳转关键字：break、continue</p>
+</li>
+<li>
+<p>2.4 随机数 Random</p>
+</li>
+</ul>
+<h2 id="3-数组">3. 数组<a hidden class="anchor" aria-hidden="true" href="#3-数组">#</a></h2>
+<ul>
+<li>
+<p>3.1 静态初始化数组</p>
+</li>
+<li>
+<p>3.2 数组遍历</p>
+</li>
+<li>
+<p>3.3 动态初始化数组</p>
+</li>
+<li>
+<p>3.4 组的内存执行原理</p>
+<ul>
+<li>
+<p>3.4.1 方法区（字节码文件加载）、栈（方法运行时加载、变量加载）、堆（变量实际数值或者对象的实例）、本地方法栈、寄存器</p>
+</li>
+<li>
+<p>3.4.2 多个变量指向同一个数组的问题，修改其中一个导致堆内的数据变化，会导致另一个数组跟着变化</p>
+</li>
+<li>
+<p>3.4.3 数组赋值为null时，说明在数组没有指向堆中的实例</p>
+</li>
+</ul>
+</li>
+<li>
+<p>3.5 数组使用的简单案例</p>
+<ul>
+<li>
+<p>数组求最值</p>
+<ul>
+<li>定义一个变量用于保存最终的最大值，从数组第一个数据开始</li>
+<li>从第二个数据开始辨遍历，如果该值大于变量，则替换变量的值</li>
+</ul>
+</li>
+<li>
+<p>数组反转</p>
+<ul>
+<li>方法一：逆向循环，插入新的数组</li>
+<li>方法二：依次前后交换数据
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0,j<span style="color:#f92672">=</span>arr.<span style="color:#a6e22e">length</span><span style="color:#f92672">-</span>1;i<span style="color:#f92672">&lt;</span>j;i<span style="color:#f92672">++</span>,j<span style="color:#f92672">--</span>){
+</span></span><span style="display:flex;"><span>    Object temp <span style="color:#f92672">=</span> arr<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>    arr<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> arr<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>    arr<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> arr<span style="color:#f92672">[</span>temp<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>数组随机排名</p>
+<ul>
+<li>动态初始化数字，后期手动录入数据</li>
+<li>依次遍历数组数据，随机生成一个索引，交换遍历处和生成索引的两个数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-方法">4. 方法<a hidden class="anchor" aria-hidden="true" href="#4-方法">#</a></h2>
+<ul>
+<li>
+<p>方法初识</p>
+<ul>
+<li>方法是什么：方法是一种语法结构，它可以把一段代码封装起来，方便反复调用</li>
+<li>方法的完整格式
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>修饰符 返回值类型 <span style="color:#a6e22e">方法名</span>(参数类型 参数 ...){
+</span></span><span style="display:flex;"><span>  方法体代码(需要执行的代码)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> 返回值<span style="color:#960050;background-color:#1e0010">；</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>使用方法的好处
+<ul>
+<li>提高代码的复用性，提高开发效率</li>
+<li>让代码逻辑更清晰</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>方法的其他形式：无返回值时使用 <strong>void</strong> 代替返回类型</p>
+</li>
+<li>
+<p>方法使用时的常见问题</p>
+<ul>
+<li>方法不能嵌套声明</li>
+<li>void修饰的方法不能返回值</li>
+<li>return后不能写代码</li>
+</ul>
+</li>
+<li>
+<p>方法的案例</p>
+<ul>
+<li>设计方法的技巧
+<ul>
+<li>1、方法是否需要收集数据-&gt;形参</li>
+<li>方法是否返回数据-&gt;返回值</li>
+<li>方法要处理的业务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>方法再计算机中的执行原理</p>
+<blockquote>
+<p>方法被调用的时候，是进入栈内存中运行（栈是先进后出，保证方法调用执行后可以返回到main方法中，并且执行后可以清除运行过的方法，防止内存溢出）</p>
+</blockquote>
+</li>
+<li>
+<p>Java的参数传递机制</p>
+<ul>
+<li>1、基础类型是值传递</li>
+<li>2、引用类型的参数传递</li>
+</ul>
+</li>
+<li>
+<p>方法重载</p>
+<ul>
+<li>一个类中相同方法名但是参数个数或类型不同 统称为重载</li>
+<li>知识补充：方法中单独使用return关键字</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-java案例">5. Java案例<a hidden class="anchor" aria-hidden="true" href="#5-java案例">#</a></h2>
+<ul>
+<li>
+<p>买飞机票</p>
+<blockquote>
+<p>根据月份区分淡季旺季，根据作为类型计算折扣，和价格相乘得出结果</p>
+</blockquote>
+</li>
+<li>
+<p>验证码2</p>
+<blockquote>
+<p>按位循环，先随机选择数字（0-9）、小写字母（97+26）、大写字母（65+26），在随机生成ASCII码转换为char型</p>
+</blockquote>
+</li>
+<li>
+<p>打分</p>
+<ul>
+<li>需求：接受多个分数，去掉一个最小和一个最大值后取平均分</li>
+<li>
+<blockquote>
+<p>因为不清楚人数，所以使用动态数组保存，循环人数次使用Scanner录入分数，再次循环数组，得到最小和最大值和全部分数的和，最后计算返回值</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>加密</p>
+<ul>
+<li>需求：传入一个数字，需要将其每一位加5，并对10取余，后将所有数字反转</li>
+<li>
+<blockquote>
+<p>方法1：定义一个数组，将数字每一位放到数组中，循环数组并计算每一位，计算后放入数组，逆向循环数组，输出结果</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>方法2:定义一个数组，将数字每一位放到数组中，双向循环数组并计算每一位直达前后索引相遇，计算后放入数组，输出数组内的数字既可</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0,j<span style="color:#f92672">=</span>arr.<span style="color:#a6e22e">length</span><span style="color:#f92672">-</span>1;i<span style="color:#f92672">&lt;</span>j;i<span style="color:#f92672">++</span>,j<span style="color:#f92672">--</span>){
+</span></span><span style="display:flex;"><span>        Object temp <span style="color:#f92672">=</span> arr<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        arr<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> arr<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        arr<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> arr<span style="color:#f92672">[</span>temp<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>数组拷贝</p>
+<blockquote>
+<p>创建一个新数组，不能使用相同的实例</p>
+</blockquote>
+</li>
+<li>
+<p>抢红包</p>
+<ul>
+<li>需求：5个红包给人抢，抢到一个后不允许选中同一个</li>
+<li>
+<blockquote>
+<p>方法1: 循环等待抽奖，抽中后将选中的值赋0，选中0时死循环重新选</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>方法2: 直接打乱顺序输出</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>找素数</p>
+<ul>
+<li>
+<blockquote>
+<p>循环入参，对每一个数字循环除以一个从2自增到一半的数字，如果可以整除则不符合，否则为素数</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>打印乘法表</p>
+</li>
+<li>
+<p>打印三角形</p>
+</li>
+<li>
+<p>实现双色球</p>
+</li>
+</ul>
+<h2 id="6面向对象">6.面向对象<a hidden class="anchor" aria-hidden="true" href="#6面向对象">#</a></h2>
+<ol>
+<li>面向对象含义</li>
+</ol>
+<ul>
+<li>含义：把数据交给对象，再调用对象的方法，用于处理数据的方法叫面向对象</li>
+<li>面向对象的好处：符合人类的习惯，更直观</li>
+</ul>
+<ol start="2">
+<li>对象执行原理类与对象的注意事项</li>
+</ol>
+<ul>
+<li>执行原理：class先加载到方法区，再将运行的方法加载到栈内存，为方法中的变量开辟一块区域到栈内存，变量初始化时会再堆内存中创建一个实例</li>
+<li>补充知识：引用类型的概念，是存储的数据为引用地址的变量。</li>
+<li>类的一些注意事项：
+<ol>
+<li>类名建议使用首字母大写的驼峰命名</li>
+<li>类中定义的变量和方法叫成员变量和成员方法，成员变量在初始化变量实例的时候会有默认值</li>
+<li>一个文件中只能有一个用public关键字修饰的类 ，并且文件名也要和这个类同名</li>
+<li>如果一个实例没有变量引用它，则该对象无法被操作，就成为了垃圾对象</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p>this关键字:代指当前运行的实例，主要解决变量名称冲突的问题</p>
+</li>
+<li>
+<p>构造器：</p>
+<ol>
+<li>无返回值的和类同名的方法</li>
+<li>创建实例时会调用构造器</li>
+<li>如果不指定构造方法，java会自动生成一个无参构造器，一旦定义了有参的构造方法，就不会生成无参的方法，需要手动添加</li>
+<li>可以用来初始化创建对象时赋值</li>
+</ol>
+</li>
+<li>
+<p>封装、实体JavaBean</p>
+<ol>
+<li>面向对象三大特性：封装、继承、多态</li>
+<li>封装：用类设计对象处理某一个事物的数据时，应该吧要处理的数据以及处理数据的方法涉及到同一个对象中</li>
+<li>封装需要遵守的规则：合理隐藏，合理暴露</li>
+<li>实体JavaBean：
+<ol>
+<li>指有私有的成员变量并为它们都提供getset方法</li>
+<li>存在一个无参构造方法</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="7常用api">7.常用API<a hidden class="anchor" aria-hidden="true" href="#7常用api">#</a></h2>
+<ul>
+<li>包的概念:分门别类管理程序的文件夹</li>
+<li>String API
+<ol>
+<li>
+<p>创建String对象</p>
+<ol>
+<li>String aaa = &ldquo;q&rdquo;;</li>
+<li>String aaa= new String(&ldquo;aa&rdquo;);</li>
+<li>String aaa= new String({&lsquo;a&rsquo;});//字节数组转换</li>
+</ol>
+</li>
+<li>
+<p>常用方法</p>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>int length()</td>
+          <td>获取字符串的长度返回</td>
+      </tr>
+      <tr>
+          <td>char charAt(int index)</td>
+          <td>获取某个索引出的字符返回</td>
+      </tr>
+      <tr>
+          <td>char[] toCharArray()</td>
+          <td>将当前字符串转换为字符数组返回</td>
+      </tr>
+      <tr>
+          <td>boolean equals(Object object)</td>
+          <td>判断当前字符串与另一个字符串内容是否一样，一样返回truw</td>
+      </tr>
+      <tr>
+          <td>boolean equalsIgnoreCase(String anotherString)</td>
+          <td>判断当前字符串与另一个字符串的内容是否一样（忽略大小写）</td>
+      </tr>
+      <tr>
+          <td>String subString(int beginIndex,int endIndex)</td>
+          <td>从传入所引出截取到末尾，得到新的字符串返回</td>
+      </tr>
+      <tr>
+          <td>String subString(int beginIndex)</td>
+          <td>字符串截取</td>
+      </tr>
+      <tr>
+          <td>String replace(CharSequnce target,CharSequnce replacement)</td>
+          <td>字符串替换，得到新的字符串返回</td>
+      </tr>
+      <tr>
+          <td>boolean contains(CharSequnce s)</td>
+          <td>判断字符串中是否包含某个字符串</td>
+      </tr>
+      <tr>
+          <td>boolean startWith(String prefix)</td>
+          <td>判断字符串是否以某个字符串开头</td>
+      </tr>
+      <tr>
+          <td>String[] split(String regex)</td>
+          <td>字符串按照某个字符串分割，并返回字符串数组</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>String的注意事项</p>
+<ul>
+<li>String对象的内容不可改变，被称为不可改变字符串对象</li>
+<li>只要是以“&hellip;”方式写出的字符串对象，会存储带字符串常量池，切内容的字符串只存储一份</li>
+<li>但是通过new方式创建的字符串对象，每new一次都会穿生一个新的对象放在堆内存中
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>  String aaa<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abd&#34;</span>;
+</span></span><span style="display:flex;"><span>  String bbb <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;b&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;c&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//  java对固定值拼接有优化，所以两个变量相等</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//aaa==bbb 为true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  String ccc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String(<span style="color:#e6db74">&#34;abd&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//由于是new出的新对象，所以aaa和ccc不相同</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>ArrayList:增删改查</li>
+</ul>
+<h2 id="8面向对象高级">8.面向对象高级<a hidden class="anchor" aria-hidden="true" href="#8面向对象高级">#</a></h2>
+<ul>
+<li>
+<p>1、封装</p>
+<ul>
+<li>static
+<ul>
+<li>两种方法
+<ul>
+<li>类方法：常用的工具类方法
+<blockquote>
+<p>特殊说明，为了避免工具类被错误的创建对象，可以采用将构造方法私有化的方式避免。</p>
+</blockquote>
+</li>
+<li>实例方法:普通方法，需要创建实例才可以调用</li>
+</ul>
+</li>
+<li>代码块
+<ul>
+<li>static静态代码块：类加载时执行一次</li>
+<li>实例代码块：：创建实例时执行一次</li>
+</ul>
+</li>
+<li>单例模式:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>2、继承</p>
+<ul>
+<li>继承的特性
+<ul>
+<li>子类继承父类的非私有方法和成员变量</li>
+<li>子类的对象创建是由子类和父类共同完成的</li>
+</ul>
+</li>
+<li>继承的注意事项
+<ul>
+<li>权限修饰符：private &lt; 缺省 &lt; protected &lt; public</li>
+<li>单继承：Java类只可以继承一个类，但是接口可以继承多个</li>
+<li>Object类：java类的公共父类，也决定了java类不能同时拥有两个父类</li>
+<li>方法重写：
+<ul>
+<li>1、子类对父类的方法进行重写</li>
+<li>2、重写方法后调用采用就近原则</li>
+</ul>
+</li>
+<li>子类中访问其他成员的特点
+<ul>
+<li>1、没有特殊代指的话遵循九九原则</li>
+<li>2、可有使用this和super代指当前类和父类</li>
+</ul>
+</li>
+<li>子类构造器的特点
+<ul>
+<li>子类的全部构造器都会调用父类的构造器在调用自己的</li>
+<li>子类中可以使用this()去调用兄弟构造器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>3、多态</p>
+</li>
+<li>
+<p>final、常量</p>
+</li>
+<li>
+<p>抽象类</p>
+</li>
+<li>
+<p>接口</p>
+</li>
+<li>
+<p>匿名内部类</p>
+</li>
+<li>
+<p>枚举</p>
+</li>
+<li>
+<p>泛型</p>
+</li>
+</ul>
+<h2 id="9常用api-2">9.常用API 2<a hidden class="anchor" aria-hidden="true" href="#9常用api-2">#</a></h2>
+<ul>
+<li>Object类</li>
+<li>StringBuilder、StringBuffer</li>
+<li>Math、System、Runtime</li>
+<li>BigDecimal</li>
+<li>传统时间 Date、SimpleDateFormat</li>
+<li>传统时间 秒杀案例、Calendar</li>
+<li>Java8新增时间：LocalDate、LocalTime、LocalDateTime、ZoneId、ZoneDateTime、Instant</li>
+<li>DateTimeFormater、Period、Duration</li>
+<li>Arrays</li>
+<li>Lamda表达式</li>
+</ul>
+<h2 id="10java进阶">10.Java进阶<a hidden class="anchor" aria-hidden="true" href="#10java进阶">#</a></h2>
+<ul>
+<li>算法
+<ul>
+<li>认识、冒泡排序、选择排序及优化</li>
+<li>二分法查找</li>
+</ul>
+</li>
+<li>正则表达式</li>
+<li>异常</li>
+</ul>
+<h2 id="11集合框架">11.集合框架<a hidden class="anchor" aria-hidden="true" href="#11集合框架">#</a></h2>
+<h2 id="12java8新特性">12.java8新特性<a hidden class="anchor" aria-hidden="true" href="#12java8新特性">#</a></h2>
+<ul>
+<li>Stream流</li>
+</ul>
+<h2 id="13io流">13.IO流<a hidden class="anchor" aria-hidden="true" href="#13io流">#</a></h2>
+<h2 id="14特殊文件">14.特殊文件<a hidden class="anchor" aria-hidden="true" href="#14特殊文件">#</a></h2>
+<h2 id="15日志技术">15.日志技术<a hidden class="anchor" aria-hidden="true" href="#15日志技术">#</a></h2>
+<h2 id="16多线程">16.多线程<a hidden class="anchor" aria-hidden="true" href="#16多线程">#</a></h2>
+<h2 id="17网络通讯">17.网络通讯<a hidden class="anchor" aria-hidden="true" href="#17网络通讯">#</a></h2>
+<h2 id="18java高级">18.Java高级<a hidden class="anchor" aria-hidden="true" href="#18java高级">#</a></h2>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://oldpei.site/tags/java/">Java</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://oldpei.site/">我的第一个 Hugo 网站</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
