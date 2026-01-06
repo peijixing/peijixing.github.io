@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Java学习 on 我的第一个 Hugo 网站</title>
+    <link>http://localhost:1313/tags/java%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in Java学习 on 我的第一个 Hugo 网站</description>
+    <generator>Hugo -- 0.154.2</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 19 Feb 2023 11:49:20 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/java%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java学习路线</title>
+      <link>http://localhost:1313/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+      <pubDate>Tue, 20 Jun 2023 09:00:20 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/java%E5%AD%A6%E4%B9%A0/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
+      <description>&lt;h2 id=&#34;1-java基础入门&#34;&gt;1. &lt;a href=&#34;https://www.bilibili.com/video/BV1Cv411372m/&#34;&gt;Java基础入门&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;2-java-web-能制作中小型网站企业管理系统&#34;&gt;2. Java Web-能制作中小型网站&amp;amp;企业管理系统&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;2.1 &lt;a href=&#34;https://www.bilibili.com/video/BV1m84y1w7Tb/&#34;&gt;Javaweb&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2.2 &lt;a href=&#34;https://www.bilibili.com/video/BV1Kr4y1i7ru/&#34;&gt;MySQL数据库&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-java开发框架-java企业级服务端开发技能&#34;&gt;3. Java开发框架-Java企业级服务端开发技能&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;3.1 &lt;a href=&#34;https://www.bilibili.com/video/BV1Ah411S7ZE/&#34;&gt;Maven&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3.2 &lt;a href=&#34;https://www.bilibili.com/video/BV1MU4y1Y7h5/&#34;&gt;GIT&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3.3 &lt;a href=&#34;https://www.bilibili.com/video/BV1WZ4y1P7Bp/&#34;&gt;SSM框架&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3.4 &lt;a href=&#34;https://www.bilibili.com/video/BV1P44y1N7QG/&#34;&gt;Spring&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3.5 &lt;a href=&#34;https://www.bilibili.com/video/BV1rE41197jR/&#34;&gt;MybatisPlus&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3.6 &lt;a href=&#34;https://www.bilibili.com/video/BV15b4y1a7yG/&#34;&gt;Spring Boot&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3.7 &lt;a href=&#34;https://www.bilibili.com/video/BV13a411q753/&#34;&gt;黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot    + mybatis plus开发核心技术的真java实战项目&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-中间件微服务框架-中级程序员热门技术&#34;&gt;4. 中间件&amp;amp;微服务框架-中级程序员热门技术&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;4.1 &lt;a href=&#34;https://www.bilibili.com/video/BV1LQ4y127n4/&#34;&gt;SpringCloud+RabbitMQ+Docker+Redis+搜索+分布式，系统详解springcloud微服务技术栈课程|黑马程序员Java微服务&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.2 &lt;a href=&#34;https://www.bilibili.com/video/BV1VE411q7dX/&#34;&gt;Dubbo&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.3 &lt;a href=&#34;https://www.bilibili.com/video/BV1M741137qY/&#34;&gt;Zookeeper&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.4 &lt;a href=&#34;https://www.bilibili.com/video/BV15k4y1k7Ep/&#34;&gt;RabbitMQ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.5 &lt;a href=&#34;https://www.bilibili.com/video/BV1L4411y7mn/&#34;&gt;RocketMQ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.6 &lt;a href=&#34;https://www.bilibili.com/video/BV1CJ411T7BK/&#34;&gt;Docker&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.7 &lt;a href=&#34;https://www.bilibili.com/video/BV1cr4y1671t/&#34;&gt;Redis&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.8 &lt;a href=&#34;https://www.bilibili.com/video/BV1bJ411x7mq/&#34;&gt;MongoDB&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4.9 &lt;a href=&#34;https://www.bilibili.com/video/BV1Nt4y1m7qL/&#34;&gt;搜索技术,java中级教程-ELK高级搜索，深度详解ElasticStack技术栈&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-项目实战-企业级项目开发掌握行业3年开发经验&#34;&gt;5. 项目实战-企业级项目开发，掌握行业3年开发经验&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;5.1 &lt;a href=&#34;https://www.bilibili.com/video/BV1j8411N7Bm/&#34;&gt;黑马程序员Java企业级实战开发《学成在线》微服务项目，基于SpringCloud、SpringCloudAlibaba技术栈开发，项目搭建到选课支付学习全通关&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.2 &lt;a href=&#34;https://www.bilibili.com/video/BV1Qs4y1v7x4/&#34;&gt;黑马程序员Java微服务项目《黑马头条》快速开发全套视频教程，基于SpringBoot+SpringCloud+Nacos等企业级微服务架构项目解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.3 &lt;a href=&#34;https://www.bilibili.com/video/BV18A411L7UX/&#34;&gt;黑马程序员Java项目SaaS移动办公完整版《iHRM 人力资源管理系统》，跨行业SaaS办公整合性解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.4 &lt;a href=&#34;https://www.bilibili.com/video/BV1Jb4y1d7GY/?vd_source=0f1da69361f56e3a2e6c283e179c225e&#34;&gt;黑马程序员Java企业级项目《集信达短信平台》，从零打造高可用、大吞吐Java企业级短信平台解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.5 &lt;a href=&#34;https://www.bilibili.com/video/BV1tw411f79E/?vd_source=0f1da69361f56e3a2e6c283e179c225e&#34;&gt;黑马程序员Java品达通用权限项目，基于SpringCloud SpringBoot 的微服务框架的权限管理解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.6 &lt;a href=&#34;https://www.bilibili.com/video/BV1Lv4y1e7HL/&#34;&gt;2023新版数据结构与算法Java视频教程（上篇），java高级程序员必学的数据结构与算法&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.7 &lt;a href=&#34;https://www.bilibili.com/video/BV1rv4y1H7o6/&#34;&gt;2023新版数据结构与算法Java视频教程（下篇），java高级程序员必学的数据结构与算法&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.8 &lt;a href=&#34;https://www.bilibili.com/video/BV1yT411H7YK/&#34;&gt;新版Java面试专题视频教程，java八股文面试全套真题+深度详解（含大厂高频面试真题）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.9 &lt;a href=&#34;https://www.bilibili.com/video/BV1yT411H7YK/&#34;&gt;新版Java面试专题视频教程，java八股文面试全套真题+深度详解（含大厂高频面试真题）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

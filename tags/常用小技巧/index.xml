@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>常用小技巧 on 我的第一个 Hugo 网站</title>
+    <link>http://localhost:1313/tags/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in 常用小技巧 on 我的第一个 Hugo 网站</description>
+    <generator>Hugo -- 0.154.2</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 04 Jul 2023 10:24:08 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用小技巧</title>
+      <link>http://localhost:1313/posts/%E8%B5%84%E6%BA%90/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Tue, 04 Jul 2023 10:24:08 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E8%B5%84%E6%BA%90/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;h2 id=&#34;idea激活&#34;&gt;idea激活&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/idea%E7%A0%B4%E8%A7%A3/%E6%BF%80%E6%B4%BB%E7%A0%81.txt&#34;&gt;idea激活码&lt;/a&gt;，直接激活即可&lt;/p&gt;
+&lt;h2 id=&#34;win10免更新提示&#34;&gt;win10免更新提示&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;打开文件夹，地址栏输入  控制面板\系统和安全\管理工具&lt;/li&gt;
+&lt;li&gt;打开 服务&lt;/li&gt;
+&lt;li&gt;找到Windows Update，打开属性，设置为禁用&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>
