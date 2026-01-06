@@ -1,0 +1,89 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>资源分享 - 分类 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/</link>
+        <description>资源分享 - 分类 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" rel="self" type="application/rss+xml" /><item>
+    <title>Mac资源和配置</title>
+    <link>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[<h2 id="mac安装翻墙软件clashx-pro"><a href="https://ghproxy.com/?q=https%3A%2F%2Fgithub.com%2Fhasefukashi%2Fhasefukashi%2Fblob%2Fmain%2FClashX%2520Pro.dmg" target="_blank" rel="noopener noreffer ">Mac安装翻墙软件ClashX Pro</a></h2>
+<h2 id="机场地址"><a href="https://xn--i8s3q176n.xyz/" target="_blank" rel="noopener noreffer ">机场地址</a></h2>
+<h2 id="mac安装homebrew">Mac安装HomeBrew</h2>
+<ul>
+<li><a href="https://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="noopener noreffer ">下载安装git</a></li>
+<li>命令行安装HomeBrew：
+<ul>
+<li>intel芯片：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>M1芯片：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/huwei1024/HomebrewCN/raw/master/Homebrew.sh)&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="鼠标滚轮翻转软件scrollreverser"><a href="https://pilotmoon.com/scrollreverser/" target="_blank" rel="noopener noreffer ">鼠标滚轮翻转软件scrollreverser</a></h2>
+<h2 id="截屏工具snipaste"><a href="https://www.snipaste.com/" target="_blank" rel="noopener noreffer ">截屏工具snipaste</a></h2>
+<h2 id="查看隐藏文件funter"><a href="https://www.pc6.com/mac/315302.html" target="_blank" rel="noopener noreffer ">查看隐藏文件Funter</a></h2>
+<h2 id="mac软件破解下载"><a href="https://www.macyy.cn/" target="_blank" rel="noopener noreffer ">Mac软件破解下载</a></h2>
+<h2 id="final-cut-pro插件下载"><a href="https://www.macbl.com/plugin/final-cut-pro" target="_blank" rel="noopener noreffer ">final cut pro插件下载</a></h2>
+<h2 id="去除更新设置的红点">去除更新设置的红点</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">defaults write com.apple.systempreferences AttentionPrefBundleIDs <span class="m">0</span> <span class="o">&amp;&amp;</span> killall Dock
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
+</item>
+<item>
+    <title>常用小技巧</title>
+    <link>https://oldpei.site/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</link>
+    <pubDate>Tue, 04 Jul 2023 10:24:08 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid>
+    <description><![CDATA[<h2 id="idea激活">idea激活</h2>
+<p><a href="/idea%E7%A0%B4%E8%A7%A3/%e6%bf%80%e6%b4%bb%e7%a0%81.txt" rel="">idea激活码</a>，直接激活即可</p>
+<h2 id="win10免更新提示">win10免更新提示</h2>
+<ol>
+<li>打开文件夹，地址栏输入  控制面板\系统和安全\管理工具</li>
+<li>打开 服务</li>
+<li>找到Windows Update，打开属性，设置为禁用</li>
+</ol>]]></description>
+</item>
+<item>
+    <title>自用软件推荐</title>
+    <link>https://oldpei.site/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</link>
+    <pubDate>Wed, 08 Feb 2023 13:48:11 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</guid>
+    <description><![CDATA[<h2 id="阅读">阅读</h2>
+<ul>
+<li>主要功能</li>
+</ul>
+<blockquote>
+<p>PS:非常好用的小说阅读器,可以导入网络大神的书源
+推荐一波书源 <a href="https://oldpei.site/%e4%b9%a6%e6%ba%90.json" target="_blank" rel="noopener noreffer ">https://oldpei.site/书源.json</a>
+书源2 <a href="https://oldpei.site/legado/%e4%b9%a6%e6%ba%90.json" target="_blank" rel="noopener noreffer ">https://oldpei.site/legado/书源.json</a></p>]]></description>
+</item>
+</channel>
+</rss>

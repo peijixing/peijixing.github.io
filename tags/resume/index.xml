@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Resume - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/tags/resume/</link>
+        <description>Resume - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Jan 2023 14:18:00 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/tags/resume/" rel="self" type="application/rss+xml" /><item>
+    <title>个人简历</title>
+    <link>https://oldpei.site/%E7%AE%80%E5%8E%86/</link>
+    <pubDate>Sun, 29 Jan 2023 14:18:00 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/%E7%AE%80%E5%8E%86/</guid>
+    <description><![CDATA[<center><h2>裴继星</h2></center>
+<center><b>18041107717 | mrpeijixing@163.com</b></center>
+<center><b>在职，正在找工作 | java后台开发 | 14-20K</b></center>
+<center><b>大连海事大学(211)·电气工程及其自动化专业</b></center>
+<ul>
+<li>个人评价</li>
+</ul>
+<p>熟练掌握诸如以下展示技能，并掌握mybatis、rpc框架实现、spring、springboot、tomcat等技术或中间件的部分源码，并用自己的方式进行实现，代码已开源 <b><a href="https://gitee.com/laopei/sourcecode" target="_blank" rel="noopener noreffer ">https://gitee.com/laopei/sourcecode</a></b>。</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,220 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/</link>
+        <description>老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</lastBuildDate>
+            <atom:link href="https://oldpei.site/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>个人简历</title>
+    <link>https://oldpei.site/%E7%AE%80%E5%8E%86/</link>
+    <pubDate>Sun, 29 Jan 2023 14:18:00 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/%E7%AE%80%E5%8E%86/</guid>
+    <description><![CDATA[<center><h2>裴继星</h2></center>
+<center><b>18041107717 | mrpeijixing@163.com</b></center>
+<center><b>在职，正在找工作 | java后台开发 | 14-20K</b></center>
+<center><b>大连海事大学(211)·电气工程及其自动化专业</b></center>
+<ul>
+<li>个人评价</li>
+</ul>
+<p>熟练掌握诸如以下展示技能，并掌握mybatis、rpc框架实现、spring、springboot、tomcat等技术或中间件的部分源码，并用自己的方式进行实现，代码已开源 <b><a href="https://gitee.com/laopei/sourcecode" target="_blank" rel="noopener noreffer ">https://gitee.com/laopei/sourcecode</a></b>。</p>]]></description>
+</item>
+<item>
+    <title>Mac资源和配置</title>
+    <link>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Fri, 14 Jul 2023 09:38:23 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/mac%E8%B5%84%E6%BA%90%E5%92%8C%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[<h2 id="mac安装翻墙软件clashx-pro"><a href="https://ghproxy.com/?q=https%3A%2F%2Fgithub.com%2Fhasefukashi%2Fhasefukashi%2Fblob%2Fmain%2FClashX%2520Pro.dmg" target="_blank" rel="noopener noreffer ">Mac安装翻墙软件ClashX Pro</a></h2>
+<h2 id="机场地址"><a href="https://xn--i8s3q176n.xyz/" target="_blank" rel="noopener noreffer ">机场地址</a></h2>
+<h2 id="mac安装homebrew">Mac安装HomeBrew</h2>
+<ul>
+<li><a href="https://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="noopener noreffer ">下载安装git</a></li>
+<li>命令行安装HomeBrew：
+<ul>
+<li>intel芯片：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>M1芯片：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/huwei1024/HomebrewCN/raw/master/Homebrew.sh)&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="鼠标滚轮翻转软件scrollreverser"><a href="https://pilotmoon.com/scrollreverser/" target="_blank" rel="noopener noreffer ">鼠标滚轮翻转软件scrollreverser</a></h2>
+<h2 id="截屏工具snipaste"><a href="https://www.snipaste.com/" target="_blank" rel="noopener noreffer ">截屏工具snipaste</a></h2>
+<h2 id="查看隐藏文件funter"><a href="https://www.pc6.com/mac/315302.html" target="_blank" rel="noopener noreffer ">查看隐藏文件Funter</a></h2>
+<h2 id="mac软件破解下载"><a href="https://www.macyy.cn/" target="_blank" rel="noopener noreffer ">Mac软件破解下载</a></h2>
+<h2 id="final-cut-pro插件下载"><a href="https://www.macbl.com/plugin/final-cut-pro" target="_blank" rel="noopener noreffer ">final cut pro插件下载</a></h2>
+<h2 id="去除更新设置的红点">去除更新设置的红点</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">defaults write com.apple.systempreferences AttentionPrefBundleIDs <span class="m">0</span> <span class="o">&amp;&amp;</span> killall Dock
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
+</item>
+<item>
+    <title>常用小技巧</title>
+    <link>https://oldpei.site/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</link>
+    <pubDate>Tue, 04 Jul 2023 10:24:08 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid>
+    <description><![CDATA[<h2 id="idea激活">idea激活</h2>
+<p><a href="/idea%E7%A0%B4%E8%A7%A3/%e6%bf%80%e6%b4%bb%e7%a0%81.txt" rel="">idea激活码</a>，直接激活即可</p>
+<h2 id="win10免更新提示">win10免更新提示</h2>
+<ol>
+<li>打开文件夹，地址栏输入  控制面板\系统和安全\管理工具</li>
+<li>打开 服务</li>
+<li>找到Windows Update，打开属性，设置为禁用</li>
+</ol>]]></description>
+</item>
+<item>
+    <title>Java基础</title>
+    <link>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Wed, 21 Jun 2023 09:03:18 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/java%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[<h2 id="1-基础语法">1. 基础语法</h2>
+<ul>
+<li>
+<p>1.1 注释</p>
+</li>
+<li>
+<p>1.2 字面量</p>
+</li>
+<li>
+<p>1.3 变量</p>
+</li>
+<li>
+<p>1.4 关键字和标识符</p>
+</li>
+<li>
+<p>1.5 数据类型</p>
+<ul>
+<li>
+<p>1.5.1 基础数据类型：byte、short、int、long、float、double、char、boolean</p>]]></description>
+</item>
+<item>
+    <title>Java学习路线</title>
+    <link>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+    <pubDate>Tue, 20 Jun 2023 09:00:20 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
+    <description><![CDATA[<h2 id="1-java基础入门">1. <a href="https://www.bilibili.com/video/BV1Cv411372m/" target="_blank" rel="noopener noreffer ">Java基础入门</a></h2>
+<h2 id="2-java-web-能制作中小型网站企业管理系统">2. Java Web-能制作中小型网站&amp;企业管理系统</h2>
+<ul>
+<li>
+<p>2.1 <a href="https://www.bilibili.com/video/BV1m84y1w7Tb/" target="_blank" rel="noopener noreffer ">Javaweb</a></p>
+</li>
+<li>
+<p>2.2 <a href="https://www.bilibili.com/video/BV1Kr4y1i7ru/" target="_blank" rel="noopener noreffer ">MySQL数据库</a></p>
+</li>
+</ul>
+<h2 id="3-java开发框架-java企业级服务端开发技能">3. Java开发框架-Java企业级服务端开发技能</h2>
+<ul>
+<li>
+<p>3.1 <a href="https://www.bilibili.com/video/BV1Ah411S7ZE/" target="_blank" rel="noopener noreffer ">Maven</a></p>]]></description>
+</item>
+<item>
+    <title>自用软件推荐</title>
+    <link>https://oldpei.site/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</link>
+    <pubDate>Wed, 08 Feb 2023 13:48:11 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/%E8%87%AA%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/</guid>
+    <description><![CDATA[<h2 id="阅读">阅读</h2>
+<ul>
+<li>主要功能</li>
+</ul>
+<blockquote>
+<p>PS:非常好用的小说阅读器,可以导入网络大神的书源
+推荐一波书源 <a href="https://oldpei.site/%e4%b9%a6%e6%ba%90.json" target="_blank" rel="noopener noreffer ">https://oldpei.site/书源.json</a>
+书源2 <a href="https://oldpei.site/legado/%e4%b9%a6%e6%ba%90.json" target="_blank" rel="noopener noreffer ">https://oldpei.site/legado/书源.json</a></p>]]></description>
+</item>
+<item>
+    <title>MyBatis-Plus初级运用</title>
+    <link>https://oldpei.site/mybatis-plus-start/</link>
+    <pubDate>Thu, 02 Feb 2023 16:05:47 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/mybatis-plus-start/</guid>
+    <description><![CDATA[<p>使用之前需要掌握：</p>
+<ul>
+<li>拥有 Java 开发环境以及相应 IDE</li>
+<li>熟悉 Spring Boot</li>
+<li>熟悉 Maven</li>
+</ul>
+<hr>
+<h2 id="1数据表准备">1.数据表准备</h2>
+<p>以User表为例</p>
+<table>
+  <thead>
+      <tr>
+          <th>id</th>
+          <th style="text-align: center">name</th>
+          <th style="text-align: center">age</th>
+          <th style="text-align: center">email</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td style="text-align: center">Jone</td>
+          <td style="text-align: center">18</td>
+          <td style="text-align: center"><a href="mailto:test1@baomidou.com" rel="">test1@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td style="text-align: center">Jack</td>
+          <td style="text-align: center">20</td>
+          <td style="text-align: center"><a href="mailto:test2@baomidou.com" rel="">test2@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td style="text-align: center">Tom</td>
+          <td style="text-align: center">28</td>
+          <td style="text-align: center"><a href="mailto:test3@baomidou.com" rel="">test3@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td style="text-align: center">Sandy</td>
+          <td style="text-align: center">21</td>
+          <td style="text-align: center"><a href="mailto:test4@baomidou.com" rel="">test4@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td style="text-align: center">Billie</td>
+          <td style="text-align: center">24</td>
+          <td style="text-align: center"><a href="mailto:test5@baomidou.com" rel="">test5@baomidou.com</a></td>
+      </tr>
+  </tbody>
+</table>
+<p>其数据库DDL脚本如下：</p>]]></description>
+</item>
+<item>
+    <title>Quartz框架学习</title>
+    <link>https://oldpei.site/quartz/</link>
+    <pubDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/quartz/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

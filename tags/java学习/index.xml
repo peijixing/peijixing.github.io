@@ -1,0 +1,28 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Java学习 - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/tags/java%E5%AD%A6%E4%B9%A0/</link>
+        <description>Java学习 - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 20 Jun 2023 09:00:20 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/tags/java%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml" /><item>
+    <title>Java学习路线</title>
+    <link>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+    <pubDate>Tue, 20 Jun 2023 09:00:20 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
+    <description><![CDATA[<h2 id="1-java基础入门">1. <a href="https://www.bilibili.com/video/BV1Cv411372m/" target="_blank" rel="noopener noreffer ">Java基础入门</a></h2>
+<h2 id="2-java-web-能制作中小型网站企业管理系统">2. Java Web-能制作中小型网站&amp;企业管理系统</h2>
+<ul>
+<li>
+<p>2.1 <a href="https://www.bilibili.com/video/BV1m84y1w7Tb/" target="_blank" rel="noopener noreffer ">Javaweb</a></p>
+</li>
+<li>
+<p>2.2 <a href="https://www.bilibili.com/video/BV1Kr4y1i7ru/" target="_blank" rel="noopener noreffer ">MySQL数据库</a></p>
+</li>
+</ul>
+<h2 id="3-java开发框架-java企业级服务端开发技能">3. Java开发框架-Java企业级服务端开发技能</h2>
+<ul>
+<li>
+<p>3.1 <a href="https://www.bilibili.com/video/BV1Ah411S7ZE/" target="_blank" rel="noopener noreffer ">Maven</a></p>]]></description>
+</item>
+</channel>
+</rss>

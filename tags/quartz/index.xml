@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Quartz - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/tags/quartz/</link>
+        <description>Quartz - 标签 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/tags/quartz/" rel="self" type="application/rss+xml" /><item>
+    <title>Quartz框架学习</title>
+    <link>https://oldpei.site/quartz/</link>
+    <pubDate>Tue, 23 Jan 2024 08:57:23 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/quartz/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

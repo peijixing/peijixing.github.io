@@ -1,0 +1,66 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>中间件 - 分类 - 老裴的个人博客，分享一些没什么卵用的知识！</title>
+        <link>https://oldpei.site/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+        <description>中间件 - 分类 - 老裴的个人博客，分享一些没什么卵用的知识！</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 02 Feb 2023 16:05:47 &#43;0800</lastBuildDate><atom:link href="https://oldpei.site/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="self" type="application/rss+xml" /><item>
+    <title>MyBatis-Plus初级运用</title>
+    <link>https://oldpei.site/mybatis-plus-start/</link>
+    <pubDate>Thu, 02 Feb 2023 16:05:47 &#43;0800</pubDate>
+    <author>xxxx</author>
+    <guid>https://oldpei.site/mybatis-plus-start/</guid>
+    <description><![CDATA[<p>使用之前需要掌握：</p>
+<ul>
+<li>拥有 Java 开发环境以及相应 IDE</li>
+<li>熟悉 Spring Boot</li>
+<li>熟悉 Maven</li>
+</ul>
+<hr>
+<h2 id="1数据表准备">1.数据表准备</h2>
+<p>以User表为例</p>
+<table>
+  <thead>
+      <tr>
+          <th>id</th>
+          <th style="text-align: center">name</th>
+          <th style="text-align: center">age</th>
+          <th style="text-align: center">email</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td style="text-align: center">Jone</td>
+          <td style="text-align: center">18</td>
+          <td style="text-align: center"><a href="mailto:test1@baomidou.com" rel="">test1@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td style="text-align: center">Jack</td>
+          <td style="text-align: center">20</td>
+          <td style="text-align: center"><a href="mailto:test2@baomidou.com" rel="">test2@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td style="text-align: center">Tom</td>
+          <td style="text-align: center">28</td>
+          <td style="text-align: center"><a href="mailto:test3@baomidou.com" rel="">test3@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td style="text-align: center">Sandy</td>
+          <td style="text-align: center">21</td>
+          <td style="text-align: center"><a href="mailto:test4@baomidou.com" rel="">test4@baomidou.com</a></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td style="text-align: center">Billie</td>
+          <td style="text-align: center">24</td>
+          <td style="text-align: center"><a href="mailto:test5@baomidou.com" rel="">test5@baomidou.com</a></td>
+      </tr>
+  </tbody>
+</table>
+<p>其数据库DDL脚本如下：</p>]]></description>
+</item>
+</channel>
+</rss>
