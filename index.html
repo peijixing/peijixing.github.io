@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>离谱发明实验室 | oldpei.site</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">oldpei<span>.site</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="resources.html" class="nav-link">📡 资源补给站</a>
+      <a href="#" class="nav-link">关于</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">// 离谱发明实验室</h1>
+    <p class="page-subtitle">以下所有项目均通过国际反逻辑认证，请谨慎体验。</p>
+
+    <div class="card-grid">
+      <a href="projects/password-unique.html" class="card">
+        <div class="card-icon">🔐</div>
+        <div class="card-title">密码绝不同款注册局</div>
+        <div class="card-desc">你的密码必须全球唯一，重复就会被公开处刑。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <!-- 未来可继续添加卡片 -->
+    </div>
+  </div>
+
+  <script src="assets/ads.js"></script>
+  <script src="assets/utils.js"></script>
+  <script src="assets/ad-banner.js"></script>
+  <script>
+    // 移动端汉堡菜单
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

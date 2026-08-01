@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资源补给站 | oldpei.site</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* 确保代码块支持换行显示 */
+    .resource-code-block code {
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">oldpei<span>.site</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="nav-link">← 返回实验室</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">// 资源补给站</h1>
+    <p class="page-subtitle">复制口令，打开任推邦获取资源。持续更新中...</p>
+    <div id="resourceList"></div>
+  </div>
+
+  <!-- 依赖库 -->
+  <script src="assets/ads.js"></script>
+  <script src="assets/utils.js"></script>
+  <script src="assets/ad-banner.js"></script>
+
+  <script>
+    // 移动端汉堡菜单
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+
+    // 确保 AD_LIST 存在后再渲染
+    function renderResources() {
+      const container = document.getElementById('resourceList');
+      if (typeof AD_LIST === 'undefined' || !Array.isArray(AD_LIST) || AD_LIST.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-secondary);">暂无资源，请稍后再来。</p>';
+        return;
+      }
+
+      container.innerHTML = ''; // 清空
+      AD_LIST.forEach(ad => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        card.innerHTML = `
+          <div class="resource-info">
+            <div class="resource-title">${ad.title}</div>
+            <div class="resource-desc">${ad.desc}</div>
+            <div class="resource-code-block">
+              <code>${ad.code}</code>
+              <button class="btn btn-sm copy-resource-btn" data-code="${ad.code.replace(/"/g, '&quot;')}">复制</button>
+              <span class="resource-platform">${ad.platform}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // 绑定复制事件
+      document.querySelectorAll('.copy-resource-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const code = this.getAttribute('data-code');
+          copyToClipboard(code, (success) => {
+            if (success) {
+              this.textContent = '已复制';
+              this.classList.add('copied');
+              setTimeout(() => {
+                this.textContent = '复制';
+                this.classList.remove('copied');
+              }, 1500);
+            } else {
+              alert('复制失败，请手动复制');
+            }
+          });
+        });
+      });
+    }
+
+    // 页面加载完后渲染
+    window.addEventListener('DOMContentLoaded', renderResources);
+  </script>
+</body>
+</html>
