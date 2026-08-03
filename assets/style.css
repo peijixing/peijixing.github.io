@@ -471,3 +471,122 @@ a:hover {
     align-self: flex-start;
   }
 }
+
+/* ========== 打赏组件样式 ========== */
+.donate-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--accent-blue);
+  color: var(--accent-blue);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 998;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.donate-btn:hover {
+  transform: scale(1.1);
+  background-color: var(--accent-blue);
+  color: #fff;
+}
+
+.donate-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.donate-overlay.active {
+  display: flex;
+}
+
+.donate-modal {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+.donate-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1;
+}
+.donate-close:hover {
+  color: var(--accent-red);
+}
+.donate-modal h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+.donate-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.donate-qr-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.donate-qr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.donate-qr-item img {
+  width: 140px;
+  height: 140px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  object-fit: contain;
+  background-color: #fff; /* 二维码透明背景不显示，需要白底 */
+}
+.donate-qr-item span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.donate-tip {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* 移动端调整 */
+@media (max-width: 480px) {
+  .donate-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+  .donate-modal {
+    padding: 1.5rem;
+  }
+  .donate-qr-item img {
+    width: 120px;
+    height: 120px;
+  }

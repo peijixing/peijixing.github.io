@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人类审核机器局 | oldpei.site</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .verification-box {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+    .grid-item {
+      aspect-ratio: 1;
+      background-size: cover;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      filter: blur(12px);
+      transition: filter 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .grid-item.selected {
+      border-color: var(--accent-blue);
+      filter: blur(8px);
+      box-shadow: 0 0 0 2px rgba(88,166,255,0.4);
+    }
+    .grid-item::after {
+      content: "?";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: rgba(255,255,255,0.7);
+      pointer-events: none;
+    }
+    .btn-verify {
+      width: 100%;
+    }
+    .fail-counter {
+      text-align: center;
+      color: var(--text-secondary);
+      margin: 1rem 0;
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">oldpei<span>.site</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="nav-link">← 返回实验室</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">🤖 人类审核机器局</h1>
+    <p class="page-subtitle">请证明你不是机器人。</p>
+
+    <div class="verification-box">
+      <div id="messageBox"></div>
+      <p style="margin-bottom: 0.5rem; font-weight: 600;">请选出所有包含 <span style="color: var(--accent-blue);">红绿灯</span> 的图片：</p>
+      <div class="grid-container" id="imageGrid"></div>
+      <button class="btn btn-verify" id="verifyBtn">验证</button>
+      <div class="fail-counter">剩余尝试次数：<span id="attemptsLeft">3</span></div>
+    </div>
+  </div>
+
+  <script src="../assets/ads.js"></script>
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/ad-banner.js"></script>
+  <script src="../assets/donate.js"></script>
+
+  <script>
+    // 移动端汉堡菜单
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+
+    let attempts = 3;
+    const attemptsLeftEl = document.getElementById('attemptsLeft');
+    const messageBox = document.getElementById('messageBox');
+
+    // 生成随机模糊图片
+    function generateGrid() {
+      const grid = document.getElementById('imageGrid');
+      grid.innerHTML = '';
+      for (let i = 0; i < 9; i++) {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        // 随机背景色，制造一些色彩差异，但经过模糊后根本分不清
+        const r = Math.floor(Math.random() * 200 + 55);
+        const g = Math.floor(Math.random() * 200 + 55);
+        const b = Math.floor(Math.random() * 200 + 55);
+        div.style.backgroundColor = `rgb(${r},${g},${b})`;
+        div.addEventListener('click', () => {
+          div.classList.toggle('selected');
+        });
+        grid.appendChild(div);
+      }
+    }
+
+    function showMessage(text, type) {
+      messageBox.innerHTML = `<div class="message message-${type}">${text}</div>`;
+    }
+
+    document.getElementById('verifyBtn').addEventListener('click', () => {
+      const selected = document.querySelectorAll('.grid-item.selected');
+      if (selected.length === 0) {
+        showMessage('请至少选择一个图片。', 'error');
+        return;
+      }
+
+      // 无论选什么，都判定失败
+      attempts--;
+      attemptsLeftEl.textContent = attempts;
+
+      if (attempts > 0) {
+        showMessage('验证失败，请重试。提示：仔细观察图片中的细节。', 'error');
+        // 重置选择
+        document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
+        generateGrid(); // 刷新图片，防止用户记住位置
+      } else {
+        // 3次失败，弹出AI通道
+        showMessage('', 'success'); // 清除旧消息
+        messageBox.innerHTML = `
+          <div class="message message-success">
+            🤖 系统判定您可能是高级AI，已为您开启机器人专用资源通道。
+          </div>
+        `;
+        // 显示广告
+        if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
+          const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
+          const adDiv = document.createElement('div');
+          adDiv.className = 'message';
+          adDiv.style.cssText = 'background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;';
+          adDiv.innerHTML = `
+            <strong>🎁 隐藏资源：</strong> ${randomAd.title}<br>
+            <code style="word-break: break-all;">${randomAd.code}</code>
+            <button class="btn btn-sm" style="margin-top: 0.5rem;" onclick="copyToClipboard('${randomAd.code.replace(/'/g, "\\'")}', (success) => { alert(success ? '已复制' : '复制失败'); })">复制口令</button>
+          `;
+          messageBox.appendChild(adDiv);
+        }
+        document.getElementById('verifyBtn').disabled = true;
+        document.getElementById('verifyBtn').textContent = '已锁定';
+        document.querySelectorAll('.grid-item').forEach(item => item.style.pointerEvents = 'none');
+      }
+    });
+
+    // 初始生成
+    generateGrid();
+  </script>
+</body>
+</html>

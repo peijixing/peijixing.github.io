@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>反逻辑进度条生成器 | oldpei.site</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .progress-box {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 500px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .progress {
+      height: 30px;
+      background-color: var(--bg-primary);
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+      width: 0%;
+      transition: width 0.1s linear;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .status-text {
+      color: var(--text-secondary);
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+    }
+    .btn {
+      min-width: 80px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">oldpei<span>.site</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="nav-link">← 返回实验室</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">⏳ 反逻辑进度条生成器</h1>
+    <p class="page-subtitle">一个永远无法按常理完成的下载。</p>
+
+    <div class="progress-box">
+      <div class="progress">
+        <div class="progress-bar" id="progressBar" style="width: 0%;">0%</div>
+      </div>
+      <div class="status-text" id="statusText">准备就绪</div>
+      <div class="controls">
+        <button class="btn" id="startBtn">开始下载</button>
+        <button class="btn" id="pauseBtn" disabled>暂停</button>
+        <button class="btn" id="cancelBtn" disabled>取消</button>
+        <button class="btn" id="speedBtn" disabled>加速</button>
+      </div>
+    </div>
+    <div id="adContainer" style="margin-top: 1.5rem;"></div>
+  </div>
+
+  <script src="../assets/ads.js"></script>
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/ad-banner.js"></script>
+  <script src="../assets/donate.js"></script>
+
+  <script>
+    // 移动端汉堡菜单
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+
+    const progressBar = document.getElementById('progressBar');
+    const statusText = document.getElementById('statusText');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const speedBtn = document.getElementById('speedBtn');
+    const adContainer = document.getElementById('adContainer');
+
+    let progress = 0;
+    let timer = null;
+    let isPaused = false;
+    let speedMultiplier = 1;
+
+    function updateUI() {
+      progressBar.style.width = progress + '%';
+      progressBar.textContent = progress + '%';
+    }
+
+    function clearTimer() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startDownload() {
+      if (timer) return;
+      isPaused = false;
+      statusText.textContent = '下载中...';
+      timer = setInterval(() => {
+        // 特殊逻辑：如果进度达到99就停止，并且加速按钮反而会让进度倒着走
+        if (progress >= 99) {
+          progress = 99; // 永远卡在99
+          clearTimer();
+          statusText.textContent = '即将完成...';
+          pauseBtn.disabled = true;
+          cancelBtn.disabled = false;
+          return;
+        }
+        // 加速按钮实际让进度倒退（反逻辑）
+        if (speedMultiplier < 0) {
+          progress = Math.max(0, progress + speedMultiplier);
+        } else {
+          progress = Math.min(99, progress + 1 * speedMultiplier);
+        }
+        updateUI();
+      }, 100);
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      cancelBtn.disabled = false;
+      speedBtn.disabled = false;
+    }
+
+    function pauseDownload() {
+      if (isPaused) return;
+      isPaused = true;
+      clearTimer();
+      statusText.textContent = '已暂停';
+      pauseBtn.textContent = '继续';
+    }
+
+    function resumeDownload() {
+      isPaused = false;
+      pauseBtn.textContent = '暂停';
+      startDownload();
+    }
+
+    function cancelDownload() {
+      clearTimer();
+      // 取消反而瞬间完成
+      progress = 100;
+      updateUI();
+      statusText.textContent = '下载完成！';
+      startBtn.disabled = true;
+      pauseBtn.disabled = true;
+      cancelBtn.disabled = true;
+      speedBtn.disabled = true;
+      showAd();
+    }
+
+    function toggleSpeed() {
+      if (speedMultiplier === 1) {
+        speedMultiplier = -1; // 改为倒退
+        speedBtn.textContent = '减速';
+        speedBtn.style.backgroundColor = 'var(--accent-red)';
+        statusText.textContent = '加速模式启动（实际效果：倒退）';
+      } else {
+        speedMultiplier = 1;
+        speedBtn.textContent = '加速';
+        speedBtn.style.backgroundColor = '';
+      }
+    }
+
+    function showAd() {
+      if (typeof AD_LIST === 'undefined' || AD_LIST.length === 0) return;
+      const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
+      adContainer.innerHTML = `
+        <div class="message" style="background-color: rgba(63,185,80,0.1); border-color: var(--accent-green);">
+          🎉 下载完成！你获得了一份隐藏资源：<br>
+          <strong>${randomAd.title}</strong><br>
+          <code style="word-break: break-all;">${randomAd.code}</code>
+          <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
+        </div>
+      `;
+      document.getElementById('copyAdBtn').addEventListener('click', () => {
+        copyToClipboard(randomAd.code, (success) => {
+          alert(success ? '已复制，打开任推邦查看资源' : '复制失败，请手动复制');
+        });
+      });
+    }
+
+    startBtn.addEventListener('click', startDownload);
+    pauseBtn.addEventListener('click', () => {
+      if (isPaused) {
+        resumeDownload();
+      } else {
+        pauseDownload();
+      }
+    });
+    cancelBtn.addEventListener('click', cancelDownload);
+    speedBtn.addEventListener('click', toggleSpeed);
+
+    // 初始状态
+    updateUI();
+  </script>
+</body>
+</html>
