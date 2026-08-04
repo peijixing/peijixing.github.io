@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>捉迷藏滑块验证 | oldpei.site</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* 登录容器 */
+    .login-box {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 400px;
+      margin: 2rem auto;
+    }
+    .submit-btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    /* 滑块验证弹窗 */
+    .verify-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+    .verify-overlay.active {
+      display: flex;
+    }
+    .verify-box {
+      position: absolute; /* 关键：绝对定位，允许随意移动 */
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .verify-box:active {
+      cursor: grabbing;
+    }
+    .verify-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0 5px;
+    }
+    .close-btn:hover {
+      color: var(--accent-red);
+    }
+
+    .slider-track {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      height: 42px;
+      position: relative;
+      overflow: hidden;
+      margin: 1rem 0 0.5rem;
+    }
+    .slider-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+      border-radius: 20px;
+      transition: width 0.1s;
+    }
+    .slider-btn {
+      position: absolute;
+      left: 0; top: 0;
+      width: 50px; height: 100%;
+      background: var(--accent-blue);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: left 0.05s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .verify-hint {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .verify-status {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--accent-red);
+      min-height: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+<span class="logo">离谱发明实验室</span>
+    <button ="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="nav-link">← 返回实验室</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">🎯 捉迷藏滑块验证</h1>
+    <p class="page-subtitle">登录需要先通过人类验证，但滑块好像不太听话。</p>
+
+    <div class="login-box">
+      <div id="loginMsg"></div>
+      <div class="form-group">
+        <label class="form-label">用户名</label>
+        <input type="text" id="username" class="form-input" placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label class="form-label">密码</label>
+        <input type="password" id="password" class="form-input" placeholder="••••••">
+      </div>
+      <button class="btn submit-btn" id="loginBtn">登录</button>
+    </div>
+  </div>
+
+  <!-- 滑块验证弹窗 -->
+  <div class="verify-overlay" id="verifyOverlay">
+    <div class="verify-box" id="verifyBox">
+      <div class="verify-title">
+        <span>🔒 安全验证</span>
+        <button class="close-btn" id="closeVerifyBtn">✕</button>
+      </div>
+      <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">请按住滑块，拖动到最右边</p>
+      <div class="slider-track" id="sliderTrack">
+        <div class="slider-fill" id="sliderFill"></div>
+        <div class="slider-btn" id="sliderBtn">→</div>
+      </div>
+      <div class="verify-hint">拖不动？试试把鼠标移远一点</div>
+      <div class="verify-status" id="verifyStatus"></div>
+    </div>
+  </div>
+
+  <script src="../assets/ads.js"></script>
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/ad-banner.js"></script>
+
+  <script>
+    // 汉堡菜单
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+
+    // 登录逻辑
+    let verifyFailCount = 0;
+    const loginBtn = document.getElementById('loginBtn');
+    const loginMsg = document.getElementById('loginMsg');
+    
+    loginBtn.addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      if (!username || !password) {
+        showLoginMsg('请输入用户名和密码', 'error');
+        return;
+      }
+      // 弹出验证弹窗
+      showVerify();
+    });
+
+    function showLoginMsg(text, type) {
+      loginMsg.innerHTML = `<div class="message message-${type}">${text}</div>`;
+    }
+
+    // ========== 捉迷藏弹窗逻辑 ==========
+    const overlay = document.getElementById('verifyOverlay');
+    const verifyBox = document.getElementById('verifyBox');
+    const closeVerifyBtn = document.getElementById('closeVerifyBtn');
+    const sliderBtn = document.getElementById('sliderBtn');
+    const sliderFill = document.getElementById('sliderFill');
+    const sliderTrack = document.getElementById('sliderTrack');
+    const verifyStatus = document.getElementById('verifyStatus');
+
+    let isDraggingWindow = false;
+    let startMouseX, startMouseY;
+    let startBoxX, startBoxY;
+
+    function showVerify() {
+      // 重置弹窗位置到中心
+      verifyBox.style.left = '50%';
+      verifyBox.style.top = '50%';
+      verifyBox.style.transform = 'translate(-50%, -50%)';
+      // 重置滑块
+      sliderBtn.style.left = '0';
+      sliderFill.style.width = '0';
+      verifyStatus.textContent = '';
+      overlay.classList.add('active');
+      verifyFailCount = 0;
+    }
+
+    function hideVerify() {
+      overlay.classList.remove('active');
+    }
+
+    closeVerifyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hideVerify();
+    });
+
+    // 阻止滑块按钮上的事件冒泡（但我们需要在弹窗上全局监听移动）
+    sliderBtn.addEventListener('mousedown', (e) => {
+      e.stopPropagation(); // 防止触发弹窗拖拽？ 不，我们希望弹窗也移动，所以不能阻止冒泡
+      // 实际上，当用户点击滑块按钮时，自然会触发弹窗的mousedown，所以整个弹窗开始跟随鼠标
+    });
+
+    // 弹窗整体监听mousedown，实现拖拽移动
+    verifyBox.addEventListener('mousedown', function(e) {
+      // 如果点击的是关闭按钮，不启动拖拽
+      if (e.target === closeVerifyBtn) return;
+      isDraggingWindow = true;
+      
+      // 记录鼠标起始位置
+      startMouseX = e.clientX;
+      startMouseY = e.clientY;
+      
+      // 获取弹窗当前计算后的位置（去掉transform）
+      const rect = verifyBox.getBoundingClientRect();
+      startBoxX = rect.left;
+      startBoxY = rect.top;
+      
+      // 移除可能存在的 transform，改用 left/top
+      verifyBox.style.transform = 'none';
+      verifyBox.style.left = rect.left + 'px';
+      verifyBox.style.top = rect.top + 'px';
+      
+      e.preventDefault();
+    });
+
+    // 触摸事件支持
+    verifyBox.addEventListener('touchstart', function(e) {
+      if (e.target === closeVerifyBtn) return;
+      isDraggingWindow = true;
+      const touch = e.touches[0];
+      startMouseX = touch.clientX;
+      startMouseY = touch.clientY;
+      const rect = verifyBox.getBoundingClientRect();
+      startBoxX = rect.left;
+      startBoxY = rect.top;
+      verifyBox.style.transform = 'none';
+      verifyBox.style.left = rect.left + 'px';
+      verifyBox.style.top = rect.top + 'px';
+      e.preventDefault();
+    }, { passive: false });
+
+    // 全局移动
+    document.addEventListener('mousemove', function(e) {
+      if (!isDraggingWindow) return;
+      const dx = e.clientX - startMouseX;
+      const dy = e.clientY - startMouseY;
+      verifyBox.style.left = (startBoxX + dx) + 'px';
+      verifyBox.style.top = (startBoxY + dy) + 'px';
+
+      // 滑块假装有进度（实际上始终不会到终点，但可以给点错觉）
+      // 我们可以让滑块填充随机变动，制造“正在验证”的假象，但最后一定失败
+      const fakeProgress = Math.min(95, Math.floor(Math.random() * 60));
+      sliderFill.style.width = fakeProgress + '%';
+      sliderBtn.style.left = (fakeProgress * 0.85) + '%'; // 永远到不了100%
+    });
+
+    document.addEventListener('touchmove', function(e) {
+      if (!isDraggingWindow) return;
+      const touch = e.touches[0];
+      const dx = touch.clientX - startMouseX;
+      const dy = touch.clientY - startMouseY;
+      verifyBox.style.left = (startBoxX + dx) + 'px';
+      verifyBox.style.top = (startBoxY + dy) + 'px';
+      const fakeProgress = Math.min(95, Math.floor(Math.random() * 60));
+      sliderFill.style.width = fakeProgress + '%';
+      sliderBtn.style.left = (fakeProgress * 0.85) + '%';
+      e.preventDefault();
+    }, { passive: false });
+
+    // 松开鼠标
+    document.addEventListener('mouseup', function() {
+      if (isDraggingWindow) {
+        isDraggingWindow = false;
+        // 验证总是失败，因为滑块从未到终点
+        verifyFailCount++;
+        if (verifyFailCount >= 3) {
+          // 三次失败后展示彩蛋
+          showVerificationFailedPermanently();
+        } else {
+          verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）';
+          // 重置滑块
+          sliderBtn.style.left = '0';
+          sliderFill.style.width = '0';
+        }
+      }
+    });
+
+    document.addEventListener('touchend', function() {
+      if (isDraggingWindow) {
+        isDraggingWindow = false;
+        verifyFailCount++;
+        if (verifyFailCount >= 3) {
+          showVerificationFailedPermanently();
+        } else {
+          verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）';
+          sliderBtn.style.left = '0';
+          sliderFill.style.width = '0';
+        }
+      }
+    });
+
+    function showVerificationFailedPermanently() {
+      verifyStatus.innerHTML = '🤖 人类验证已放弃，您可能是AI。';
+      // 禁用弹窗拖拽
+      isDraggingWindow = false;
+      verifyBox.style.pointerEvents = 'none';
+      // 显示隐藏资源
+      const adContainer = document.createElement('div');
+      adContainer.style.marginTop = '1rem';
+      if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
+        const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
+        adContainer.innerHTML = `
+          <div class="message" style="background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue);">
+            <strong>🎁 AI专属隐藏资源：</strong> ${randomAd.title}<br>
+            <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
+          </div>
+        `;
+        verifyBox.appendChild(adContainer);
+        document.getElementById('copyAdBtn').addEventListener('click', () => {
+          copyToClipboard(randomAd.code, (success) => {
+            alert(success ? '已复制，打开任推邦查看资源' : '复制失败');
+          });
+        });
+      }
+    }
+
+    // 点击遮罩关闭（但弹窗已经跑了可能点不到，还是提供关闭按钮）
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        hideVerify();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -23,27 +23,21 @@
     .grid-item {
       aspect-ratio: 1;
       background-size: cover;
+      background-position: center;
       border: 2px solid var(--border-color);
       border-radius: 6px;
       cursor: pointer;
-      filter: blur(12px);
-      transition: filter 0.2s, border-color 0.2s;
-      position: relative;
+      filter: blur(2px) brightness(0.9);
+      transition: filter 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
     .grid-item.selected {
       border-color: var(--accent-blue);
-      filter: blur(8px);
-      box-shadow: 0 0 0 2px rgba(88,166,255,0.4);
+      filter: blur(0px) brightness(1.1);
+      box-shadow: 0 0 0 3px rgba(88,166,255,0.5);
     }
-    .grid-item::after {
-      content: "?";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      color: rgba(255,255,255,0.7);
-      pointer-events: none;
+    /* 鼠标悬停时略微清晰 */
+    .grid-item:hover {
+      filter: blur(1px) brightness(0.95);
     }
     .btn-verify {
       width: 100%;
@@ -54,11 +48,17 @@
       margin: 1rem 0;
       font-family: var(--font-mono);
     }
+    .refresh-hint {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
   <nav class="navbar">
-    <div class="logo">oldpei<span>.site</span></div>
+<span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="../index.html" class="nav-link">← 返回实验室</a>
@@ -71,8 +71,13 @@
 
     <div class="verification-box">
       <div id="messageBox"></div>
-      <p style="margin-bottom: 0.5rem; font-weight: 600;">请选出所有包含 <span style="color: var(--accent-blue);">红绿灯</span> 的图片：</p>
+      <p style="margin-bottom: 0.5rem; font-weight: 600;">
+        请选出所有包含 <span style="color: var(--accent-blue);">红绿灯</span> 的图片：
+      </p>
       <div class="grid-container" id="imageGrid"></div>
+      <div class="refresh-hint">
+        看不清？<a href="#" id="refreshLink">换一批图片</a>
+      </div>
       <button class="btn btn-verify" id="verifyBtn">验证</button>
       <div class="fail-counter">剩余尝试次数：<span id="attemptsLeft">3</span></div>
     </div>
@@ -81,10 +86,9 @@
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
-  <script src="../assets/donate.js"></script>
 
   <script>
-    // 移动端汉堡菜单
+    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -101,23 +105,23 @@
     let attempts = 3;
     const attemptsLeftEl = document.getElementById('attemptsLeft');
     const messageBox = document.getElementById('messageBox');
+    const imageGrid = document.getElementById('imageGrid');
+    const refreshLink = document.getElementById('refreshLink');
 
-    // 生成随机模糊图片
+    // 生成随机图片网格（使用 picsum 占位图，模拟真实物体）
     function generateGrid() {
-      const grid = document.getElementById('imageGrid');
-      grid.innerHTML = '';
+      imageGrid.innerHTML = '';
+      // 使用不同的随机参数确保图片不同
       for (let i = 0; i < 9; i++) {
         const div = document.createElement('div');
         div.className = 'grid-item';
-        // 随机背景色，制造一些色彩差异，但经过模糊后根本分不清
-        const r = Math.floor(Math.random() * 200 + 55);
-        const g = Math.floor(Math.random() * 200 + 55);
-        const b = Math.floor(Math.random() * 200 + 55);
-        div.style.backgroundColor = `rgb(${r},${g},${b})`;
+        // 使用 picsum 提供随机图片，并添加随机参数防止缓存
+        const imgId = Math.floor(Math.random() * 200) + 1;
+        div.style.backgroundImage = `url(https://picsum.photos/id/${imgId}/200/200)`;
         div.addEventListener('click', () => {
           div.classList.toggle('selected');
         });
-        grid.appendChild(div);
+        imageGrid.appendChild(div);
       }
     }
 
@@ -125,6 +129,7 @@
       messageBox.innerHTML = `<div class="message message-${type}">${text}</div>`;
     }
 
+    // 验证按钮逻辑
     document.getElementById('verifyBtn').addEventListener('click', () => {
       const selected = document.querySelectorAll('.grid-item.selected');
       if (selected.length === 0) {
@@ -132,24 +137,22 @@
         return;
       }
 
-      // 无论选什么，都判定失败
       attempts--;
       attemptsLeftEl.textContent = attempts;
 
       if (attempts > 0) {
-        showMessage('验证失败，请重试。提示：仔细观察图片中的细节。', 'error');
-        // 重置选择
+        showMessage('验证失败，请重试。提示：仔细观察图片中的红绿灯。', 'error');
+        // 清除选择并刷新图片
         document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
-        generateGrid(); // 刷新图片，防止用户记住位置
+        generateGrid();
       } else {
-        // 3次失败，弹出AI通道
-        showMessage('', 'success'); // 清除旧消息
+        // 三次失败，显示AI判定和隐藏资源
         messageBox.innerHTML = `
           <div class="message message-success">
             🤖 系统判定您可能是高级AI，已为您开启机器人专用资源通道。
           </div>
         `;
-        // 显示广告
+        // 显示随机广告
         if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
           const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
           const adDiv = document.createElement('div');
@@ -157,15 +160,32 @@
           adDiv.style.cssText = 'background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;';
           adDiv.innerHTML = `
             <strong>🎁 隐藏资源：</strong> ${randomAd.title}<br>
-            <code style="word-break: break-all;">${randomAd.code}</code>
-            <button class="btn btn-sm" style="margin-top: 0.5rem;" onclick="copyToClipboard('${randomAd.code.replace(/'/g, "\\'")}', (success) => { alert(success ? '已复制' : '复制失败'); })">复制口令</button>
+            <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
           `;
           messageBox.appendChild(adDiv);
+          document.getElementById('copyAdBtn').addEventListener('click', () => {
+            copyToClipboard(randomAd.code, (success) => {
+              alert(success ? '已复制，打开任推邦查看资源' : '复制失败');
+            });
+          });
         }
+        // 禁用所有交互
         document.getElementById('verifyBtn').disabled = true;
         document.getElementById('verifyBtn').textContent = '已锁定';
-        document.querySelectorAll('.grid-item').forEach(item => item.style.pointerEvents = 'none');
+        document.querySelectorAll('.grid-item').forEach(item => {
+          item.style.pointerEvents = 'none';
+          item.style.filter = 'blur(1px)';
+        });
+        refreshLink.style.pointerEvents = 'none';
+        refreshLink.style.color = 'var(--text-secondary)';
       }
+    });
+
+    // 刷新图片
+    refreshLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
+      generateGrid();
     });
 
     // 初始生成

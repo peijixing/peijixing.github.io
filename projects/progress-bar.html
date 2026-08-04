@@ -52,7 +52,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="logo">oldpei<span>.site</span></div>
+<span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="../index.html" class="nav-link">← 返回实验室</a>
@@ -81,10 +81,9 @@
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
-  <script src="../assets/donate.js"></script>
 
   <script>
-    // 移动端汉堡菜单
+    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -128,16 +127,14 @@
       isPaused = false;
       statusText.textContent = '下载中...';
       timer = setInterval(() => {
-        // 特殊逻辑：如果进度达到99就停止，并且加速按钮反而会让进度倒着走
         if (progress >= 99) {
-          progress = 99; // 永远卡在99
+          progress = 99;
           clearTimer();
           statusText.textContent = '即将完成...';
           pauseBtn.disabled = true;
           cancelBtn.disabled = false;
           return;
         }
-        // 加速按钮实际让进度倒退（反逻辑）
         if (speedMultiplier < 0) {
           progress = Math.max(0, progress + speedMultiplier);
         } else {
@@ -167,7 +164,6 @@
 
     function cancelDownload() {
       clearTimer();
-      // 取消反而瞬间完成
       progress = 100;
       updateUI();
       statusText.textContent = '下载完成！';
@@ -180,7 +176,7 @@
 
     function toggleSpeed() {
       if (speedMultiplier === 1) {
-        speedMultiplier = -1; // 改为倒退
+        speedMultiplier = -1;
         speedBtn.textContent = '减速';
         speedBtn.style.backgroundColor = 'var(--accent-red)';
         statusText.textContent = '加速模式启动（实际效果：倒退）';
@@ -204,7 +200,7 @@
       `;
       document.getElementById('copyAdBtn').addEventListener('click', () => {
         copyToClipboard(randomAd.code, (success) => {
-          alert(success ? '已复制，打开任推邦查看资源' : '复制失败，请手动复制');
+          alert(success ? '已复制，打开任推邦查看资源' : '复制失败');
         });
       });
     }
@@ -220,7 +216,6 @@
     cancelBtn.addEventListener('click', cancelDownload);
     speedBtn.addEventListener('click', toggleSpeed);
 
-    // 初始状态
     updateUI();
   </script>
 </body>

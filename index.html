@@ -8,7 +8,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="logo">oldpei<span>.site</span></div>
+    <span class="navbar-brand">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="resources.html" class="nav-link">📡 资源补给站</a>
@@ -17,7 +17,6 @@
   </nav>
 
   <div class="container">
-    <h1 class="page-title">// 离谱发明实验室</h1>
     <p class="page-subtitle">以下所有项目均通过国际反逻辑认证，请谨慎体验。</p>
 
     <div class="card-grid">
@@ -27,19 +26,36 @@
         <div class="card-desc">你的密码必须全球唯一，重复就会被公开处刑。</div>
         <div class="card-footer">进入 →</div>
       </a>
-      <!-- 未来可继续添加卡片 -->
       <a href="projects/human-verification.html" class="card">
-  <div class="card-icon">🤖</div>
-  <div class="card-title">人类审核机器局</div>
-  <div class="card-desc">证明你是人类，但你永远通不过验证。</div>
-  <div class="card-footer">进入 →</div>
-</a>
-<a href="projects/progress-bar.html" class="card">
-  <div class="card-icon">⏳</div>
-  <div class="card-title">反逻辑进度条生成器</div>
-  <div class="card-desc">下载进度永远停在99%，取消反而瞬间完成。</div>
-  <div class="card-footer">进入 →</div>
-</a>
+        <div class="card-icon">🤖</div>
+        <div class="card-title">人类审核机器局</div>
+        <div class="card-desc">证明你是人类，但你永远通不过验证。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <a href="projects/progress-bar.html" class="card">
+        <div class="card-icon">⏳</div>
+        <div class="card-title">反逻辑进度条生成器</div>
+        <div class="card-desc">下载进度永远停在99%，取消反而瞬间完成。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <a href="projects/slide-verify.html" class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">捉迷藏滑块验证</div>
+        <div class="card-desc">滑块验证弹窗会跟着鼠标跑，永远无法完成。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+    </div>
+
+    <!-- 捐赠卡片 -->
+    <div class="donate-card" id="donateCard">
+      <div class="donate-card-inner">
+        <span class="donate-icon">❤️</span>
+        <div>
+          <div class="donate-title">支持离谱发明实验室</div>
+          <div class="donate-sub">如果你被逗笑了，请我喝杯咖啡吧 ☕</div>
+        </div>
+        <button class="btn donate-open-btn">赞赏一下</button>
+      </div>
     </div>
   </div>
 
@@ -47,9 +63,8 @@
   <script src="assets/utils.js"></script>
   <script src="assets/ad-banner.js"></script>
   <script src="assets/donate.js"></script>
+
   <script>
-  
-    // 移动端汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {

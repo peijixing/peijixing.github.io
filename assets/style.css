@@ -74,7 +74,7 @@ a:hover {
   text-decoration: none;
 }
 
-/* 汉堡菜单按钮（移动端显示） */
+/* 汉堡菜单 */
 .menu-toggle {
   display: none;
   background: none;
@@ -163,7 +163,7 @@ a:hover {
   transition: background-color 0.2s;
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  min-height: 44px; /* 触摸友好 */
+  min-height: 44px;
   min-width: 44px;
 }
 .btn:hover {
@@ -195,7 +195,7 @@ a:hover {
   font-family: var(--font-sans);
   font-size: 1rem;
   transition: border-color 0.2s;
-  min-height: 44px; /* 触摸友好 */
+  min-height: 44px;
 }
 .form-input:focus {
   outline: none;
@@ -221,7 +221,7 @@ a:hover {
   color: var(--accent-green);
 }
 
-/* ========== 子页面返回链接 ========== */
+/* ========== 返回链接 ========== */
 .back-link {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -274,6 +274,7 @@ a:hover {
   color: var(--accent-green);
   border: 1px solid var(--border-color);
   word-break: break-all;
+  white-space: pre-line;
   user-select: all;
 }
 .ad-copy-btn {
@@ -369,6 +370,7 @@ a:hover {
   flex-wrap: wrap;
 }
 .resource-code-block code {
+  white-space: pre-line;
   background-color: var(--bg-primary);
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
@@ -386,11 +388,128 @@ a:hover {
   white-space: nowrap;
 }
 
-/* =================================== */
-/* ========== 响应式设计 ========== */
-/* =================================== */
+/* ========== 捐赠卡片（首页醒目展示） ========== */
+.donate-card {
+  background: linear-gradient(135deg, rgba(88,166,255,0.1), rgba(63,185,80,0.1));
+  border: 2px solid var(--accent-blue);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.donate-card:hover {
+  background: linear-gradient(135deg, rgba(88,166,255,0.15), rgba(63,185,80,0.15));
+  box-shadow: 0 0 20px rgba(88,166,255,0.2);
+}
+.donate-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+.donate-icon {
+  font-size: 2.5rem;
+}
+.donate-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+.donate-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.donate-open-btn {
+  background-color: var(--accent-green);
+  border: none;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.donate-open-btn:hover {
+  background-color: #2c974b;
+}
 
-/* 平板及手机横屏 */
+/* 捐赠弹窗 */
+.donate-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.75);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.donate-overlay.active {
+  display: flex;
+}
+.donate-modal {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+.donate-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1;
+}
+.donate-close:hover {
+  color: var(--accent-red);
+}
+.donate-modal h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+.donate-qr-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+.donate-qr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.donate-qr-item img {
+  width: 140px;
+  height: 140px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  object-fit: contain;
+  background-color: #fff;
+}
+.donate-qr-item span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.donate-tip {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ========== 响应式设计 ========== */
 @media (max-width: 768px) {
   .navbar {
     padding: 0.8rem 1.2rem;
@@ -418,7 +537,6 @@ a:hover {
     padding: 0.5rem 0;
     width: 100%;
   }
-
   .page-title {
     font-size: 1.6rem;
   }
@@ -426,11 +544,9 @@ a:hover {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
   }
-
   .card-grid {
     grid-template-columns: 1fr;
   }
-
   .ad-banner-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -443,18 +559,19 @@ a:hover {
   .ad-dots {
     align-self: flex-end;
   }
-
   .resource-card {
     flex-direction: column;
     align-items: flex-start;
   }
-
   .container {
     padding: 1.5rem 1rem;
   }
+  .donate-card-inner {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
 }
 
-/* 小型手机 */
 @media (max-width: 480px) {
   .logo {
     font-size: 1rem;
@@ -468,125 +585,16 @@ a:hover {
   }
   .ad-copy-btn {
     width: auto;
-    align-self: flex-start;
-  }
-}
-
-/* ========== 打赏组件样式 ========== */
-.donate-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--bg-secondary);
-  border: 2px solid var(--accent-blue);
-  color: var(--accent-blue);
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 998;
-  box-shadow: var(--shadow);
-  transition: transform 0.2s, background-color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.donate-btn:hover {
-  transform: scale(1.1);
-  background-color: var(--accent-blue);
-  color: #fff;
-}
-
-.donate-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-.donate-overlay.active {
-  display: flex;
-}
-
-.donate-modal {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 2rem;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-}
-.donate-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  line-height: 1;
-}
-.donate-close:hover {
-  color: var(--accent-red);
-}
-.donate-modal h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-}
-.donate-sub {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-.donate-qr-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-.donate-qr-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.donate-qr-item img {
-  width: 140px;
-  height: 140px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  object-fit: contain;
-  background-color: #fff; /* 二维码透明背景不显示，需要白底 */
-}
-.donate-qr-item span {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-.donate-tip {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-}
-
-/* 移动端调整 */
-@media (max-width: 480px) {
-  .donate-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-  }
-  .donate-modal {
-    padding: 1.5rem;
   }
   .donate-qr-item img {
     width: 120px;
     height: 120px;
   }
+}
+/* 首页导航品牌文字 */
+.navbar-brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 1px;
+}

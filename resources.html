@@ -6,7 +6,6 @@
   <title>资源补给站 | oldpei.site</title>
   <link rel="stylesheet" href="assets/style.css">
   <style>
-    /* 确保代码块支持换行显示 */
     .resource-code-block code {
       white-space: pre-line;
     }
@@ -14,7 +13,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="logo">oldpei<span>.site</span></div>
+<span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html" class="nav-link">← 返回实验室</a>
@@ -27,11 +26,9 @@
     <div id="resourceList"></div>
   </div>
 
-  <!-- 依赖库 -->
   <script src="assets/ads.js"></script>
   <script src="assets/utils.js"></script>
   <script src="assets/ad-banner.js"></script>
-
   <script>
     // 移动端汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
@@ -47,15 +44,14 @@
       });
     }
 
-    // 确保 AD_LIST 存在后再渲染
+    // 渲染资源列表
     function renderResources() {
       const container = document.getElementById('resourceList');
       if (typeof AD_LIST === 'undefined' || !Array.isArray(AD_LIST) || AD_LIST.length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary);">暂无资源，请稍后再来。</p>';
         return;
       }
-
-      container.innerHTML = ''; // 清空
+      container.innerHTML = '';
       AD_LIST.forEach(ad => {
         const card = document.createElement('div');
         card.className = 'resource-card';
@@ -73,7 +69,6 @@
         container.appendChild(card);
       });
 
-      // 绑定复制事件
       document.querySelectorAll('.copy-resource-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const code = this.getAttribute('data-code');
@@ -85,16 +80,12 @@
                 this.textContent = '复制';
                 this.classList.remove('copied');
               }, 1500);
-            } else {
-              alert('复制失败，请手动复制');
             }
           });
         });
       });
     }
 
-    // 页面加载完后渲染
     window.addEventListener('DOMContentLoaded', renderResources);
   </script>
 </body>
-</html>
