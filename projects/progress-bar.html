@@ -52,7 +52,7 @@
 </head>
 <body>
   <nav class="navbar">
-<span class="logo">离谱发明实验室</span>
+    <span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="../index.html" class="nav-link">← 返回实验室</a>
@@ -83,7 +83,6 @@
   <script src="../assets/ad-banner.js"></script>
 
   <script>
-    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -194,13 +193,12 @@
         <div class="message" style="background-color: rgba(63,185,80,0.1); border-color: var(--accent-green);">
           🎉 下载完成！你获得了一份隐藏资源：<br>
           <strong>${randomAd.title}</strong><br>
-          <code style="word-break: break-all;">${randomAd.code}</code>
           <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
         </div>
       `;
       document.getElementById('copyAdBtn').addEventListener('click', () => {
         copyToClipboard(randomAd.code, (success) => {
-          alert(success ? '已复制，打开任推邦查看资源' : '复制失败');
+          alert(success ? '已复制，请到对应的 App 查看' : '复制失败');
         });
       });
     }

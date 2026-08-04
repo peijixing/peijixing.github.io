@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>人类审核机器局 | oldpei.site</title>
+  <title>人类审核机器局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
   <style>
     .verification-box {
@@ -13,6 +13,7 @@
       padding: 2rem;
       max-width: 500px;
       margin: 2rem auto;
+      width: 90%;
     }
     .grid-container {
       display: grid;
@@ -21,7 +22,7 @@
       margin: 1.5rem 0;
     }
     .grid-item {
-      aspect-ratio: 1;
+      aspect-ratio: 1 / 1;
       background-size: cover;
       background-position: center;
       border: 2px solid var(--border-color);
@@ -35,7 +36,6 @@
       filter: blur(0px) brightness(1.1);
       box-shadow: 0 0 0 3px rgba(88,166,255,0.5);
     }
-    /* 鼠标悬停时略微清晰 */
     .grid-item:hover {
       filter: blur(1px) brightness(0.95);
     }
@@ -54,11 +54,71 @@
       font-size: 0.85rem;
       margin-top: 0.5rem;
     }
+
+    /* 广告彩蛋弹窗 */
+    .easter-egg-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .easter-egg-overlay.active {
+      display: flex;
+    }
+    .easter-egg-modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--accent-blue);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(88,166,255,0.3);
+    }
+    .easter-egg-modal h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .easter-egg-modal p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .easter-egg-modal .resource-title {
+      color: var(--accent-green);
+      font-weight: 600;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+    .easter-egg-modal .btn {
+      margin-top: 1rem;
+    }
+    .easter-egg-modal .close-egg {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      text-decoration: underline;
+    }
+    @media (max-width: 480px) {
+      .verification-box {
+        padding: 1.5rem;
+      }
+      .grid-container {
+        gap: 0.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <nav class="navbar">
-<span class="logo">离谱发明实验室</span>
+    <span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="../index.html" class="nav-link">← 返回实验室</a>
@@ -83,12 +143,23 @@
     </div>
   </div>
 
+  <!-- 广告彩蛋弹窗 -->
+  <div class="easter-egg-overlay" id="easterEggOverlay">
+    <div class="easter-egg-modal">
+      <h3>🤖 系统判定：您是高级AI</h3>
+      <p>作为奖励，您获得了一份隐藏资源</p>
+      <div class="resource-title" id="eggResourceTitle"></div>
+      <button class="btn" id="eggCopyBtn">📋 复制口令</button>
+      <br>
+      <button class="close-egg" id="closeEggBtn">关闭，继续当人类</button>
+    </div>
+  </div>
+
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
 
   <script>
-    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -108,14 +179,18 @@
     const imageGrid = document.getElementById('imageGrid');
     const refreshLink = document.getElementById('refreshLink');
 
-    // 生成随机图片网格（使用 picsum 占位图，模拟真实物体）
+    // 广告弹窗相关元素
+    const easterEggOverlay = document.getElementById('easterEggOverlay');
+    const eggResourceTitle = document.getElementById('eggResourceTitle');
+    const eggCopyBtn = document.getElementById('eggCopyBtn');
+    const closeEggBtn = document.getElementById('closeEggBtn');
+    let currentAd = null;
+
     function generateGrid() {
       imageGrid.innerHTML = '';
-      // 使用不同的随机参数确保图片不同
       for (let i = 0; i < 9; i++) {
         const div = document.createElement('div');
         div.className = 'grid-item';
-        // 使用 picsum 提供随机图片，并添加随机参数防止缓存
         const imgId = Math.floor(Math.random() * 200) + 1;
         div.style.backgroundImage = `url(https://picsum.photos/id/${imgId}/200/200)`;
         div.addEventListener('click', () => {
@@ -129,47 +204,55 @@
       messageBox.innerHTML = `<div class="message message-${type}">${text}</div>`;
     }
 
-    // 验证按钮逻辑
+    function showEasterEgg(ad) {
+      if (!ad) return;
+      currentAd = ad;
+      eggResourceTitle.textContent = ad.title;
+      easterEggOverlay.classList.add('active');
+    }
+
+    function hideEasterEgg() {
+      easterEggOverlay.classList.remove('active');
+    }
+
+    // 复制口令按钮
+    eggCopyBtn.addEventListener('click', () => {
+      if (currentAd) {
+        copyToClipboard(currentAd.code, (success) => {
+          if (success) {
+            eggCopyBtn.textContent = '✅ 已复制';
+            setTimeout(() => {
+              eggCopyBtn.textContent = '📋 复制口令';
+            }, 2000);
+          } else {
+            alert('复制失败，请手动复制');
+          }
+        });
+      }
+    });
+
+    // 关闭弹窗
+    closeEggBtn.addEventListener('click', hideEasterEgg);
+    easterEggOverlay.addEventListener('click', (e) => {
+      if (e.target === easterEggOverlay) hideEasterEgg();
+    });
+
     document.getElementById('verifyBtn').addEventListener('click', () => {
       const selected = document.querySelectorAll('.grid-item.selected');
       if (selected.length === 0) {
         showMessage('请至少选择一个图片。', 'error');
         return;
       }
-
       attempts--;
       attemptsLeftEl.textContent = attempts;
 
       if (attempts > 0) {
         showMessage('验证失败，请重试。提示：仔细观察图片中的红绿灯。', 'error');
-        // 清除选择并刷新图片
         document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
         generateGrid();
       } else {
-        // 三次失败，显示AI判定和隐藏资源
-        messageBox.innerHTML = `
-          <div class="message message-success">
-            🤖 系统判定您可能是高级AI，已为您开启机器人专用资源通道。
-          </div>
-        `;
-        // 显示随机广告
-        if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
-          const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
-          const adDiv = document.createElement('div');
-          adDiv.className = 'message';
-          adDiv.style.cssText = 'background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;';
-          adDiv.innerHTML = `
-            <strong>🎁 隐藏资源：</strong> ${randomAd.title}<br>
-            <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
-          `;
-          messageBox.appendChild(adDiv);
-          document.getElementById('copyAdBtn').addEventListener('click', () => {
-            copyToClipboard(randomAd.code, (success) => {
-              alert(success ? '已复制，打开任推邦查看资源' : '复制失败');
-            });
-          });
-        }
-        // 禁用所有交互
+        // 三次失败，锁定页面
+        showMessage('🤖 系统判定您可能是高级AI，验证已锁定。', 'error');
         document.getElementById('verifyBtn').disabled = true;
         document.getElementById('verifyBtn').textContent = '已锁定';
         document.querySelectorAll('.grid-item').forEach(item => {
@@ -178,17 +261,21 @@
         });
         refreshLink.style.pointerEvents = 'none';
         refreshLink.style.color = 'var(--text-secondary)';
+
+        // 弹出广告彩蛋
+        if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
+          const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
+          showEasterEgg(randomAd);
+        }
       }
     });
 
-    // 刷新图片
     refreshLink.addEventListener('click', (e) => {
       e.preventDefault();
       document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
       generateGrid();
     });
 
-    // 初始生成
     generateGrid();
   </script>
 </body>

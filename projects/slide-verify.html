@@ -2,11 +2,10 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>捉迷藏滑块验证 | oldpei.site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>捉迷藏滑块验证 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
   <style>
-    /* 登录容器 */
     .login-box {
       background-color: var(--bg-secondary);
       border: 1px solid var(--border-color);
@@ -20,7 +19,6 @@
       margin-top: 1rem;
     }
 
-    /* 滑块验证弹窗 */
     .verify-overlay {
       display: none;
       position: fixed;
@@ -35,19 +33,19 @@
       display: flex;
     }
     .verify-box {
-      position: absolute; /* 关键：绝对定位，允许随意移动 */
+      position: absolute;
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
       padding: 1.5rem;
-      width: 320px;
+      width: 90%;
+      max-width: 360px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      cursor: grab;
       user-select: none;
       -webkit-user-select: none;
-    }
-    .verify-box:active {
-      cursor: grabbing;
+      touch-action: none;
+      cursor: default;
+      transition: none;
     }
     .verify-title {
       font-weight: 600;
@@ -60,13 +58,12 @@
       background: none;
       border: none;
       color: var(--text-secondary);
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       cursor: pointer;
       padding: 0 5px;
+      line-height: 1;
     }
-    .close-btn:hover {
-      color: var(--accent-red);
-    }
+    .close-btn:hover { color: var(--accent-red); }
 
     .slider-track {
       background: var(--bg-primary);
@@ -82,7 +79,7 @@
       width: 0%;
       background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
       border-radius: 20px;
-      transition: width 0.1s;
+      transition: none;
     }
     .slider-btn {
       position: absolute;
@@ -95,8 +92,9 @@
       justify-content: center;
       color: white;
       font-size: 1.2rem;
-      transition: left 0.05s;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      touch-action: none;
+      z-index: 2;
     }
     .verify-hint {
       text-align: center;
@@ -110,12 +108,24 @@
       color: var(--accent-red);
       min-height: 1.5em;
     }
+    .give-up-btn {
+      display: block;
+      margin: 0.8rem auto 0;
+      padding: 0.3rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--text-secondary);
+      color: var(--text-secondary);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .give-up-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
   </style>
 </head>
 <body>
   <nav class="navbar">
-<span class="logo">离谱发明实验室</span>
-    <button ="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <span class="logo">离谱发明实验室</span>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="../index.html" class="nav-link">← 返回实验室</a>
     </div>
@@ -139,7 +149,6 @@
     </div>
   </div>
 
-  <!-- 滑块验证弹窗 -->
   <div class="verify-overlay" id="verifyOverlay">
     <div class="verify-box" id="verifyBox">
       <div class="verify-title">
@@ -151,8 +160,9 @@
         <div class="slider-fill" id="sliderFill"></div>
         <div class="slider-btn" id="sliderBtn">→</div>
       </div>
-      <div class="verify-hint">拖不动？试试把鼠标移远一点</div>
+      <div class="verify-hint">拖到30%后弹窗会逃跑，快完成时还会自动重置</div>
       <div class="verify-status" id="verifyStatus"></div>
+      <button class="give-up-btn" id="giveUpBtn">放弃验证（直接获取彩蛋）</button>
     </div>
   </div>
 
@@ -175,27 +185,21 @@
       });
     }
 
-    // 登录逻辑
+    // ========== 验证逻辑 ==========
     let verifyFailCount = 0;
     const loginBtn = document.getElementById('loginBtn');
     const loginMsg = document.getElementById('loginMsg');
-    
+
     loginBtn.addEventListener('click', () => {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
       if (!username || !password) {
-        showLoginMsg('请输入用户名和密码', 'error');
+        loginMsg.innerHTML = '<div class="message message-error">请输入用户名和密码</div>';
         return;
       }
-      // 弹出验证弹窗
       showVerify();
     });
 
-    function showLoginMsg(text, type) {
-      loginMsg.innerHTML = `<div class="message message-${type}">${text}</div>`;
-    }
-
-    // ========== 捉迷藏弹窗逻辑 ==========
     const overlay = document.getElementById('verifyOverlay');
     const verifyBox = document.getElementById('verifyBox');
     const closeVerifyBtn = document.getElementById('closeVerifyBtn');
@@ -203,22 +207,29 @@
     const sliderFill = document.getElementById('sliderFill');
     const sliderTrack = document.getElementById('sliderTrack');
     const verifyStatus = document.getElementById('verifyStatus');
+    const giveUpBtn = document.getElementById('giveUpBtn');
 
-    let isDraggingWindow = false;
-    let startMouseX, startMouseY;
-    let startBoxX, startBoxY;
+    let isDragging = false;
+    let startDragX = 0, startDragY = 0;
+    let initialSliderLeft = 0;
+    let initialBoxLeft = 0, initialBoxTop = 0;
+    let boxMoved = false;
 
     function showVerify() {
-      // 重置弹窗位置到中心
       verifyBox.style.left = '50%';
       verifyBox.style.top = '50%';
       verifyBox.style.transform = 'translate(-50%, -50%)';
-      // 重置滑块
-      sliderBtn.style.left = '0';
-      sliderFill.style.width = '0';
+      verifyBox.style.pointerEvents = 'auto';
+      sliderBtn.style.left = '0px';
+      sliderFill.style.width = '0%';
       verifyStatus.textContent = '';
       overlay.classList.add('active');
       verifyFailCount = 0;
+      // 重新显示滑块区域（如果之前隐藏）
+      sliderTrack.style.display = 'block';
+      verifyBox.querySelector('p').style.display = 'block';
+      document.querySelector('.verify-hint').style.display = 'block';
+      giveUpBtn.style.display = 'block';
     }
 
     function hideVerify() {
@@ -230,141 +241,193 @@
       hideVerify();
     });
 
-    // 阻止滑块按钮上的事件冒泡（但我们需要在弹窗上全局监听移动）
-    sliderBtn.addEventListener('mousedown', (e) => {
-      e.stopPropagation(); // 防止触发弹窗拖拽？ 不，我们希望弹窗也移动，所以不能阻止冒泡
-      // 实际上，当用户点击滑块按钮时，自然会触发弹窗的mousedown，所以整个弹窗开始跟随鼠标
+    giveUpBtn.addEventListener('click', () => {
+      verifyStatus.innerHTML = '你放弃了验证，AI 判定已生效。';
+      showPermanentAd();
     });
 
-    // 弹窗整体监听mousedown，实现拖拽移动
-    verifyBox.addEventListener('mousedown', function(e) {
-      // 如果点击的是关闭按钮，不启动拖拽
-      if (e.target === closeVerifyBtn) return;
-      isDraggingWindow = true;
-      
-      // 记录鼠标起始位置
-      startMouseX = e.clientX;
-      startMouseY = e.clientY;
-      
-      // 获取弹窗当前计算后的位置（去掉transform）
+    // 获取滑块当前进度 0-100
+    function getProgress() {
+      const trackWidth = sliderTrack.clientWidth - sliderBtn.offsetWidth;
+      const left = parseFloat(sliderBtn.style.left) || 0;
+      return (left / trackWidth) * 100;
+    }
+
+    // 设置滑块位置（left px），同时更新填充
+    function setSliderLeft(px) {
+      const trackWidth = sliderTrack.clientWidth - sliderBtn.offsetWidth;
+      const clamped = Math.min(trackWidth, Math.max(0, px));
+      sliderBtn.style.left = clamped + 'px';
+      sliderFill.style.width = (clamped / trackWidth * 100) + '%';
+    }
+
+    // ========== 核心：滑块拖拽 + 弹窗弹性逃逸 ==========
+    function onDragStart(e) {
+      if (e.target !== sliderBtn) return;
+      e.preventDefault();
+      isDragging = true;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      startDragX = clientX;
+      startDragY = clientY;
+      initialSliderLeft = parseFloat(sliderBtn.style.left) || 0;
       const rect = verifyBox.getBoundingClientRect();
-      startBoxX = rect.left;
-      startBoxY = rect.top;
-      
-      // 移除可能存在的 transform，改用 left/top
+      initialBoxLeft = rect.left;
+      initialBoxTop = rect.top;
       verifyBox.style.transform = 'none';
       verifyBox.style.left = rect.left + 'px';
       verifyBox.style.top = rect.top + 'px';
-      
+      boxMoved = false;
+    }
+
+    function onDragMove(e) {
+      if (!isDragging) return;
       e.preventDefault();
-    });
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const dx = clientX - startDragX;
+      const dy = clientY - startDragY;
 
-    // 触摸事件支持
-    verifyBox.addEventListener('touchstart', function(e) {
-      if (e.target === closeVerifyBtn) return;
-      isDraggingWindow = true;
-      const touch = e.touches[0];
-      startMouseX = touch.clientX;
-      startMouseY = touch.clientY;
-      const rect = verifyBox.getBoundingClientRect();
-      startBoxX = rect.left;
-      startBoxY = rect.top;
-      verifyBox.style.transform = 'none';
-      verifyBox.style.left = rect.left + 'px';
-      verifyBox.style.top = rect.top + 'px';
-      e.preventDefault();
-    }, { passive: false });
+      // 1. 更新滑块位置（完全跟手）
+      const trackWidth = sliderTrack.clientWidth - sliderBtn.offsetWidth;
+      let newLeft = initialSliderLeft + dx;
+      newLeft = Math.min(trackWidth, Math.max(0, newLeft));
+      sliderBtn.style.left = newLeft + 'px';
+      const progress = (newLeft / trackWidth) * 100;
+      sliderFill.style.width = progress + '%';
 
-    // 全局移动
-    document.addEventListener('mousemove', function(e) {
-      if (!isDraggingWindow) return;
-      const dx = e.clientX - startMouseX;
-      const dy = e.clientY - startMouseY;
-      verifyBox.style.left = (startBoxX + dx) + 'px';
-      verifyBox.style.top = (startBoxY + dy) + 'px';
+      // 2. 弹窗逃逸逻辑
+      if (progress >= 30) {
+        // 弹窗基础移动量 = 手指位移
+        let moveX = dx;
+        let moveY = dy;
 
-      // 滑块假装有进度（实际上始终不会到终点，但可以给点错觉）
-      // 我们可以让滑块填充随机变动，制造“正在验证”的假象，但最后一定失败
-      const fakeProgress = Math.min(95, Math.floor(Math.random() * 60));
-      sliderFill.style.width = fakeProgress + '%';
-      sliderBtn.style.left = (fakeProgress * 0.85) + '%'; // 永远到不了100%
-    });
+        // 加速因子：进度越高，弹窗逃逸越快
+        const speedMultiplier = 1 + (progress - 30) / 50; // 1 到 2.4 倍
+        moveX *= speedMultiplier;
+        moveY *= speedMultiplier;
 
-    document.addEventListener('touchmove', function(e) {
-      if (!isDraggingWindow) return;
-      const touch = e.touches[0];
-      const dx = touch.clientX - startMouseX;
-      const dy = touch.clientY - startMouseY;
-      verifyBox.style.left = (startBoxX + dx) + 'px';
-      verifyBox.style.top = (startBoxY + dy) + 'px';
-      const fakeProgress = Math.min(95, Math.floor(Math.random() * 60));
-      sliderFill.style.width = fakeProgress + '%';
-      sliderBtn.style.left = (fakeProgress * 0.85) + '%';
-      e.preventDefault();
-    }, { passive: false });
+        let newBoxX = initialBoxLeft + moveX;
+        let newBoxY = initialBoxTop + moveY;
 
-    // 松开鼠标
-    document.addEventListener('mouseup', function() {
-      if (isDraggingWindow) {
-        isDraggingWindow = false;
-        // 验证总是失败，因为滑块从未到终点
+        const boxW = verifyBox.offsetWidth;
+        const boxH = verifyBox.offsetHeight;
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+
+        // 边界弹性：如果碰到边缘，反弹并加大移动量，防止卡边
+        const margin = 20;
+        if (newBoxX < margin) {
+          newBoxX = margin;
+          // 反弹效果：重置参考点，让滑块更难继续
+          boxMoved = true;
+          initialBoxLeft = newBoxX;
+          initialBoxTop = newBoxY;
+          startDragX = clientX;
+          startDragY = clientY;
+          initialSliderLeft = newLeft;
+        } else if (newBoxX + boxW > screenW - margin) {
+          newBoxX = screenW - boxW - margin;
+          boxMoved = true;
+          initialBoxLeft = newBoxX;
+          initialBoxTop = newBoxY;
+          startDragX = clientX;
+          startDragY = clientY;
+          initialSliderLeft = newLeft;
+        }
+
+        if (newBoxY < margin) {
+          newBoxY = margin;
+          boxMoved = true;
+          initialBoxLeft = newBoxX;
+          initialBoxTop = newBoxY;
+          startDragX = clientX;
+          startDragY = clientY;
+          initialSliderLeft = newLeft;
+        } else if (newBoxY + boxH > screenH - margin) {
+          newBoxY = screenH - boxH - margin;
+          boxMoved = true;
+          initialBoxLeft = newBoxX;
+          initialBoxTop = newBoxY;
+          startDragX = clientX;
+          startDragY = clientY;
+          initialSliderLeft = newLeft;
+        }
+
+        verifyBox.style.left = newBoxX + 'px';
+        verifyBox.style.top = newBoxY + 'px';
+      }
+
+      // 3. 快完成时自动重置（永远别想成功）
+      if (progress > 92) {
+        // 强行重置滑块，制造失败
+        isDragging = false;
+        verifyStatus.textContent = '即将完成…但验证好像又跑了！';
+        setSliderLeft(0);
+        // 弹窗随机弹跳
+        const randX = Math.random() * (window.innerWidth - verifyBox.offsetWidth);
+        const randY = Math.random() * (window.innerHeight - verifyBox.offsetHeight);
+        verifyBox.style.left = randX + 'px';
+        verifyBox.style.top = randY + 'px';
         verifyFailCount++;
         if (verifyFailCount >= 3) {
-          // 三次失败后展示彩蛋
-          showVerificationFailedPermanently();
-        } else {
-          verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）';
-          // 重置滑块
-          sliderBtn.style.left = '0';
-          sliderFill.style.width = '0';
+          verifyStatus.innerHTML = '验证失败次数过多。';
+          showPermanentAd();
         }
-      }
-    });
-
-    document.addEventListener('touchend', function() {
-      if (isDraggingWindow) {
-        isDraggingWindow = false;
-        verifyFailCount++;
-        if (verifyFailCount >= 3) {
-          showVerificationFailedPermanently();
-        } else {
-          verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）';
-          sliderBtn.style.left = '0';
-          sliderFill.style.width = '0';
-        }
-      }
-    });
-
-    function showVerificationFailedPermanently() {
-      verifyStatus.innerHTML = '🤖 人类验证已放弃，您可能是AI。';
-      // 禁用弹窗拖拽
-      isDraggingWindow = false;
-      verifyBox.style.pointerEvents = 'none';
-      // 显示隐藏资源
-      const adContainer = document.createElement('div');
-      adContainer.style.marginTop = '1rem';
-      if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
-        const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
-        adContainer.innerHTML = `
-          <div class="message" style="background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue);">
-            <strong>🎁 AI专属隐藏资源：</strong> ${randomAd.title}<br>
-            <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
-          </div>
-        `;
-        verifyBox.appendChild(adContainer);
-        document.getElementById('copyAdBtn').addEventListener('click', () => {
-          copyToClipboard(randomAd.code, (success) => {
-            alert(success ? '已复制，打开任推邦查看资源' : '复制失败');
-          });
-        });
       }
     }
 
-    // 点击遮罩关闭（但弹窗已经跑了可能点不到，还是提供关闭按钮）
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        hideVerify();
+    function onDragEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      // 如果没有触发自动重置，正常结束也视为失败
+      const progress = getProgress();
+      if (progress < 92 && verifyFailCount < 3) {
+        verifyFailCount++;
+        if (verifyFailCount >= 3) {
+          verifyStatus.innerHTML = '验证失败次数过多。';
+          showPermanentAd();
+        } else {
+          verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）';
+          setSliderLeft(0);
+        }
       }
+    }
+
+    // 事件绑定
+    sliderBtn.addEventListener('mousedown', onDragStart);
+    sliderBtn.addEventListener('touchstart', onDragStart, { passive: false });
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('touchmove', onDragMove, { passive: false });
+    document.addEventListener('mouseup', onDragEnd);
+    document.addEventListener('touchend', onDragEnd);
+
+    function showPermanentAd() {
+      verifyBox.style.pointerEvents = 'none';
+      if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
+        const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
+        const adDiv = document.createElement('div');
+        adDiv.className = 'message';
+        adDiv.style.cssText = 'background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem; pointer-events: auto;';
+        adDiv.innerHTML = `
+          <strong>🎁 AI专属隐藏资源：</strong> ${randomAd.title}<br>
+          <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
+        `;
+        verifyBox.appendChild(adDiv);
+        document.getElementById('copyAdBtn').addEventListener('click', () => {
+          copyToClipboard(randomAd.code, (success) => {
+            alert(success ? '已复制，请到对应的 App 查看' : '复制失败');
+          });
+        });
+      }
+      sliderTrack.style.display = 'none';
+      verifyBox.querySelector('p').style.display = 'none';
+      document.querySelector('.verify-hint').style.display = 'none';
+      giveUpBtn.style.display = 'none';
+    }
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) hideVerify();
     });
   </script>
 </body>
