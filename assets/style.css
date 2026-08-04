@@ -598,3 +598,70 @@ a:hover {
   color: var(--accent-blue);
   letter-spacing: 1px;
 }
+.biz-tagline {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(88,166,255,0.05);
+  border-radius: 20px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.biz-tagline a {
+  color: var(--accent-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+.biz-tagline a:hover {
+  text-decoration: underline;
+}
+
+/* 移动端换行 */
+@media (max-width: 480px) {
+  .biz-tagline {
+    white-space: normal;
+    padding: 0.5rem;
+  }
+}
+/* 微信号复制区域 */
+.wechat-id-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.wechat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.wechat-id {
+  background-color: var(--bg-primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  color: var(--accent-green);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+.copy-wechat-btn {
+  min-height: 32px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+  .wechat-id-box {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}

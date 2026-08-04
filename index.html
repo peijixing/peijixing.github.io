@@ -5,10 +5,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>离谱发明实验室 | oldpei.site</title>
   <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* 业务标语 */
+    .biz-tagline {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: rgba(88,166,255,0.05);
+      border-radius: 20px;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .biz-tagline a {
+      color: var(--accent-blue);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .biz-tagline a:hover {
+      text-decoration: underline;
+    }
+
+    /* 联系弹窗 */
+    .contact-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.75);
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+    }
+    .contact-overlay.active {
+      display: flex;
+    }
+    .contact-modal {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 300px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .contact-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .contact-close:hover {
+      color: var(--accent-red);
+    }
+    .contact-modal h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .contact-modal p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .contact-modal img {
+      width: 200px;
+      height: 200px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      object-fit: contain;
+      background-color: #fff;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 480px) {
+      .biz-tagline {
+        white-space: normal;
+        padding: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
-    <span class="navbar-brand">离谱发明实验室</span>
+    <span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="resources.html" class="nav-link">📡 资源补给站</a>
@@ -17,9 +108,17 @@
   </nav>
 
   <div class="container">
+    <h1 class="page-title">// 离谱发明实验室</h1>
     <p class="page-subtitle">以下所有项目均通过国际反逻辑认证，请谨慎体验。</p>
 
+    <!-- 业务标语 -->
+    <div class="biz-tagline">
+      💼 承接网页 / 小程序定制，有趣的想法我们一起实现 → 
+      <a id="contactLink">联系我</a>
+    </div>
+
     <div class="card-grid">
+      <!-- 四个卡片保持不变，此处省略 -->
       <a href="projects/password-unique.html" class="card">
         <div class="card-icon">🔐</div>
         <div class="card-title">密码绝不同款注册局</div>
@@ -59,12 +158,31 @@
     </div>
   </div>
 
+<!-- 微信联系弹窗 -->
+<div class="contact-overlay" id="contactOverlay">
+  <div class="contact-modal">
+    <div class="contact-close" id="contactClose">✕</div>
+    <h3>🤝 扫码添加微信</h3>
+    <p>聊想法、谈合作，备注“离谱实验室”</p>
+    <img src="assets/images/wechat-contact.png" alt="微信二维码">
+    <!-- 手机端友好：显示微信号 + 复制按钮 -->
+    <div class="wechat-id-box">
+      <span class="wechat-label">微信号：</span>
+      <code class="wechat-id" id="wechatId">mrpeijixing</code>
+      <button class="btn btn-sm copy-wechat-btn" id="copyWechatBtn">复制</button>
+    </div>
+    <p class="mobile-hint" style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.5rem;">
+      📱 手机用户点击“复制”后，打开微信添加朋友
+    </p>
+  </div>
+</div>
   <script src="assets/ads.js"></script>
   <script src="assets/utils.js"></script>
   <script src="assets/ad-banner.js"></script>
   <script src="assets/donate.js"></script>
 
   <script>
+    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -77,6 +195,44 @@
         });
       });
     }
+
+    // 联系弹窗
+    const contactLink = document.getElementById('contactLink');
+    const contactOverlay = document.getElementById('contactOverlay');
+    const contactClose = document.getElementById('contactClose');
+
+    contactLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactOverlay.classList.add('active');
+    });
+
+    contactClose.addEventListener('click', () => {
+      contactOverlay.classList.remove('active');
+    });
+
+    contactOverlay.addEventListener('click', (e) => {
+      if (e.target === contactOverlay) {
+        contactOverlay.classList.remove('active');
+      }
+    });
+    // 复制微信号
+const copyWechatBtn = document.getElementById('copyWechatBtn');
+const wechatId = document.getElementById('wechatId');
+if (copyWechatBtn && wechatId) {
+  copyWechatBtn.addEventListener('click', () => {
+    const id = wechatId.textContent.trim();
+    copyToClipboard(id, (success) => {
+      if (success) {
+        copyWechatBtn.textContent = '已复制';
+        copyWechatBtn.classList.add('copied');
+        setTimeout(() => {
+          copyWechatBtn.textContent = '复制';
+          copyWechatBtn.classList.remove('copied');
+        }, 1500);
+      }
+    });
+  });
+}
   </script>
 </body>
 </html>

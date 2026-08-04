@@ -21,6 +21,7 @@
           </div>
         </div>
         <p class="donate-tip">扫码打赏，金额随意 ☕</p>
+        <p style = "font-size:0.75rem;color:var(--text-secondary);" > 📱手机用户可截图保存二维码后扫码 </p>
       </div>
     `;
     document.body.appendChild(overlay);
