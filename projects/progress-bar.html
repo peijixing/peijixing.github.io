@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>反逻辑进度条生成器 | oldpei.site</title>
+  <title>反逻辑进度条生成器 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
   <style>
     .progress-box {
@@ -42,8 +42,34 @@
     }
     .status-text {
       color: var(--text-secondary);
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       font-family: var(--font-mono);
+      font-size: 0.95rem;
+    }
+    .speed-display {
+      color: var(--accent-blue);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+    .file-info {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+    .file-name {
+      color: var(--accent-yellow);
+      font-weight: 600;
+    }
+    .random-joke {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      font-style: italic;
+      min-height: 1.5em;
     }
     .btn {
       min-width: 80px;
@@ -61,13 +87,21 @@
 
   <div class="container">
     <h1 class="page-title">⏳ 反逻辑进度条生成器</h1>
-    <p class="page-subtitle">一个永远无法按常理完成的下载。</p>
+    <p class="page-subtitle">一个永远无法按常理完成的下载，附带免费焦虑。</p>
 
-    <div class="progress-box">
+    <!-- 截图目标容器 -->
+    <div class="progress-box" id="progressBox">
+      <div class="file-info">
+        正在下载：<span class="file-name" id="fileName">《高等数学重修第7版》.pdf</span><br>
+        文件大小：<span id="fileSize">13.5 GB</span>
+      </div>
+
       <div class="progress">
         <div class="progress-bar" id="progressBar" style="width: 0%;">0%</div>
       </div>
+      <div class="speed-display" id="speedDisplay">当前速度：3.2 MB/s</div>
       <div class="status-text" id="statusText">准备就绪</div>
+      <div class="random-joke" id="randomJoke"></div>
       <div class="controls">
         <button class="btn" id="startBtn">开始下载</button>
         <button class="btn" id="pauseBtn" disabled>暂停</button>
@@ -81,8 +115,11 @@
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
-<script src="../assets/share-button.js"></script>
+  <!-- 引入截图分享组件 -->
+  <script src="../assets/share-button.js"></script>
+
   <script>
+    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -98,20 +135,72 @@
 
     const progressBar = document.getElementById('progressBar');
     const statusText = document.getElementById('statusText');
+    const speedDisplay = document.getElementById('speedDisplay');
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const cancelBtn = document.getElementById('cancelBtn');
     const speedBtn = document.getElementById('speedBtn');
     const adContainer = document.getElementById('adContainer');
+    const fileNameEl = document.getElementById('fileName');
+    const fileSizeEl = document.getElementById('fileSize');
+    const randomJoke = document.getElementById('randomJoke');
+
+    const funnyNames = [
+      "《高等数学重修第7版》.pdf",
+      "《学不会的C++从入门到放弃》.epub",
+      "《前任婚礼邀请函》.docx",
+      "《公司裁员名单(绝密)》.xlsx",
+      "《老板画的饼合集》.pptx",
+      "《如何一夜暴富》.exe",
+      "《防脱发终极指南》.mp4",
+      "《教你如何不踩坑》.chm",
+      "《每天一遍，防止抑郁》.mp3",
+      "《网盘限时免费资源》.rar"
+    ];
+
+    const funnySizes = [
+      "13.5 GB", "999 MB", "2.33 TB", "0.1 KB", "42.0 MB", "1.21 GB", "512 B"
+    ];
+
+    const jokes = [
+      "不要担心，这只是个进度条。",
+      "据说盯着进度条会加速下载。",
+      "您的网速击败了全国0%的用户。",
+      "下载过程中请勿呼吸。",
+      "如果卡住了，试试摇一摇电脑。",
+      "检测到宇宙射线干扰…恢复中…",
+      "正在写入硬盘…的隔壁老王的U盘。",
+      "你的文件正在被仓鼠搬运，请稍候。",
+      "即将下载完毕……的勇气。",
+      "网络请求已送达，但对方拒收。"
+    ];
+
+    function randomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
 
     let progress = 0;
     let timer = null;
     let isPaused = false;
     let speedMultiplier = 1;
+    const baseSpeed = 3.2;
 
     function updateUI() {
       progressBar.style.width = progress + '%';
       progressBar.textContent = progress + '%';
+      const displaySpeed = (baseSpeed * speedMultiplier).toFixed(1);
+      speedDisplay.textContent = '当前速度：' + displaySpeed + ' MB/s';
+      speedDisplay.style.color = speedMultiplier < 0 ? 'var(--accent-red)' : 'var(--accent-blue)';
+
+      if (progress >= 99 && !isPaused) {
+        statusText.textContent = randomItem([
+          "即将完成... 大概还需要 3 年",
+          "最后 1% 可能需要更久",
+          "正在处理最后的 0.01% 黑洞",
+          "马上就完了…真的",
+          "即将结束？不，进度条觉得不行"
+        ]);
+      }
     }
 
     function clearTimer() {
@@ -125,13 +214,17 @@
       if (timer) return;
       isPaused = false;
       statusText.textContent = '下载中...';
+      fileNameEl.textContent = randomItem(funnyNames);
+      fileSizeEl.textContent = randomItem(funnySizes);
+      randomJoke.textContent = randomItem(jokes);
+
       timer = setInterval(() => {
         if (progress >= 99) {
           progress = 99;
           clearTimer();
-          statusText.textContent = '即将完成...';
           pauseBtn.disabled = true;
           cancelBtn.disabled = false;
+          updateUI();
           return;
         }
         if (speedMultiplier < 0) {
@@ -151,8 +244,9 @@
       if (isPaused) return;
       isPaused = true;
       clearTimer();
-      statusText.textContent = '已暂停';
+      statusText.textContent = '已暂停（你确定要暂停？速度会减半哦）';
       pauseBtn.textContent = '继续';
+      updateUI();
     }
 
     function resumeDownload() {
@@ -165,11 +259,13 @@
       clearTimer();
       progress = 100;
       updateUI();
-      statusText.textContent = '下载完成！';
+      statusText.textContent = '下载完成！（别问我为什么取消反而完成）';
+      speedDisplay.textContent = '当前速度：∞ MB/s';
       startBtn.disabled = true;
       pauseBtn.disabled = true;
       cancelBtn.disabled = true;
       speedBtn.disabled = true;
+      randomJoke.textContent = '人生就是这样，越想放弃越容易成功。';
       showAd();
     }
 
@@ -178,12 +274,16 @@
         speedMultiplier = -1;
         speedBtn.textContent = '减速';
         speedBtn.style.backgroundColor = 'var(--accent-red)';
-        statusText.textContent = '加速模式启动（实际效果：倒退）';
+        statusText.textContent = '加速模式启动！（实为倒车请注意）';
+        randomJoke.textContent = '文件正在被撤回，请勿惊慌。';
       } else {
         speedMultiplier = 1;
         speedBtn.textContent = '加速';
         speedBtn.style.backgroundColor = '';
+        statusText.textContent = '下载中...';
+        randomJoke.textContent = randomItem(jokes);
       }
+      updateUI();
     }
 
     function showAd() {
@@ -203,13 +303,19 @@
       });
     }
 
+    document.querySelector('.progress').addEventListener('dblclick', () => {
+      alert(randomItem([
+        "别点了，它不会变快的。",
+        "你的双击已经被进度条忽略。",
+        "进度条：你再双击我就摆烂。",
+        "这个进度条有自尊，请尊重它。"
+      ]));
+    });
+
     startBtn.addEventListener('click', startDownload);
     pauseBtn.addEventListener('click', () => {
-      if (isPaused) {
-        resumeDownload();
-      } else {
-        pauseDownload();
-      }
+      if (isPaused) resumeDownload();
+      else pauseDownload();
     });
     cancelBtn.addEventListener('click', cancelDownload);
     speedBtn.addEventListener('click', toggleSpeed);

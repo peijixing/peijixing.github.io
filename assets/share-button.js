@@ -1,5 +1,4 @@
 (function() {
-  // 加载 html2canvas
   function loadHtml2Canvas(callback) {
     if (window.html2canvas) {
       callback();
@@ -25,16 +24,17 @@
       btn.innerHTML = '⏳ 生成中...';
       btn.disabled = true;
       
-      // 优先截取冲突卡片或排行榜，否则截取主体
+      // 优先截取冲突卡片、排行榜、进度条容器，否则截取主体
       var target = document.getElementById('conflictCard') ||
         document.getElementById('leaderboard') ||
+        document.getElementById('progressBox') ||
         document.querySelector('.container') ||
         document.body;
       
       loadHtml2Canvas(function() {
         html2canvas(target, {
           backgroundColor: '#0d1117',
-          scale: Math.min(window.devicePixelRatio, 2), // 限制最大缩放，避免内存问题
+          scale: Math.min(window.devicePixelRatio, 2),
           useCORS: true,
           logging: false,
           allowTaint: true
@@ -53,7 +53,6 @@
   }
   
   function showPreviewModal(canvas) {
-    // 移除已有弹窗
     var existing = document.querySelector('.screenshot-modal-overlay');
     if (existing) existing.remove();
     
@@ -72,7 +71,6 @@
     `;
     document.body.appendChild(overlay);
     
-    // 关闭弹窗
     var closeBtn = overlay.querySelector('.screenshot-close');
     closeBtn.addEventListener('click', function() {
       overlay.remove();
@@ -81,7 +79,6 @@
       if (e.target === overlay) overlay.remove();
     });
     
-    // 保存图片
     var downloadBtn = overlay.querySelector('#downloadScreenshot');
     downloadBtn.addEventListener('click', function() {
       var link = document.createElement('a');
@@ -92,16 +89,14 @@
       document.body.removeChild(link);
     });
     
-    // 分享
     var shareBtn = overlay.querySelector('#shareScreenshot');
     shareBtn.addEventListener('click', function() {
-      // 尝试 Web Share API (移动端常用)
       if (navigator.share) {
         canvas.toBlob(function(blob) {
           var file = new File([blob], 'screenshot.png', { type: 'image/png' });
           var shareData = {
             title: '离谱发明实验室',
-            text: '看看这个离谱的网站！',
+            text: '看看这个离谱的进度条！',
             files: [file]
           };
           if (navigator.canShare && navigator.canShare(shareData)) {
@@ -109,12 +104,10 @@
               console.log('分享取消或失败', err);
             });
           } else {
-            // 降级为下载
             downloadBtn.click();
           }
         }, 'image/png');
       } else {
-        // 桌面端降级：复制图片到剪贴板？或者直接下载
         downloadBtn.click();
         alert('已保存图片，可手动分享');
       }

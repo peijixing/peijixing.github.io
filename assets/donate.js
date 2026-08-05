@@ -12,11 +12,11 @@
         <p class="donate-sub">如果这些离谱发明让你笑了，支持一下吧~</p>
         <div class="donate-qr-wrapper">
           <div class="donate-qr-item">
-            <img src="assets/images/wechat-qr.png" alt="微信收款码">
+            <img src="assets/images/wechat-qr.webp" alt="微信收款码">
             <span>微信</span>
           </div>
           <div class="donate-qr-item">
-            <img src="assets/images/alipay-qr.png" alt="支付宝收款码">
+            <img src="assets/images/alipay-qr.webp" alt="支付宝收款码">
             <span>支付宝</span>
           </div>
         </div>
