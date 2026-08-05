@@ -305,3 +305,41 @@ a:hover { text-decoration: underline; }
   .biz-tagline { white-space: normal; padding: 0.5rem; }
   .wechat-id-box { flex-direction: column; gap: 0.3rem; }
 }
+.stats-container {
+  margin: 1.5rem 0 2rem;
+  padding: 1.2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+.stats-title {
+  text-align: center;
+  color: var(--accent-blue);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+.stat-icon { font-size: 1.8rem; }
+.stat-count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-yellow);
+  font-family: var(--font-mono);
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}

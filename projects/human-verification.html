@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>人类审核机器局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
+  <!-- Firebase 初始化 -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+    import { getFirestore, collection, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
+      authDomain: "absurd-lab.firebaseapp.com",
+      projectId: "absurd-lab",
+      storageBucket: "absurd-lab.firebasestorage.app",
+      messagingSenderId: "989176389764",
+      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.db = db;
+    window.firestoreHelpers = { collection, doc, setDoc, increment };
+  </script>
   <style>
     .verification-box {
       background-color: var(--bg-secondary);
@@ -39,80 +56,29 @@
     .grid-item:hover {
       filter: blur(1px) brightness(0.95);
     }
-    .btn-verify {
-      width: 100%;
-    }
-    .fail-counter {
-      text-align: center;
-      color: var(--text-secondary);
-      margin: 1rem 0;
-      font-family: var(--font-mono);
-    }
-    .refresh-hint {
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      margin-top: 0.5rem;
-    }
+    .btn-verify { width: 100%; }
+    .fail-counter { text-align: center; color: var(--text-secondary); margin: 1rem 0; font-family: var(--font-mono); }
+    .refresh-hint { text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; }
 
-    /* 广告彩蛋弹窗 */
     .easter-egg-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75); z-index: 1000; justify-content: center; align-items: center;
     }
-    .easter-egg-overlay.active {
-      display: flex;
-    }
+    .easter-egg-overlay.active { display: flex; }
     .easter-egg-modal {
-      background: var(--bg-secondary);
-      border: 1px solid var(--accent-blue);
-      border-radius: var(--radius);
-      padding: 2rem;
-      max-width: 360px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(88,166,255,0.3);
+      background: var(--bg-secondary); border: 1px solid var(--accent-blue);
+      border-radius: var(--radius); padding: 2rem; max-width: 360px; width: 90%;
+      text-align: center; box-shadow: 0 0 30px rgba(88,166,255,0.3);
     }
-    .easter-egg-modal h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .easter-egg-modal p {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-    .easter-egg-modal .resource-title {
-      color: var(--accent-green);
-      font-weight: 600;
-      margin: 1rem 0;
-      font-size: 1.1rem;
-    }
-    .easter-egg-modal .btn {
-      margin-top: 1rem;
-    }
-    .easter-egg-modal .close-egg {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      text-decoration: underline;
-    }
+    .easter-egg-modal h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .easter-egg-modal p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .easter-egg-modal .resource-title { color: var(--accent-green); font-weight: 600; margin: 1rem 0; font-size: 1.1rem; }
+    .easter-egg-modal .btn { margin-top: 1rem; }
+    .easter-egg-modal .close-egg { background: none; border: none; color: var(--text-secondary); font-size: 0.85rem; cursor: pointer; margin-top: 0.5rem; text-decoration: underline; }
+
     @media (max-width: 480px) {
-      .verification-box {
-        padding: 1.5rem;
-      }
-      .grid-container {
-        gap: 0.5rem;
-      }
+      .verification-box { padding: 1.5rem; }
+      .grid-container { gap: 0.5rem; }
     }
   </style>
 </head>
@@ -158,18 +124,16 @@
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
-<script src="../assets/share-button.js"></script>
+  <script src="../assets/stats.js"></script>
+  <script src="../assets/share-button.js"></script>
+
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-      });
+      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
       navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-        });
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
       });
     }
 
@@ -179,7 +143,6 @@
     const imageGrid = document.getElementById('imageGrid');
     const refreshLink = document.getElementById('refreshLink');
 
-    // 广告弹窗相关元素
     const easterEggOverlay = document.getElementById('easterEggOverlay');
     const eggResourceTitle = document.getElementById('eggResourceTitle');
     const eggCopyBtn = document.getElementById('eggCopyBtn');
@@ -193,9 +156,7 @@
         div.className = 'grid-item';
         const imgId = Math.floor(Math.random() * 200) + 1;
         div.style.backgroundImage = `url(https://picsum.photos/id/${imgId}/200/200)`;
-        div.addEventListener('click', () => {
-          div.classList.toggle('selected');
-        });
+        div.addEventListener('click', () => div.classList.toggle('selected'));
         imageGrid.appendChild(div);
       }
     }
@@ -215,23 +176,17 @@
       easterEggOverlay.classList.remove('active');
     }
 
-    // 复制口令按钮
     eggCopyBtn.addEventListener('click', () => {
       if (currentAd) {
         copyToClipboard(currentAd.code, (success) => {
           if (success) {
             eggCopyBtn.textContent = '✅ 已复制';
-            setTimeout(() => {
-              eggCopyBtn.textContent = '📋 复制口令';
-            }, 2000);
-          } else {
-            alert('复制失败，请手动复制');
-          }
+            setTimeout(() => eggCopyBtn.textContent = '📋 复制口令', 2000);
+          } else alert('复制失败');
         });
       }
     });
 
-    // 关闭弹窗
     closeEggBtn.addEventListener('click', hideEasterEgg);
     easterEggOverlay.addEventListener('click', (e) => {
       if (e.target === easterEggOverlay) hideEasterEgg();
@@ -251,7 +206,6 @@
         document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
         generateGrid();
       } else {
-        // 三次失败，锁定页面
         showMessage('🤖 系统判定您可能是高级AI，验证已锁定。', 'error');
         document.getElementById('verifyBtn').disabled = true;
         document.getElementById('verifyBtn').textContent = '已锁定';
@@ -262,11 +216,12 @@
         refreshLink.style.pointerEvents = 'none';
         refreshLink.style.color = 'var(--text-secondary)';
 
-        // 弹出广告彩蛋
         if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
           const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
           showEasterEgg(randomAd);
         }
+
+        if (window.incrementStat) window.incrementStat('human_verification');
       }
     });
 

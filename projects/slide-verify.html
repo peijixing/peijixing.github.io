@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>捉迷藏滑块验证 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
+  <!-- Firebase 初始化 -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
+      authDomain: "absurd-lab.firebaseapp.com",
+      projectId: "absurd-lab",
+      storageBucket: "absurd-lab.firebasestorage.app",
+      messagingSenderId: "989176389764",
+      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.db = db;
+    window.firestoreHelpers = { doc, setDoc, increment };
+  </script>
   <style>
     .login-box {
       background-color: var(--bg-secondary);
@@ -14,110 +31,37 @@
       max-width: 400px;
       margin: 2rem auto;
     }
-    .submit-btn {
-      width: 100%;
-      margin-top: 1rem;
-    }
-
+    .submit-btn { width: 100%; margin-top: 1rem; }
     .verify-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center;
     }
-    .verify-overlay.active {
-      display: flex;
-    }
+    .verify-overlay.active { display: flex; }
     .verify-box {
-      position: absolute;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      width: 90%;
-      max-width: 360px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: none;
-      cursor: default;
-      transition: none;
+      position: absolute; background: var(--bg-secondary); border: 1px solid var(--border-color);
+      border-radius: var(--radius); padding: 1.5rem; width: 90%; max-width: 360px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); user-select: none; -webkit-user-select: none;
+      touch-action: none; cursor: default; transition: none;
     }
-    .verify-title {
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .close-btn {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0 5px;
-      line-height: 1;
-    }
+    .verify-title { font-weight: 600; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .close-btn { background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; padding: 0 5px; line-height: 1; }
     .close-btn:hover { color: var(--accent-red); }
-
     .slider-track {
-      background: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      height: 42px;
-      position: relative;
-      overflow: hidden;
-      margin: 1rem 0 0.5rem;
+      background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 20px;
+      height: 42px; position: relative; overflow: hidden; margin: 1rem 0 0.5rem;
     }
-    .slider-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
-      border-radius: 20px;
-      transition: none;
-    }
+    .slider-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-green)); border-radius: 20px; transition: none; }
     .slider-btn {
-      position: absolute;
-      left: 0; top: 0;
-      width: 50px; height: 100%;
-      background: var(--accent-blue);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      touch-action: none;
-      z-index: 2;
+      position: absolute; left: 0; top: 0; width: 50px; height: 100%; background: var(--accent-blue);
+      border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white;
+      font-size: 1.2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.3); touch-action: none; z-index: 2;
     }
-    .verify-hint {
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-    }
-    .verify-status {
-      text-align: center;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--accent-red);
-      min-height: 1.5em;
-    }
+    .verify-hint { text-align: center; color: var(--text-secondary); font-size: 0.85rem; }
+    .verify-status { text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: var(--accent-red); min-height: 1.5em; }
     .give-up-btn {
-      display: block;
-      margin: 0.8rem auto 0;
-      padding: 0.3rem 1.2rem;
-      background: transparent;
-      border: 1px solid var(--text-secondary);
-      color: var(--text-secondary);
-      border-radius: var(--radius);
-      cursor: pointer;
-      font-size: 0.8rem;
+      display: block; margin: 0.8rem auto 0; padding: 0.3rem 1.2rem;
+      background: transparent; border: 1px solid var(--text-secondary); color: var(--text-secondary);
+      border-radius: var(--radius); cursor: pointer; font-size: 0.8rem;
     }
     .give-up-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
   </style>
@@ -169,23 +113,19 @@
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
-<script src="../assets/share-button.js"></script>
+  <script src="../assets/stats.js"></script>
+  <script src="../assets/share-button.js"></script>
+
   <script>
-    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-      });
+      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
       navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-        });
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
       });
     }
 
-    // ========== 验证逻辑 ==========
     let verifyFailCount = 0;
     const loginBtn = document.getElementById('loginBtn');
     const loginMsg = document.getElementById('loginMsg');
@@ -209,51 +149,32 @@
     const verifyStatus = document.getElementById('verifyStatus');
     const giveUpBtn = document.getElementById('giveUpBtn');
 
-    let isDragging = false;
-    let startDragX = 0, startDragY = 0;
-    let initialSliderLeft = 0;
-    let initialBoxLeft = 0, initialBoxTop = 0;
+    let isDragging = false, startDragX = 0, startDragY = 0;
+    let initialSliderLeft = 0, initialBoxLeft = 0, initialBoxTop = 0;
     let boxMoved = false;
 
     function showVerify() {
-      verifyBox.style.left = '50%';
-      verifyBox.style.top = '50%';
-      verifyBox.style.transform = 'translate(-50%, -50%)';
-      verifyBox.style.pointerEvents = 'auto';
-      sliderBtn.style.left = '0px';
-      sliderFill.style.width = '0%';
-      verifyStatus.textContent = '';
-      overlay.classList.add('active');
-      verifyFailCount = 0;
-      // 重新显示滑块区域（如果之前隐藏）
-      sliderTrack.style.display = 'block';
-      verifyBox.querySelector('p').style.display = 'block';
-      document.querySelector('.verify-hint').style.display = 'block';
-      giveUpBtn.style.display = 'block';
+      verifyBox.style.left = '50%'; verifyBox.style.top = '50%'; verifyBox.style.transform = 'translate(-50%, -50%)';
+      verifyBox.style.pointerEvents = 'auto'; sliderBtn.style.left = '0px'; sliderFill.style.width = '0%';
+      verifyStatus.textContent = ''; overlay.classList.add('active'); verifyFailCount = 0;
+      sliderTrack.style.display = 'block'; verifyBox.querySelector('p').style.display = 'block';
+      document.querySelector('.verify-hint').style.display = 'block'; giveUpBtn.style.display = 'block';
     }
 
-    function hideVerify() {
-      overlay.classList.remove('active');
-    }
-
-    closeVerifyBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      hideVerify();
-    });
+    function hideVerify() { overlay.classList.remove('active'); }
+    closeVerifyBtn.addEventListener('click', (e) => { e.stopPropagation(); hideVerify(); });
 
     giveUpBtn.addEventListener('click', () => {
       verifyStatus.innerHTML = '你放弃了验证，AI 判定已生效。';
       showPermanentAd();
     });
 
-    // 获取滑块当前进度 0-100
     function getProgress() {
       const trackWidth = sliderTrack.clientWidth - sliderBtn.offsetWidth;
       const left = parseFloat(sliderBtn.style.left) || 0;
       return (left / trackWidth) * 100;
     }
 
-    // 设置滑块位置（left px），同时更新填充
     function setSliderLeft(px) {
       const trackWidth = sliderTrack.clientWidth - sliderBtn.offsetWidth;
       const clamped = Math.min(trackWidth, Math.max(0, px));
@@ -261,22 +182,18 @@
       sliderFill.style.width = (clamped / trackWidth * 100) + '%';
     }
 
-    // ========== 核心：滑块拖拽 + 弹窗弹性逃逸 ==========
     function onDragStart(e) {
       if (e.target !== sliderBtn) return;
       e.preventDefault();
       isDragging = true;
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      startDragX = clientX;
-      startDragY = clientY;
+      startDragX = clientX; startDragY = clientY;
       initialSliderLeft = parseFloat(sliderBtn.style.left) || 0;
       const rect = verifyBox.getBoundingClientRect();
-      initialBoxLeft = rect.left;
-      initialBoxTop = rect.top;
+      initialBoxLeft = rect.left; initialBoxTop = rect.top;
       verifyBox.style.transform = 'none';
-      verifyBox.style.left = rect.left + 'px';
-      verifyBox.style.top = rect.top + 'px';
+      verifyBox.style.left = rect.left + 'px'; verifyBox.style.top = rect.top + 'px';
       boxMoved = false;
     }
 
@@ -285,10 +202,7 @@
       e.preventDefault();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const dx = clientX - startDragX;
-      const dy = clientY - startDragY;
-
-      // 1. 更新滑块位置（完全跟手）
+      const dx = clientX - startDragX, dy = clientY - startDragY;
       const trackWidth = sliderTrack.clientWidth - sliderBtn.offsetWidth;
       let newLeft = initialSliderLeft + dx;
       newLeft = Math.min(trackWidth, Math.max(0, newLeft));
@@ -296,105 +210,43 @@
       const progress = (newLeft / trackWidth) * 100;
       sliderFill.style.width = progress + '%';
 
-      // 2. 弹窗逃逸逻辑
       if (progress >= 30) {
-        // 弹窗基础移动量 = 手指位移
-        let moveX = dx;
-        let moveY = dy;
-
-        // 加速因子：进度越高，弹窗逃逸越快
-        const speedMultiplier = 1 + (progress - 30) / 50; // 1 到 2.4 倍
-        moveX *= speedMultiplier;
-        moveY *= speedMultiplier;
-
-        let newBoxX = initialBoxLeft + moveX;
-        let newBoxY = initialBoxTop + moveY;
-
-        const boxW = verifyBox.offsetWidth;
-        const boxH = verifyBox.offsetHeight;
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
-
-        // 边界弹性：如果碰到边缘，反弹并加大移动量，防止卡边
+        let moveX = dx, moveY = dy;
+        const speedMultiplier = 1 + (progress - 30) / 50;
+        moveX *= speedMultiplier; moveY *= speedMultiplier;
+        let newBoxX = initialBoxLeft + moveX, newBoxY = initialBoxTop + moveY;
+        const boxW = verifyBox.offsetWidth, boxH = verifyBox.offsetHeight;
+        const screenW = window.innerWidth, screenH = window.innerHeight;
         const margin = 20;
-        if (newBoxX < margin) {
-          newBoxX = margin;
-          // 反弹效果：重置参考点，让滑块更难继续
-          boxMoved = true;
-          initialBoxLeft = newBoxX;
-          initialBoxTop = newBoxY;
-          startDragX = clientX;
-          startDragY = clientY;
-          initialSliderLeft = newLeft;
-        } else if (newBoxX + boxW > screenW - margin) {
-          newBoxX = screenW - boxW - margin;
-          boxMoved = true;
-          initialBoxLeft = newBoxX;
-          initialBoxTop = newBoxY;
-          startDragX = clientX;
-          startDragY = clientY;
-          initialSliderLeft = newLeft;
-        }
-
-        if (newBoxY < margin) {
-          newBoxY = margin;
-          boxMoved = true;
-          initialBoxLeft = newBoxX;
-          initialBoxTop = newBoxY;
-          startDragX = clientX;
-          startDragY = clientY;
-          initialSliderLeft = newLeft;
-        } else if (newBoxY + boxH > screenH - margin) {
-          newBoxY = screenH - boxH - margin;
-          boxMoved = true;
-          initialBoxLeft = newBoxX;
-          initialBoxTop = newBoxY;
-          startDragX = clientX;
-          startDragY = clientY;
-          initialSliderLeft = newLeft;
-        }
-
-        verifyBox.style.left = newBoxX + 'px';
-        verifyBox.style.top = newBoxY + 'px';
+        if (newBoxX < margin) { newBoxX = margin; boxMoved = true; initialBoxLeft = newBoxX; initialBoxTop = newBoxY; startDragX = clientX; startDragY = clientY; initialSliderLeft = newLeft; }
+        else if (newBoxX + boxW > screenW - margin) { newBoxX = screenW - boxW - margin; boxMoved = true; initialBoxLeft = newBoxX; initialBoxTop = newBoxY; startDragX = clientX; startDragY = clientY; initialSliderLeft = newLeft; }
+        if (newBoxY < margin) { newBoxY = margin; boxMoved = true; initialBoxLeft = newBoxX; initialBoxTop = newBoxY; startDragX = clientX; startDragY = clientY; initialSliderLeft = newLeft; }
+        else if (newBoxY + boxH > screenH - margin) { newBoxY = screenH - boxH - margin; boxMoved = true; initialBoxLeft = newBoxX; initialBoxTop = newBoxY; startDragX = clientX; startDragY = clientY; initialSliderLeft = newLeft; }
+        verifyBox.style.left = newBoxX + 'px'; verifyBox.style.top = newBoxY + 'px';
       }
 
-      // 3. 快完成时自动重置（永远别想成功）
       if (progress > 92) {
-        // 强行重置滑块，制造失败
         isDragging = false;
         verifyStatus.textContent = '即将完成…但验证好像又跑了！';
         setSliderLeft(0);
-        // 弹窗随机弹跳
-        const randX = Math.random() * (window.innerWidth - verifyBox.offsetWidth);
-        const randY = Math.random() * (window.innerHeight - verifyBox.offsetHeight);
-        verifyBox.style.left = randX + 'px';
-        verifyBox.style.top = randY + 'px';
+        verifyBox.style.left = Math.random() * (window.innerWidth - verifyBox.offsetWidth) + 'px';
+        verifyBox.style.top = Math.random() * (window.innerHeight - verifyBox.offsetHeight) + 'px';
         verifyFailCount++;
-        if (verifyFailCount >= 3) {
-          verifyStatus.innerHTML = '验证失败次数过多。';
-          showPermanentAd();
-        }
+        if (verifyFailCount >= 3) { verifyStatus.innerHTML = '验证失败次数过多。'; showPermanentAd(); }
       }
     }
 
     function onDragEnd() {
       if (!isDragging) return;
       isDragging = false;
-      // 如果没有触发自动重置，正常结束也视为失败
       const progress = getProgress();
       if (progress < 92 && verifyFailCount < 3) {
         verifyFailCount++;
-        if (verifyFailCount >= 3) {
-          verifyStatus.innerHTML = '验证失败次数过多。';
-          showPermanentAd();
-        } else {
-          verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）';
-          setSliderLeft(0);
-        }
+        if (verifyFailCount >= 3) { verifyStatus.innerHTML = '验证失败次数过多。'; showPermanentAd(); }
+        else { verifyStatus.textContent = '验证失败，请重试！（第' + verifyFailCount + '次）'; setSliderLeft(0); }
       }
     }
 
-    // 事件绑定
     sliderBtn.addEventListener('mousedown', onDragStart);
     sliderBtn.addEventListener('touchstart', onDragStart, { passive: false });
     document.addEventListener('mousemove', onDragMove);
@@ -409,26 +261,18 @@
         const adDiv = document.createElement('div');
         adDiv.className = 'message';
         adDiv.style.cssText = 'background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem; pointer-events: auto;';
-        adDiv.innerHTML = `
-          <strong>🎁 AI专属隐藏资源：</strong> ${randomAd.title}<br>
-          <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
-        `;
+        adDiv.innerHTML = `<strong>🎁 AI专属隐藏资源：</strong> ${randomAd.title}<br><button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>`;
         verifyBox.appendChild(adDiv);
         document.getElementById('copyAdBtn').addEventListener('click', () => {
-          copyToClipboard(randomAd.code, (success) => {
-            alert(success ? '已复制，请到对应的 App 查看' : '复制失败');
-          });
+          copyToClipboard(randomAd.code, success => alert(success ? '已复制，请到对应的 App 查看' : '复制失败'));
         });
       }
-      sliderTrack.style.display = 'none';
-      verifyBox.querySelector('p').style.display = 'none';
-      document.querySelector('.verify-hint').style.display = 'none';
-      giveUpBtn.style.display = 'none';
+      sliderTrack.style.display = 'none'; verifyBox.querySelector('p').style.display = 'none';
+      document.querySelector('.verify-hint').style.display = 'none'; giveUpBtn.style.display = 'none';
+      if (window.incrementStat) window.incrementStat('slide_verify');
     }
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) hideVerify();
-    });
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) hideVerify(); });
   </script>
 </body>
 </html>

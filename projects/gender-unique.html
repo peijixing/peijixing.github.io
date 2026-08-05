@@ -5,61 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>性别绝不同款注册局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
+  <!-- Firebase 初始化 -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
+      authDomain: "absurd-lab.firebaseapp.com",
+      projectId: "absurd-lab",
+      storageBucket: "absurd-lab.firebasestorage.app",
+      messagingSenderId: "989176389764",
+      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.db = db;
+    window.firestoreHelpers = { doc, setDoc, increment };
+  </script>
   <style>
     .rule-hint {
-      background-color: rgba(88,166,255,0.05);
-      border-left: 3px solid var(--accent-blue);
-      padding: 0.8rem 1rem;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-      border-radius: var(--radius);
+      background-color: rgba(88,166,255,0.05); border-left: 3px solid var(--accent-blue);
+      padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem;
+      display: flex; gap: 0.5rem; align-items: flex-start; border-radius: var(--radius);
     }
-    .submit-btn {
-      width: 100%;
-      margin-top: 0.5rem;
-      background-color: var(--accent-blue);
-      color: #fff;
-      border: none;
-      padding: 0.7rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .gender-select {
-      display: flex;
-      gap: 1rem;
-      margin: 0.5rem 0;
-    }
+    .submit-btn { width: 100%; margin-top: 0.5rem; background-color: var(--accent-blue); color: #fff; border: none; padding: 0.7rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 1rem; }
+    .gender-select { display: flex; gap: 1rem; margin: 0.5rem 0; }
     .gender-option {
-      flex: 1;
-      padding: 0.7rem;
-      border: 2px solid var(--border-color);
-      border-radius: var(--radius);
-      text-align: center;
-      cursor: pointer;
-      background: var(--bg-primary);
-      color: var(--text-secondary);
-      font-weight: 600;
-      transition: all 0.2s;
+      flex: 1; padding: 0.7rem; border: 2px solid var(--border-color); border-radius: var(--radius);
+      text-align: center; cursor: pointer; background: var(--bg-primary); color: var(--text-secondary);
+      font-weight: 600; transition: all 0.2s;
     }
-    .gender-option.selected {
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
-      background: rgba(88,166,255,0.1);
-    }
+    .gender-option.selected { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(88,166,255,0.1); }
     .conflict-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--accent-red);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(248,81,73,0.2);
-      animation: pulse 2s infinite;
+      background: var(--bg-secondary); border: 1px solid var(--accent-red); border-radius: var(--radius);
+      padding: 1.5rem; margin-top: 1.5rem; text-align: center;
+      box-shadow: 0 0 15px rgba(248,81,73,0.2); animation: pulse 2s infinite;
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 10px rgba(248,81,73,0.3); }
@@ -70,21 +50,10 @@
     .conflict-card .card-line { margin: 0.5rem 0; font-size: 1rem; color: var(--text-primary); }
     .conflict-card .card-line strong { color: var(--accent-yellow); }
     .conflict-card .card-footer-text { margin-top: 1rem; font-size: 0.8rem; color: var(--text-secondary); }
-    .fake-users {
-      display: flex;
-      gap: 1rem;
-      margin: 1.5rem 0;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .fake-users { display: flex; gap: 1rem; margin: 1.5rem 0; justify-content: center; flex-wrap: wrap; }
     .fake-user-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1rem;
-      width: 140px;
-      text-align: center;
-      font-size: 0.9rem;
+      background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius);
+      padding: 1rem; width: 140px; text-align: center; font-size: 0.9rem;
     }
     .fake-user-card .user-icon { font-size: 2rem; }
     .fake-user-card .user-name { font-weight: 700; margin: 0.3rem 0; }
@@ -109,7 +78,6 @@
       <div>本站严格实行性别配额制。目前仅存的两位用户已经占满了所有名额。你可以尝试注册，但注定失败。</div>
     </div>
 
-    <!-- 假用户展示 -->
     <div class="fake-users">
       <div class="fake-user-card">
         <div class="user-icon">👨</div>
@@ -145,10 +113,10 @@
   <script src="../assets/ads.js"></script>
   <script src="../assets/utils.js"></script>
   <script src="../assets/ad-banner.js"></script>
+  <script src="../assets/stats.js"></script>
   <script src="../assets/share-button.js"></script>
 
   <script>
-    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -161,7 +129,6 @@
     let selectedGender = null;
     let failCount = 0;
 
-    // 性别选择
     document.querySelectorAll('.gender-option').forEach(opt => {
       opt.addEventListener('click', function() {
         document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
@@ -171,8 +138,6 @@
     });
 
     function showConflictCard(gender) {
-      // 修正：选择男，冲突用户是已注册的男性用户"钢铁直男老王"
-      // 选择女，冲突用户是已注册的女性用户"小仙女莉莉"
       const conflictUser = gender === '男' ? '钢铁直男老王' : '小仙女莉莉';
       const cardHTML = `
         <div class="conflict-card" id="conflictCard">
@@ -194,13 +159,10 @@
         <div class="message" style="background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;">
           <strong>🎁 世界已满，但你获得了隐藏资源：</strong> ${randomAd.title}<br>
           <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
-        </div>
-      `;
+        </div>`;
       document.getElementById('messageBox').innerHTML += adHTML;
       document.getElementById('copyAdBtn').addEventListener('click', () => {
-        copyToClipboard(randomAd.code, (success) => {
-          alert(success ? '已复制，请到对应的 App 查看' : '复制失败');
-        });
+        copyToClipboard(randomAd.code, success => alert(success ? '已复制，请到对应的 App 查看' : '复制失败'));
       });
     }
 
@@ -216,7 +178,6 @@
         return;
       }
 
-      // 永远冲突：显示正确的冲突卡片
       showConflictCard(selectedGender);
       failCount++;
 
@@ -225,6 +186,8 @@
         document.getElementById('registerBtn').textContent = '世界已满';
         showAd();
       }
+
+      if (window.incrementStat) window.incrementStat('gender_unique');
     });
   </script>
 </body>

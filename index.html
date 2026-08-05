@@ -6,7 +6,44 @@
   <title>离谱发明实验室 | oldpei.site</title>
   <link rel="stylesheet" href="assets/style.css">
   <style>
-    /* 业务标语 */
+    .stats-container {
+      margin: 1.5rem 0 2rem;
+      padding: 1.2rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+    }
+    .stats-title {
+      text-align: center;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+    }
+    .stat-icon { font-size: 1.8rem; }
+    .stat-count {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-yellow);
+      font-family: var(--font-mono);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+    }
     .biz-tagline {
       text-align: center;
       font-size: 0.85rem;
@@ -30,11 +67,7 @@
       text-decoration: none;
       cursor: pointer;
     }
-    .biz-tagline a:hover {
-      text-decoration: underline;
-    }
-
-    /* 联系弹窗 */
+    .biz-tagline a:hover { text-decoration: underline; }
     .contact-overlay {
       display: none;
       position: fixed;
@@ -45,9 +78,7 @@
       justify-content: center;
       align-items: center;
     }
-    .contact-overlay.active {
-      display: flex;
-    }
+    .contact-overlay.active { display: flex; }
     .contact-modal {
       background-color: var(--bg-secondary);
       border: 1px solid var(--border-color);
@@ -67,33 +98,34 @@
       cursor: pointer;
       line-height: 1;
     }
-    .contact-close:hover {
-      color: var(--accent-red);
-    }
-    .contact-modal h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-    .contact-modal p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
+    .contact-close:hover { color: var(--accent-red); }
+    .contact-modal h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .contact-modal p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
     .contact-modal img {
-      width: 200px;
-      height: 200px;
+      width: 200px; height: 200px;
       border: 1px solid var(--border-color);
       border-radius: 8px;
       object-fit: contain;
       background-color: #fff;
     }
-
-    /* 移动端适配 */
+    .wechat-id-box {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;
+    }
+    .wechat-label { color: var(--text-secondary); font-size: 0.9rem; }
+    .wechat-id {
+      background-color: var(--bg-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      color: var(--accent-green);
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+    .copy-wechat-btn { min-height: 32px; padding: 0.2rem 0.8rem; font-size: 0.85rem; }
     @media (max-width: 480px) {
-      .biz-tagline {
-        white-space: normal;
-        padding: 0.5rem;
-      }
+      .biz-tagline { white-space: normal; padding: 0.5rem; }
+      .wechat-id-box { flex-direction: column; gap: 0.3rem; }
     }
   </style>
 </head>
@@ -111,14 +143,44 @@
     <h1 class="page-title">// 离谱发明实验室</h1>
     <p class="page-subtitle">以下所有项目均通过国际反逻辑认证，请谨慎体验。</p>
 
-    <!-- 业务标语 -->
+    <!-- 实时统计 -->
+    <div class="stats-container">
+      <div class="stats-title">📊 离谱实时统计</div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-icon">🔐</span>
+          <span class="stat-count" id="statPassword">0</span>
+          <span class="stat-label">密码撞衫</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">🤖</span>
+          <span class="stat-count" id="statHuman">0</span>
+          <span class="stat-label">AI判定</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">⏳</span>
+          <span class="stat-count" id="statProgress">0</span>
+          <span class="stat-label">下载翻车</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">🎯</span>
+          <span class="stat-count" id="statSlide">0</span>
+          <span class="stat-label">滑块逃脱</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">⚧️</span>
+          <span class="stat-count" id="statGender">0</span>
+          <span class="stat-label">性别撞车</span>
+        </div>
+      </div>
+    </div>
+
     <div class="biz-tagline">
       💼 承接网页 / 小程序定制，有趣的想法我们一起实现 → 
       <a id="contactLink">联系我</a>
     </div>
 
     <div class="card-grid">
-      <!-- 四个卡片保持不变，此处省略 -->
       <a href="projects/password-unique.html" class="card">
         <div class="card-icon">🔐</div>
         <div class="card-title">密码绝不同款注册局</div>
@@ -144,14 +206,13 @@
         <div class="card-footer">进入 →</div>
       </a>
       <a href="projects/gender-unique.html" class="card">
-  <div class="card-icon">⚧️</div>
-  <div class="card-title">性别绝不同款注册局</div>
-  <div class="card-desc">世界只能有一男一女，再注册就撞性别。</div>
-  <div class="card-footer">进入 →</div>
-</a>
+        <div class="card-icon">⚧️</div>
+        <div class="card-title">性别绝不同款注册局</div>
+        <div class="card-desc">世界只能有一男一女，再注册就撞性别。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
     </div>
 
-    <!-- 捐赠卡片 -->
     <div class="donate-card" id="donateCard">
       <div class="donate-card-inner">
         <span class="donate-icon">❤️</span>
@@ -164,41 +225,56 @@
     </div>
   </div>
 
-<!-- 微信联系弹窗 -->
-<div class="contact-overlay" id="contactOverlay">
-  <div class="contact-modal">
-    <div class="contact-close" id="contactClose">✕</div>
-    <h3>🤝 扫码添加微信</h3>
-    <p>聊想法、谈合作，备注“离谱实验室”</p>
-    <img src="assets/images/wechat-contact.webp" alt="微信二维码">
-    <!-- 手机端友好：显示微信号 + 复制按钮 -->
-    <div class="wechat-id-box">
-      <span class="wechat-label">微信号：</span>
-      <code class="wechat-id" id="wechatId">mrpeijixing</code>
-      <button class="btn btn-sm copy-wechat-btn" id="copyWechatBtn">复制</button>
+  <!-- 联系弹窗 -->
+  <div class="contact-overlay" id="contactOverlay">
+    <div class="contact-modal">
+      <div class="contact-close" id="contactClose">✕</div>
+      <h3>🤝 扫码添加微信</h3>
+      <p>聊想法、谈合作，备注“离谱实验室”</p>
+      <img src="assets/images/wechat-contact.png" alt="微信二维码">
+      <div class="wechat-id-box">
+        <span class="wechat-label">微信号：</span>
+        <code class="wechat-id" id="wechatId">你的微信号</code>
+        <button class="btn btn-sm copy-wechat-btn" id="copyWechatBtn">复制</button>
+      </div>
+      <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.5rem;">
+        📱 手机用户点击“复制”后，打开微信添加朋友
+      </p>
     </div>
-    <p class="mobile-hint" style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.5rem;">
-      📱 手机用户点击“复制”后，打开微信添加朋友
-    </p>
   </div>
-</div>
+
+  <!-- Firebase 读取统计 -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+    import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
+      authDomain: "absurd-lab.firebaseapp.com",
+      projectId: "absurd-lab",
+      storageBucket: "absurd-lab.firebasestorage.app",
+      messagingSenderId: "989176389764",
+      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.db = db;
+    window.firestoreHelpers = { collection, getDocs };
+  </script>
+
   <script src="assets/ads.js"></script>
   <script src="assets/utils.js"></script>
   <script src="assets/ad-banner.js"></script>
   <script src="assets/donate.js"></script>
+  <script src="assets/stats.js"></script>
+  <script src="assets/share-button.js"></script>
 
   <script>
-    // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-      });
+      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
       navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-        });
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
       });
     }
 
@@ -206,39 +282,48 @@
     const contactLink = document.getElementById('contactLink');
     const contactOverlay = document.getElementById('contactOverlay');
     const contactClose = document.getElementById('contactClose');
-
     contactLink.addEventListener('click', (e) => {
       e.preventDefault();
       contactOverlay.classList.add('active');
     });
-
-    contactClose.addEventListener('click', () => {
-      contactOverlay.classList.remove('active');
-    });
-
+    contactClose.addEventListener('click', () => contactOverlay.classList.remove('active'));
     contactOverlay.addEventListener('click', (e) => {
-      if (e.target === contactOverlay) {
-        contactOverlay.classList.remove('active');
-      }
+      if (e.target === contactOverlay) contactOverlay.classList.remove('active');
     });
+
     // 复制微信号
-const copyWechatBtn = document.getElementById('copyWechatBtn');
-const wechatId = document.getElementById('wechatId');
-if (copyWechatBtn && wechatId) {
-  copyWechatBtn.addEventListener('click', () => {
-    const id = wechatId.textContent.trim();
-    copyToClipboard(id, (success) => {
-      if (success) {
-        copyWechatBtn.textContent = '已复制';
-        copyWechatBtn.classList.add('copied');
-        setTimeout(() => {
-          copyWechatBtn.textContent = '复制';
-          copyWechatBtn.classList.remove('copied');
-        }, 1500);
-      }
-    });
-  });
-}
+    const copyWechatBtn = document.getElementById('copyWechatBtn');
+    const wechatId = document.getElementById('wechatId');
+    if (copyWechatBtn && wechatId) {
+      copyWechatBtn.addEventListener('click', () => {
+        const id = wechatId.textContent.trim();
+        copyToClipboard(id, (success) => {
+          if (success) {
+            copyWechatBtn.textContent = '已复制';
+            copyWechatBtn.classList.add('copied');
+            setTimeout(() => {
+              copyWechatBtn.textContent = '复制';
+              copyWechatBtn.classList.remove('copied');
+            }, 1500);
+          }
+        });
+      });
+    }
+
+    // 更新统计数字
+    function updateStatsUI(data) {
+      document.getElementById('statPassword').textContent = data.password_unique || 0;
+      document.getElementById('statHuman').textContent = data.human_verification || 0;
+      document.getElementById('statProgress').textContent = data.progress_bar || 0;
+      document.getElementById('statSlide').textContent = data.slide_verify || 0;
+      document.getElementById('statGender').textContent = data.gender_unique || 0;
+    }
+
+    if (window.getStats) {
+      window.getStats(updateStatsUI);
+    } else {
+      updateStatsUI({});
+    }
   </script>
 </body>
 </html>
