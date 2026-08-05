@@ -171,7 +171,9 @@
     });
 
     function showConflictCard(gender) {
-      const conflictUser = gender === '男' ? '小仙女莉莉' : '钢铁直男老王';
+      // 修正：选择男，冲突用户是已注册的男性用户"钢铁直男老王"
+      // 选择女，冲突用户是已注册的女性用户"小仙女莉莉"
+      const conflictUser = gender === '男' ? '钢铁直男老王' : '小仙女莉莉';
       const cardHTML = `
         <div class="conflict-card" id="conflictCard">
           <div class="card-icon">🚫</div>
@@ -214,7 +216,7 @@
         return;
       }
 
-      // 永远冲突：无论选什么性别，都会显示对应性别的冲突卡片
+      // 永远冲突：显示正确的冲突卡片
       showConflictCard(selectedGender);
       failCount++;
 

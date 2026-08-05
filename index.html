@@ -3,92 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>性别绝不同款注册局 | 离谱发明实验室</title>
-  <link rel="stylesheet" href="../assets/style.css">
+  <title>离谱发明实验室 | oldpei.site</title>
+  <link rel="stylesheet" href="assets/style.css">
   <style>
-    .rule-hint {
-      background-color: rgba(88,166,255,0.05);
-      border-left: 3px solid var(--accent-blue);
-      padding: 0.8rem 1rem;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-      border-radius: var(--radius);
-    }
-    .submit-btn {
-      width: 100%;
-      margin-top: 0.5rem;
-      background-color: var(--accent-blue);
-      color: #fff;
-      border: none;
-      padding: 0.7rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .gender-select {
-      display: flex;
-      gap: 1rem;
-      margin: 0.5rem 0;
-    }
-    .gender-option {
-      flex: 1;
-      padding: 0.7rem;
-      border: 2px solid var(--border-color);
-      border-radius: var(--radius);
+    /* 业务标语 */
+    .biz-tagline {
       text-align: center;
-      cursor: pointer;
-      background: var(--bg-primary);
+      font-size: 0.85rem;
       color: var(--text-secondary);
-      font-weight: 600;
-      transition: all 0.2s;
+      margin-bottom: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: rgba(88,166,255,0.05);
+      border-radius: 20px;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .gender-option.selected {
-      border-color: var(--accent-blue);
+    .biz-tagline a {
       color: var(--accent-blue);
-      background: rgba(88,166,255,0.1);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
     }
-    .conflict-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--accent-red);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(248,81,73,0.2);
-      animation: pulse 2s infinite;
+    .biz-tagline a:hover {
+      text-decoration: underline;
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px rgba(248,81,73,0.3); }
-      50% { box-shadow: 0 0 20px rgba(248,81,73,0.6); }
-      100% { box-shadow: 0 0 10px rgba(248,81,73,0.3); }
-    }
-    .conflict-card .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .conflict-card .card-line { margin: 0.5rem 0; font-size: 1rem; color: var(--text-primary); }
-    .conflict-card .card-line strong { color: var(--accent-yellow); }
-    .conflict-card .card-footer-text { margin-top: 1rem; font-size: 0.8rem; color: var(--text-secondary); }
-    .fake-users {
-      display: flex;
-      gap: 1rem;
-      margin: 1.5rem 0;
+
+    /* 联系弹窗 */
+    .contact-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.75);
+      z-index: 1001;
       justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
     }
-    .fake-user-card {
-      background: var(--bg-secondary);
+    .contact-overlay.active {
+      display: flex;
+    }
+    .contact-modal {
+      background-color: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
-      padding: 1rem;
-      width: 140px;
+      padding: 2rem;
+      max-width: 300px;
+      width: 90%;
       text-align: center;
-      font-size: 0.9rem;
+      position: relative;
     }
-    .fake-user-card .user-icon { font-size: 2rem; }
-    .fake-user-card .user-name { font-weight: 700; margin: 0.3rem 0; }
-    .fake-user-card .user-gender { color: var(--accent-blue); }
+    .contact-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .contact-close:hover {
+      color: var(--accent-red);
+    }
+    .contact-modal h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .contact-modal p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .contact-modal img {
+      width: 200px;
+      height: 200px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      object-fit: contain;
+      background-color: #fff;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 480px) {
+      .biz-tagline {
+        white-space: normal;
+        padding: 0.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -96,136 +102,143 @@
     <span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="../index.html" class="nav-link">← 返回实验室</a>
+      <a href="resources.html" class="nav-link">📡 资源补给站</a>
+      <a href="#" class="nav-link">关于</a>
     </div>
   </nav>
 
-  <div class="container" style="max-width: 500px; margin-top: 2rem;">
-    <h1 class="page-title" style="font-size: 1.8rem;">⚧️ 性别绝不同款注册局</h1>
-    <p class="page-subtitle">世界上只能有一男一女，其他人都得靠边站。</p>
+  <div class="container">
+    <h1 class="page-title">// 离谱发明实验室</h1>
+    <p class="page-subtitle">以下所有项目均通过国际反逻辑认证，请谨慎体验。</p>
 
-    <div class="rule-hint">
-      <span>📜</span>
-      <div>本站严格实行性别配额制。目前仅存的两位用户已经占满了所有名额。你可以尝试注册，但注定失败。</div>
-    </div>
-
-    <!-- 假用户展示 -->
-    <div class="fake-users">
-      <div class="fake-user-card">
-        <div class="user-icon">👨</div>
-        <div class="user-name">钢铁直男老王</div>
-        <div class="user-gender">性别：男</div>
-      </div>
-      <div class="fake-user-card">
-        <div class="user-icon">👩</div>
-        <div class="user-name">小仙女莉莉</div>
-        <div class="user-gender">性别：女</div>
-      </div>
+    <!-- 业务标语 -->
+    <div class="biz-tagline">
+      💼 承接网页 / 小程序定制，有趣的想法我们一起实现 → 
+      <a id="contactLink">联系我</a>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">用户名</label>
-      <input type="text" id="regUsername" class="form-input" placeholder="给自己起个名（反正用不上）">
+    <div class="card-grid">
+      <!-- 四个卡片保持不变，此处省略 -->
+      <a href="projects/password-unique.html" class="card">
+        <div class="card-icon">🔐</div>
+        <div class="card-title">密码绝不同款注册局</div>
+        <div class="card-desc">你的密码必须全球唯一，重复就会被公开处刑。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <a href="projects/human-verification.html" class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">人类审核机器局</div>
+        <div class="card-desc">证明你是人类，但你永远通不过验证。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <a href="projects/progress-bar.html" class="card">
+        <div class="card-icon">⏳</div>
+        <div class="card-title">反逻辑进度条生成器</div>
+        <div class="card-desc">下载进度永远停在99%，取消反而瞬间完成。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <a href="projects/slide-verify.html" class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">捉迷藏滑块验证</div>
+        <div class="card-desc">滑块验证弹窗会跟着鼠标跑，永远无法完成。</div>
+        <div class="card-footer">进入 →</div>
+      </a>
+      <a href="projects/gender-unique.html" class="card">
+  <div class="card-icon">⚧️</div>
+  <div class="card-title">性别绝不同款注册局</div>
+  <div class="card-desc">世界只能有一男一女，再注册就撞性别。</div>
+  <div class="card-footer">进入 →</div>
+</a>
     </div>
-    <div class="form-group">
-      <label class="form-label">密码</label>
-      <input type="password" id="regPassword" class="form-input" placeholder="输入密码（也没用）">
-    </div>
-    <div class="form-group">
-      <label class="form-label">选择性别</label>
-      <div class="gender-select">
-        <div class="gender-option" data-gender="男">👨 男</div>
-        <div class="gender-option" data-gender="女">👩 女</div>
+
+    <!-- 捐赠卡片 -->
+    <div class="donate-card" id="donateCard">
+      <div class="donate-card-inner">
+        <span class="donate-icon">❤️</span>
+        <div>
+          <div class="donate-title">支持离谱发明实验室</div>
+          <div class="donate-sub">如果你被逗笑了，请我喝杯咖啡吧 ☕</div>
+        </div>
+        <button class="btn donate-open-btn">赞赏一下</button>
       </div>
     </div>
-    <button class="submit-btn" id="registerBtn">立即注册</button>
-    <div id="messageBox"></div>
   </div>
 
-  <script src="../assets/ads.js"></script>
-  <script src="../assets/utils.js"></script>
-  <script src="../assets/ad-banner.js"></script>
-  <script src="../assets/share-button.js"></script>
+<!-- 微信联系弹窗 -->
+<div class="contact-overlay" id="contactOverlay">
+  <div class="contact-modal">
+    <div class="contact-close" id="contactClose">✕</div>
+    <h3>🤝 扫码添加微信</h3>
+    <p>聊想法、谈合作，备注“离谱实验室”</p>
+    <img src="assets/images/wechat-contact.png" alt="微信二维码">
+    <!-- 手机端友好：显示微信号 + 复制按钮 -->
+    <div class="wechat-id-box">
+      <span class="wechat-label">微信号：</span>
+      <code class="wechat-id" id="wechatId">mrpeijixing</code>
+      <button class="btn btn-sm copy-wechat-btn" id="copyWechatBtn">复制</button>
+    </div>
+    <p class="mobile-hint" style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.5rem;">
+      📱 手机用户点击“复制”后，打开微信添加朋友
+    </p>
+  </div>
+</div>
+  <script src="assets/ads.js"></script>
+  <script src="assets/utils.js"></script>
+  <script src="assets/ad-banner.js"></script>
+  <script src="assets/donate.js"></script>
 
   <script>
     // 汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
       navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('open'));
-      });
-    }
-
-    let selectedGender = null;
-    let failCount = 0;
-
-    // 性别选择
-    document.querySelectorAll('.gender-option').forEach(opt => {
-      opt.addEventListener('click', function() {
-        document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
-        this.classList.add('selected');
-        selectedGender = this.dataset.gender;
-      });
-    });
-
-    function showConflictCard(gender) {
-      // 修正：选择男，冲突用户是已注册的男性用户"钢铁直男老王"
-      // 选择女，冲突用户是已注册的女性用户"小仙女莉莉"
-      const conflictUser = gender === '男' ? '钢铁直男老王' : '小仙女莉莉';
-      const cardHTML = `
-        <div class="conflict-card" id="conflictCard">
-          <div class="card-icon">🚫</div>
-          <div class="card-line"><strong>性别已被占用</strong></div>
-          <div class="card-line">你选择的性别：<strong>${gender}</strong></div>
-          <div class="card-line">已被用户：<strong>${conflictUser}</strong> 占用</div>
-          <div class="card-line" style="color:var(--accent-yellow);">一山不容二虎，除非一公一母</div>
-          <div class="card-footer-text">📸 截图分享，让大家看看谁抢了你的性别</div>
-        </div>
-      `;
-      document.getElementById('messageBox').innerHTML = cardHTML;
-    }
-
-    function showAd() {
-      if (typeof AD_LIST === 'undefined' || AD_LIST.length === 0) return;
-      const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
-      const adHTML = `
-        <div class="message" style="background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;">
-          <strong>🎁 世界已满，但你获得了隐藏资源：</strong> ${randomAd.title}<br>
-          <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
-        </div>
-      `;
-      document.getElementById('messageBox').innerHTML += adHTML;
-      document.getElementById('copyAdBtn').addEventListener('click', () => {
-        copyToClipboard(randomAd.code, (success) => {
-          alert(success ? '已复制，请到对应的 App 查看' : '复制失败');
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
         });
       });
     }
 
-    document.getElementById('registerBtn').addEventListener('click', () => {
-      const username = document.getElementById('regUsername').value.trim();
-      const password = document.getElementById('regPassword').value.trim();
-      if (!username || !password) {
-        document.getElementById('messageBox').innerHTML = '<div class="message message-error">用户名和密码不能为空（虽然填了也没用）</div>';
-        return;
-      }
-      if (!selectedGender) {
-        document.getElementById('messageBox').innerHTML = '<div class="message message-error">请选择性别</div>';
-        return;
-      }
+    // 联系弹窗
+    const contactLink = document.getElementById('contactLink');
+    const contactOverlay = document.getElementById('contactOverlay');
+    const contactClose = document.getElementById('contactClose');
 
-      // 永远冲突：显示正确的冲突卡片
-      showConflictCard(selectedGender);
-      failCount++;
+    contactLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactOverlay.classList.add('active');
+    });
 
-      if (failCount >= 3) {
-        document.getElementById('registerBtn').disabled = true;
-        document.getElementById('registerBtn').textContent = '世界已满';
-        showAd();
+    contactClose.addEventListener('click', () => {
+      contactOverlay.classList.remove('active');
+    });
+
+    contactOverlay.addEventListener('click', (e) => {
+      if (e.target === contactOverlay) {
+        contactOverlay.classList.remove('active');
       }
     });
+    // 复制微信号
+const copyWechatBtn = document.getElementById('copyWechatBtn');
+const wechatId = document.getElementById('wechatId');
+if (copyWechatBtn && wechatId) {
+  copyWechatBtn.addEventListener('click', () => {
+    const id = wechatId.textContent.trim();
+    copyToClipboard(id, (success) => {
+      if (success) {
+        copyWechatBtn.textContent = '已复制';
+        copyWechatBtn.classList.add('copied');
+        setTimeout(() => {
+          copyWechatBtn.textContent = '复制';
+          copyWechatBtn.classList.remove('copied');
+        }, 1500);
+      }
+    });
+  });
+}
   </script>
 </body>
 </html>
