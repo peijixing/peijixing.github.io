@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>资源补给站 | oldpei.site</title>
+  <title>资源补给站 | 离谱发明实验室</title>
   <link rel="stylesheet" href="assets/style.css">
-  <style>
-    .resource-code-block code {
-      white-space: pre-line;
-    }
-  </style>
+  <style>.resource-code-block code { white-space: pre-line; }</style>
 </head>
 <body>
   <nav class="navbar">
-<span class="logo">离谱发明实验室</span>
+    <span class="logo">离谱发明实验室</span>
     <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html" class="nav-link">← 返回实验室</a>
@@ -30,26 +26,17 @@
   <script src="assets/utils.js"></script>
   <script src="assets/ad-banner.js"></script>
   <script>
-    // 移动端汉堡菜单
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-      });
-      navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-        });
-      });
+      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+      navLinks.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
     }
 
-    // 渲染资源列表
     function renderResources() {
       const container = document.getElementById('resourceList');
-      if (typeof AD_LIST === 'undefined' || !Array.isArray(AD_LIST) || AD_LIST.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary);">暂无资源，请稍后再来。</p>';
-        return;
+      if (!Array.isArray(AD_LIST) || AD_LIST.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-secondary);">暂无资源</p>'; return;
       }
       container.innerHTML = '';
       AD_LIST.forEach(ad => {
@@ -64,23 +51,13 @@
               <button class="btn btn-sm copy-resource-btn" data-code="${ad.code.replace(/"/g, '&quot;')}">复制</button>
               <span class="resource-platform">${ad.platform}</span>
             </div>
-          </div>
-        `;
+          </div>`;
         container.appendChild(card);
       });
-
       document.querySelectorAll('.copy-resource-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-          const code = this.getAttribute('data-code');
-          copyToClipboard(code, (success) => {
-            if (success) {
-              this.textContent = '已复制';
-              this.classList.add('copied');
-              setTimeout(() => {
-                this.textContent = '复制';
-                this.classList.remove('copied');
-              }, 1500);
-            }
+          copyToClipboard(this.getAttribute('data-code'), success => {
+            if (success) { this.textContent = '已复制'; this.classList.add('copied'); setTimeout(() => { this.textContent = '复制'; this.classList.remove('copied'); }, 1500); }
           });
         });
       });
@@ -89,3 +66,4 @@
     window.addEventListener('DOMContentLoaded', renderResources);
   </script>
 </body>
+</html>

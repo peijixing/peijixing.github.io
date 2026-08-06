@@ -1,4 +1,3 @@
-// assets/stats.js
 (function() {
   function localIncrement(statName) {
     const key = 'stats_' + statName;

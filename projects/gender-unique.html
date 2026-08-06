@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>性别绝不同款注册局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <!-- Firebase 初始化 -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
     import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
@@ -23,38 +22,19 @@
     window.firestoreHelpers = { doc, setDoc, increment };
   </script>
   <style>
-    .rule-hint {
-      background-color: rgba(88,166,255,0.05); border-left: 3px solid var(--accent-blue);
-      padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem;
-      display: flex; gap: 0.5rem; align-items: flex-start; border-radius: var(--radius);
-    }
+    .rule-hint { background-color: rgba(88,166,255,0.05); border-left: 3px solid var(--accent-blue); padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem; display: flex; gap: 0.5rem; align-items: flex-start; border-radius: var(--radius); }
     .submit-btn { width: 100%; margin-top: 0.5rem; background-color: var(--accent-blue); color: #fff; border: none; padding: 0.7rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 1rem; }
     .gender-select { display: flex; gap: 1rem; margin: 0.5rem 0; }
-    .gender-option {
-      flex: 1; padding: 0.7rem; border: 2px solid var(--border-color); border-radius: var(--radius);
-      text-align: center; cursor: pointer; background: var(--bg-primary); color: var(--text-secondary);
-      font-weight: 600; transition: all 0.2s;
-    }
+    .gender-option { flex: 1; padding: 0.7rem; border: 2px solid var(--border-color); border-radius: var(--radius); text-align: center; cursor: pointer; background: var(--bg-primary); color: var(--text-secondary); font-weight: 600; transition: all 0.2s; }
     .gender-option.selected { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(88,166,255,0.1); }
-    .conflict-card {
-      background: var(--bg-secondary); border: 1px solid var(--accent-red); border-radius: var(--radius);
-      padding: 1.5rem; margin-top: 1.5rem; text-align: center;
-      box-shadow: 0 0 15px rgba(248,81,73,0.2); animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px rgba(248,81,73,0.3); }
-      50% { box-shadow: 0 0 20px rgba(248,81,73,0.6); }
-      100% { box-shadow: 0 0 10px rgba(248,81,73,0.3); }
-    }
+    .conflict-card { background: var(--bg-secondary); border: 1px solid var(--accent-red); border-radius: var(--radius); padding: 1.5rem; margin-top: 1.5rem; text-align: center; box-shadow: 0 0 15px rgba(248,81,73,0.2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 10px rgba(248,81,73,0.3); } 50% { box-shadow: 0 0 20px rgba(248,81,73,0.6); } 100% { box-shadow: 0 0 10px rgba(248,81,73,0.3); } }
     .conflict-card .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
     .conflict-card .card-line { margin: 0.5rem 0; font-size: 1rem; color: var(--text-primary); }
     .conflict-card .card-line strong { color: var(--accent-yellow); }
     .conflict-card .card-footer-text { margin-top: 1rem; font-size: 0.8rem; color: var(--text-secondary); }
     .fake-users { display: flex; gap: 1rem; margin: 1.5rem 0; justify-content: center; flex-wrap: wrap; }
-    .fake-user-card {
-      background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius);
-      padding: 1rem; width: 140px; text-align: center; font-size: 0.9rem;
-    }
+    .fake-user-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1rem; width: 140px; text-align: center; font-size: 0.9rem; }
     .fake-user-card .user-icon { font-size: 2rem; }
     .fake-user-card .user-name { font-weight: 700; margin: 0.3rem 0; }
     .fake-user-card .user-gender { color: var(--accent-blue); }
@@ -73,34 +53,16 @@
     <h1 class="page-title" style="font-size: 1.8rem;">⚧️ 性别绝不同款注册局</h1>
     <p class="page-subtitle">世界上只能有一男一女，其他人都得靠边站。</p>
 
-    <div class="rule-hint">
-      <span>📜</span>
-      <div>本站严格实行性别配额制。目前仅存的两位用户已经占满了所有名额。你可以尝试注册，但注定失败。</div>
-    </div>
+    <div class="rule-hint"><span>📜</span><div>本站严格实行性别配额制。目前仅存的两位用户已经占满了所有名额。你可以尝试注册，但注定失败。</div></div>
 
     <div class="fake-users">
-      <div class="fake-user-card">
-        <div class="user-icon">👨</div>
-        <div class="user-name">钢铁直男老王</div>
-        <div class="user-gender">性别：男</div>
-      </div>
-      <div class="fake-user-card">
-        <div class="user-icon">👩</div>
-        <div class="user-name">小仙女莉莉</div>
-        <div class="user-gender">性别：女</div>
-      </div>
+      <div class="fake-user-card"><div class="user-icon">👨</div><div class="user-name">钢铁直男老王</div><div class="user-gender">性别：男</div></div>
+      <div class="fake-user-card"><div class="user-icon">👩</div><div class="user-name">小仙女莉莉</div><div class="user-gender">性别：女</div></div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">用户名</label>
-      <input type="text" id="regUsername" class="form-input" placeholder="给自己起个名（反正用不上）">
-    </div>
-    <div class="form-group">
-      <label class="form-label">密码</label>
-      <input type="password" id="regPassword" class="form-input" placeholder="输入密码（也没用）">
-    </div>
-    <div class="form-group">
-      <label class="form-label">选择性别</label>
+    <div class="form-group"><label class="form-label">用户名</label><input type="text" id="regUsername" class="form-input" placeholder="给自己起个名（反正用不上）"></div>
+    <div class="form-group"><label class="form-label">密码</label><input type="password" id="regPassword" class="form-input" placeholder="输入密码（也没用）"></div>
+    <div class="form-group"><label class="form-label">选择性别</label>
       <div class="gender-select">
         <div class="gender-option" data-gender="男">👨 男</div>
         <div class="gender-option" data-gender="女">👩 女</div>
@@ -121,13 +83,10 @@
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
       menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-      navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('open'));
-      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
     }
 
-    let selectedGender = null;
-    let failCount = 0;
+    let selectedGender = null, failCount = 0;
 
     document.querySelectorAll('.gender-option').forEach(opt => {
       opt.addEventListener('click', function() {
@@ -139,7 +98,7 @@
 
     function showConflictCard(gender) {
       const conflictUser = gender === '男' ? '钢铁直男老王' : '小仙女莉莉';
-      const cardHTML = `
+      document.getElementById('messageBox').innerHTML = `
         <div class="conflict-card" id="conflictCard">
           <div class="card-icon">🚫</div>
           <div class="card-line"><strong>性别已被占用</strong></div>
@@ -147,46 +106,28 @@
           <div class="card-line">已被用户：<strong>${conflictUser}</strong> 占用</div>
           <div class="card-line" style="color:var(--accent-yellow);">一山不容二虎，除非一公一母</div>
           <div class="card-footer-text">📸 截图分享，让大家看看谁抢了你的性别</div>
-        </div>
-      `;
-      document.getElementById('messageBox').innerHTML = cardHTML;
+        </div>`;
     }
 
     function showAd() {
       if (typeof AD_LIST === 'undefined' || AD_LIST.length === 0) return;
       const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
-      const adHTML = `
-        <div class="message" style="background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;">
-          <strong>🎁 世界已满，但你获得了隐藏资源：</strong> ${randomAd.title}<br>
-          <button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button>
-        </div>`;
+      const adHTML = `<div class="message" style="background-color: rgba(88,166,255,0.1); border-color: var(--accent-blue); margin-top: 1rem;"><strong>🎁 世界已满，但你获得了隐藏资源：</strong> ${randomAd.title}<br><button class="btn btn-sm" style="margin-top: 0.5rem;" id="copyAdBtn">复制口令</button></div>`;
       document.getElementById('messageBox').innerHTML += adHTML;
-      document.getElementById('copyAdBtn').addEventListener('click', () => {
-        copyToClipboard(randomAd.code, success => alert(success ? '已复制，请到对应的 App 查看' : '复制失败'));
-      });
+      document.getElementById('copyAdBtn').addEventListener('click', () => copyToClipboard(randomAd.code, s => alert(s ? '已复制，请到对应的 App 查看' : '复制失败')));
     }
 
     document.getElementById('registerBtn').addEventListener('click', () => {
-      const username = document.getElementById('regUsername').value.trim();
-      const password = document.getElementById('regPassword').value.trim();
-      if (!username || !password) {
-        document.getElementById('messageBox').innerHTML = '<div class="message message-error">用户名和密码不能为空（虽然填了也没用）</div>';
-        return;
-      }
-      if (!selectedGender) {
-        document.getElementById('messageBox').innerHTML = '<div class="message message-error">请选择性别</div>';
-        return;
-      }
+      const username = document.getElementById('regUsername').value.trim(), password = document.getElementById('regPassword').value.trim();
+      if (!username || !password) { document.getElementById('messageBox').innerHTML = '<div class="message message-error">用户名和密码不能为空（虽然填了也没用）</div>'; return; }
+      if (!selectedGender) { document.getElementById('messageBox').innerHTML = '<div class="message message-error">请选择性别</div>'; return; }
 
       showConflictCard(selectedGender);
       failCount++;
+      if (failCount >= 3) { document.getElementById('registerBtn').disabled = true; document.getElementById('registerBtn').textContent = '世界已满'; showAd(); }
+    });
 
-      if (failCount >= 3) {
-        document.getElementById('registerBtn').disabled = true;
-        document.getElementById('registerBtn').textContent = '世界已满';
-        showAd();
-      }
-
+    window.addEventListener('DOMContentLoaded', () => {
       if (window.incrementStat) window.incrementStat('gender_unique');
     });
   </script>

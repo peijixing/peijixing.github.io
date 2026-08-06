@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>人类审核机器局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <!-- Firebase 初始化 -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-    import { getFirestore, collection, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
     const firebaseConfig = {
       apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
       authDomain: "absurd-lab.firebaseapp.com",
@@ -20,66 +19,26 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     window.db = db;
-    window.firestoreHelpers = { collection, doc, setDoc, increment };
+    window.firestoreHelpers = { doc, setDoc, increment };
   </script>
   <style>
-    .verification-box {
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 2rem;
-      max-width: 500px;
-      margin: 2rem auto;
-      width: 90%;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.8rem;
-      margin: 1.5rem 0;
-    }
-    .grid-item {
-      aspect-ratio: 1 / 1;
-      background-size: cover;
-      background-position: center;
-      border: 2px solid var(--border-color);
-      border-radius: 6px;
-      cursor: pointer;
-      filter: blur(2px) brightness(0.9);
-      transition: filter 0.2s, border-color 0.2s, box-shadow 0.2s;
-    }
-    .grid-item.selected {
-      border-color: var(--accent-blue);
-      filter: blur(0px) brightness(1.1);
-      box-shadow: 0 0 0 3px rgba(88,166,255,0.5);
-    }
-    .grid-item:hover {
-      filter: blur(1px) brightness(0.95);
-    }
+    .verification-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 500px; margin: 2rem auto; width: 90%; }
+    .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.5rem 0; }
+    .grid-item { aspect-ratio: 1 / 1; background-size: cover; background-position: center; border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer; filter: blur(2px) brightness(0.9); transition: filter 0.2s, border-color 0.2s, box-shadow 0.2s; }
+    .grid-item.selected { border-color: var(--accent-blue); filter: blur(0px) brightness(1.1); box-shadow: 0 0 0 3px rgba(88,166,255,0.5); }
+    .grid-item:hover { filter: blur(1px) brightness(0.95); }
     .btn-verify { width: 100%; }
     .fail-counter { text-align: center; color: var(--text-secondary); margin: 1rem 0; font-family: var(--font-mono); }
     .refresh-hint { text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; }
-
-    .easter-egg-overlay {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75); z-index: 1000; justify-content: center; align-items: center;
-    }
+    .easter-egg-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 1000; justify-content: center; align-items: center; }
     .easter-egg-overlay.active { display: flex; }
-    .easter-egg-modal {
-      background: var(--bg-secondary); border: 1px solid var(--accent-blue);
-      border-radius: var(--radius); padding: 2rem; max-width: 360px; width: 90%;
-      text-align: center; box-shadow: 0 0 30px rgba(88,166,255,0.3);
-    }
+    .easter-egg-modal { background: var(--bg-secondary); border: 1px solid var(--accent-blue); border-radius: var(--radius); padding: 2rem; max-width: 360px; width: 90%; text-align: center; box-shadow: 0 0 30px rgba(88,166,255,0.3); }
     .easter-egg-modal h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
     .easter-egg-modal p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; }
     .easter-egg-modal .resource-title { color: var(--accent-green); font-weight: 600; margin: 1rem 0; font-size: 1.1rem; }
     .easter-egg-modal .btn { margin-top: 1rem; }
     .easter-egg-modal .close-egg { background: none; border: none; color: var(--text-secondary); font-size: 0.85rem; cursor: pointer; margin-top: 0.5rem; text-decoration: underline; }
-
-    @media (max-width: 480px) {
-      .verification-box { padding: 1.5rem; }
-      .grid-container { gap: 0.5rem; }
-    }
+    @media (max-width: 480px) { .verification-box { padding: 1.5rem; } .grid-container { gap: 0.5rem; } }
   </style>
 </head>
 <body>
@@ -97,19 +56,14 @@
 
     <div class="verification-box">
       <div id="messageBox"></div>
-      <p style="margin-bottom: 0.5rem; font-weight: 600;">
-        请选出所有包含 <span style="color: var(--accent-blue);">红绿灯</span> 的图片：
-      </p>
+      <p style="margin-bottom: 0.5rem; font-weight: 600;">请选出所有包含 <span style="color: var(--accent-blue);">红绿灯</span> 的图片：</p>
       <div class="grid-container" id="imageGrid"></div>
-      <div class="refresh-hint">
-        看不清？<a href="#" id="refreshLink">换一批图片</a>
-      </div>
+      <div class="refresh-hint">看不清？<a href="#" id="refreshLink">换一批图片</a></div>
       <button class="btn btn-verify" id="verifyBtn">验证</button>
       <div class="fail-counter">剩余尝试次数：<span id="attemptsLeft">3</span></div>
     </div>
   </div>
 
-  <!-- 广告彩蛋弹窗 -->
   <div class="easter-egg-overlay" id="easterEggOverlay">
     <div class="easter-egg-modal">
       <h3>🤖 系统判定：您是高级AI</h3>
@@ -132,9 +86,7 @@
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
       menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-      navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('open'));
-      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
     }
 
     let attempts = 3;
@@ -142,7 +94,6 @@
     const messageBox = document.getElementById('messageBox');
     const imageGrid = document.getElementById('imageGrid');
     const refreshLink = document.getElementById('refreshLink');
-
     const easterEggOverlay = document.getElementById('easterEggOverlay');
     const eggResourceTitle = document.getElementById('eggResourceTitle');
     const eggCopyBtn = document.getElementById('eggCopyBtn');
@@ -152,86 +103,47 @@
     function generateGrid() {
       imageGrid.innerHTML = '';
       for (let i = 0; i < 9; i++) {
-        const div = document.createElement('div');
-        div.className = 'grid-item';
-        const imgId = Math.floor(Math.random() * 200) + 1;
-        div.style.backgroundImage = `url(https://picsum.photos/id/${imgId}/200/200)`;
+        const div = document.createElement('div'); div.className = 'grid-item';
+        div.style.backgroundImage = `url(https://picsum.photos/id/${Math.floor(Math.random()*200)+1}/200/200)`;
         div.addEventListener('click', () => div.classList.toggle('selected'));
         imageGrid.appendChild(div);
       }
     }
-
-    function showMessage(text, type) {
-      messageBox.innerHTML = `<div class="message message-${type}">${text}</div>`;
-    }
-
-    function showEasterEgg(ad) {
-      if (!ad) return;
-      currentAd = ad;
-      eggResourceTitle.textContent = ad.title;
-      easterEggOverlay.classList.add('active');
-    }
-
-    function hideEasterEgg() {
-      easterEggOverlay.classList.remove('active');
-    }
+    function showMessage(text, type) { messageBox.innerHTML = `<div class="message message-${type}">${text}</div>`; }
+    function showEasterEgg(ad) { currentAd = ad; eggResourceTitle.textContent = ad.title; easterEggOverlay.classList.add('active'); }
+    function hideEasterEgg() { easterEggOverlay.classList.remove('active'); }
 
     eggCopyBtn.addEventListener('click', () => {
-      if (currentAd) {
-        copyToClipboard(currentAd.code, (success) => {
-          if (success) {
-            eggCopyBtn.textContent = '✅ 已复制';
-            setTimeout(() => eggCopyBtn.textContent = '📋 复制口令', 2000);
-          } else alert('复制失败');
-        });
-      }
+      if (currentAd) copyToClipboard(currentAd.code, success => {
+        if (success) { eggCopyBtn.textContent = '✅ 已复制'; setTimeout(() => eggCopyBtn.textContent = '📋 复制口令', 2000); } else alert('复制失败');
+      });
     });
-
     closeEggBtn.addEventListener('click', hideEasterEgg);
-    easterEggOverlay.addEventListener('click', (e) => {
-      if (e.target === easterEggOverlay) hideEasterEgg();
-    });
+    easterEggOverlay.addEventListener('click', e => { if (e.target === easterEggOverlay) hideEasterEgg(); });
 
     document.getElementById('verifyBtn').addEventListener('click', () => {
       const selected = document.querySelectorAll('.grid-item.selected');
-      if (selected.length === 0) {
-        showMessage('请至少选择一个图片。', 'error');
-        return;
-      }
-      attempts--;
-      attemptsLeftEl.textContent = attempts;
-
+      if (selected.length === 0) { showMessage('请至少选择一个图片。', 'error'); return; }
+      attempts--; attemptsLeftEl.textContent = attempts;
       if (attempts > 0) {
         showMessage('验证失败，请重试。提示：仔细观察图片中的红绿灯。', 'error');
         document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
         generateGrid();
       } else {
         showMessage('🤖 系统判定您可能是高级AI，验证已锁定。', 'error');
-        document.getElementById('verifyBtn').disabled = true;
-        document.getElementById('verifyBtn').textContent = '已锁定';
-        document.querySelectorAll('.grid-item').forEach(item => {
-          item.style.pointerEvents = 'none';
-          item.style.filter = 'blur(1px)';
-        });
-        refreshLink.style.pointerEvents = 'none';
-        refreshLink.style.color = 'var(--text-secondary)';
-
-        if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) {
-          const randomAd = AD_LIST[Math.floor(Math.random() * AD_LIST.length)];
-          showEasterEgg(randomAd);
-        }
-
-        if (window.incrementStat) window.incrementStat('human_verification');
+        document.getElementById('verifyBtn').disabled = true; document.getElementById('verifyBtn').textContent = '已锁定';
+        document.querySelectorAll('.grid-item').forEach(item => { item.style.pointerEvents = 'none'; item.style.filter = 'blur(1px)'; });
+        refreshLink.style.pointerEvents = 'none'; refreshLink.style.color = 'var(--text-secondary)';
+        if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) showEasterEgg(AD_LIST[Math.floor(Math.random() * AD_LIST.length)]);
       }
     });
 
-    refreshLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
+    refreshLink.addEventListener('click', e => { e.preventDefault(); document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected')); generateGrid(); });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.incrementStat) window.incrementStat('human_verification');
       generateGrid();
     });
-
-    generateGrid();
   </script>
 </body>
 </html>
