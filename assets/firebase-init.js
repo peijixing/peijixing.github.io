@@ -1,5 +1,18 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-import { getFirestore, collection, doc, setDoc, increment, getDocs } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  setDoc,
+  increment,
+  getDocs
+} from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
@@ -12,5 +25,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// 挂载到全局，兼容现有代码
 window.db = db;
-window.firestoreHelpers = { collection, doc, setDoc, increment, getDocs };
+window.firestoreHelpers = {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  setDoc,
+  increment,
+  getDocs
+};

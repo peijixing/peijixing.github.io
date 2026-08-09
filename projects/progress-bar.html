@@ -5,22 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>反逻辑进度条生成器 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
-      authDomain: "absurd-lab.firebaseapp.com",
-      projectId: "absurd-lab",
-      storageBucket: "absurd-lab.firebasestorage.app",
-      messagingSenderId: "989176389764",
-      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    window.db = db;
-    window.firestoreHelpers = { doc, setDoc, increment };
-  </script>
+<script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .progress-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 500px; margin: 2rem auto; text-align: center; }
     .progress { height: 30px; background-color: var(--bg-primary); border-radius: 15px; overflow: hidden; margin: 1.5rem 0; }
@@ -114,6 +99,8 @@
       startBtn.disabled = true; pauseBtn.disabled = true; cancelBtn.disabled = true; speedBtn.disabled = true;
       randomJoke.textContent = '人生就是这样，越想放弃越容易成功。';
       showAd();
+      // 下载翻车计数
+      if (window.incrementStat) window.incrementStat('progress_bar');
     }
     function toggleSpeed() {
       if (speedMultiplier === 1) { speedMultiplier = -1; speedBtn.textContent = '减速'; speedBtn.style.backgroundColor = 'var(--accent-red)'; statusText.textContent = '加速模式启动！（实为倒车请注意）'; randomJoke.textContent = '文件正在被撤回，请勿惊慌。'; }
@@ -132,11 +119,7 @@
     pauseBtn.addEventListener('click', () => { if (isPaused) resumeDownload(); else pauseDownload(); });
     cancelBtn.addEventListener('click', cancelDownload);
     speedBtn.addEventListener('click', toggleSpeed);
-
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.incrementStat) window.incrementStat('progress_bar');
-      updateUI();
-    });
+    updateUI();
   </script>
 </body>
 </html>

@@ -5,22 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>捉迷藏滑块验证 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
-      authDomain: "absurd-lab.firebaseapp.com",
-      projectId: "absurd-lab",
-      storageBucket: "absurd-lab.firebasestorage.app",
-      messagingSenderId: "989176389764",
-      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    window.db = db;
-    window.firestoreHelpers = { doc, setDoc, increment };
-  </script>
+<script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .login-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 400px; margin: 2rem auto; }
     .submit-btn { width: 100%; margin-top: 1rem; }
@@ -81,7 +66,6 @@
   <script src="../assets/share-button.js"></script>
 
   <script>
-    // 菜单、登录等逻辑与之前相同，此处保持全部交互
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -179,13 +163,11 @@
         document.getElementById('copyAdBtn').addEventListener('click', () => copyToClipboard(randomAd.code, s => alert(s ? '已复制，请到对应的 App 查看' : '复制失败')));
       }
       sliderTrack.style.display = 'none'; verifyBox.querySelector('p').style.display = 'none'; document.querySelector('.verify-hint').style.display = 'none'; giveUpBtn.style.display = 'none';
+      // 滑块放弃计数
+      if (window.incrementStat) window.incrementStat('slide_verify');
     }
 
     overlay.addEventListener('click', e => { if (e.target === overlay) hideVerify(); });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.incrementStat) window.incrementStat('slide_verify');
-    });
   </script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-/* ========== 全局变量 ========== */
 :root {
   --bg-primary: #0d1117;
   --bg-secondary: #161b22;
@@ -15,13 +14,11 @@
   --radius: 8px;
 }
 
-/* ========== 基础重置 ========== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 body { background-color: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 a { color: var(--accent-blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ========== 导航栏 ========== */
 .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color); position: relative; }
 .navbar .logo { font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; color: var(--accent-blue); }
 .nav-links { display: flex; align-items: center; gap: 1.5rem; }
@@ -29,12 +26,10 @@ a:hover { text-decoration: underline; }
 .nav-link:hover { color: var(--text-primary); text-decoration: none; }
 .menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; padding: 0.25rem; }
 
-/* ========== 容器 ========== */
 .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; }
 .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
 .page-subtitle { color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem; }
 
-/* ========== 卡片 ========== */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
 .card { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer; display: block; text-decoration: none; color: var(--text-primary); }
 .card:hover { border-color: var(--accent-blue); box-shadow: 0 0 12px rgba(88,166,255,0.15); text-decoration: none; }
@@ -43,23 +38,19 @@ a:hover { text-decoration: underline; }
 .card-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
 .card-footer { display: flex; justify-content: flex-end; color: var(--accent-blue); font-size: 0.9rem; }
 
-/* ========== 按钮 ========== */
 .btn { display: inline-block; padding: 0.6rem 1.5rem; background-color: var(--accent-blue); color: #fff; border: none; border-radius: var(--radius); font-weight: 600; cursor: pointer; transition: background-color 0.2s; font-family: var(--font-sans); font-size: 0.95rem; min-height: 44px; min-width: 44px; }
 .btn:hover { background-color: #4090e0; }
 .btn-sm { padding: 0.4rem 1rem; font-size: 0.85rem; min-height: 36px; }
 
-/* ========== 表单 ========== */
 .form-group { margin-bottom: 1.2rem; }
 .form-label { display: block; margin-bottom: 0.3rem; font-weight: 600; }
 .form-input { width: 100%; padding: 0.75rem 1rem; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius); color: var(--text-primary); font-family: var(--font-sans); font-size: 1rem; transition: border-color 0.2s; min-height: 44px; }
 .form-input:focus { outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 2px rgba(88,166,255,0.2); }
 
-/* ========== 消息提示 ========== */
 .message { padding: 0.8rem 1rem; border-radius: var(--radius); margin-top: 1rem; font-size: 0.9rem; border-left: 4px solid; }
 .message-error { background-color: rgba(248,81,73,0.1); border-color: var(--accent-red); color: var(--accent-red); }
 .message-success { background-color: rgba(63,185,80,0.1); border-color: var(--accent-green); color: var(--accent-green); }
 
-/* ========== 广告轮播 ========== */
 .ad-banner { margin-top: 2rem; background-color: rgba(88,166,255,0.05); border-left: 3px solid var(--accent-blue); border-radius: var(--radius); padding: 0.8rem 1.2rem; font-size: 0.9rem; }
 .ad-banner-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
 .ad-content { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; flex: 1; }
@@ -72,7 +63,6 @@ a:hover { text-decoration: underline; }
 .dot { width: 10px; height: 10px; background-color: var(--text-secondary); border-radius: 50%; cursor: pointer; transition: background-color 0.2s; }
 .dot.active { background-color: var(--accent-blue); }
 
-/* ========== 资源列表 ========== */
 .resource-card { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.2rem 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .resource-info { flex: 1; }
 .resource-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem; }
@@ -81,7 +71,6 @@ a:hover { text-decoration: underline; }
 .resource-code-block code { white-space: pre-line; background-color: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-mono); color: var(--accent-green); border: 1px solid var(--border-color); word-break: break-all; }
 .resource-platform { color: var(--accent-yellow); font-size: 0.8rem; border: 1px solid var(--accent-yellow); padding: 0.1rem 0.5rem; border-radius: 4px; white-space: nowrap; }
 
-/* ========== 捐赠 / 联系弹窗 ========== */
 .donate-card, .biz-tagline { background: linear-gradient(135deg, rgba(88,166,255,0.1), rgba(63,185,80,0.1)); border: 2px solid var(--accent-blue); border-radius: var(--radius); padding: 1.5rem 2rem; margin-top: 1rem; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; }
 .donate-card:hover, .biz-tagline:hover { background: linear-gradient(135deg, rgba(88,166,255,0.15), rgba(63,185,80,0.15)); box-shadow: 0 0 20px rgba(88,166,255,0.2); }
 .donate-card-inner { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: center; text-align: center; }
@@ -91,7 +80,6 @@ a:hover { text-decoration: underline; }
 .donate-open-btn { background-color: var(--accent-green); border: none; color: white; padding: 0.6rem 1.5rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 1rem; }
 .donate-open-btn:hover { background-color: #2c974b; }
 
-/* 弹窗通用 */
 .donate-overlay, .contact-overlay, .screenshot-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.75); z-index: 1001; justify-content: center; align-items: center; }
 .donate-overlay.active, .contact-overlay.active, .screenshot-modal-overlay.active { display: flex; }
 .screenshot-modal-overlay { z-index: 2000; background: rgba(0,0,0,0.85); }
@@ -104,28 +92,23 @@ a:hover { text-decoration: underline; }
 .contact-modal h3 { font-size: 1.2rem; }
 .contact-modal p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
 
-/* 二维码 */
 .donate-qr-wrapper { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
 .donate-qr-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 .donate-qr-item img { width: 140px; height: 140px; border: 1px solid var(--border-color); border-radius: 8px; object-fit: contain; background-color: #fff; }
 .donate-qr-item span { font-size: 0.9rem; color: var(--text-secondary); }
 .donate-tip { color: var(--text-secondary); font-size: 0.85rem; }
 
-/* 微信号 */
 .wechat-id-box { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
 .wechat-label { color: var(--text-secondary); font-size: 0.9rem; }
 .wechat-id { background-color: var(--bg-primary); padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-mono); color: var(--accent-green); border: 1px solid var(--border-color); font-size: 0.9rem; }
 .copy-wechat-btn { min-height: 32px; padding: 0.2rem 0.8rem; font-size: 0.85rem; }
 
-/* 分享按钮 */
 .share-btn { position: fixed; bottom: 90px; right: 30px; padding: 0.5rem 1rem; background-color: var(--bg-secondary); border: 1px solid var(--accent-blue); color: var(--accent-blue); border-radius: 20px; font-weight: 600; cursor: pointer; z-index: 997; box-shadow: var(--shadow); font-size: 0.9rem; transition: transform 0.2s, background-color 0.2s; }
 .share-btn:hover { background-color: var(--accent-blue); color: #fff; }
 
-/* 冲突卡片 */
 .conflict-card { background: var(--bg-secondary); border: 1px solid var(--accent-red); border-radius: var(--radius); padding: 1.5rem; margin-top: 1.5rem; text-align: center; box-shadow: 0 0 15px rgba(248,81,73,0.2); animation: pulse 2s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 10px rgba(248,81,73,0.3); } 50% { box-shadow: 0 0 20px rgba(248,81,73,0.6); } 100% { box-shadow: 0 0 10px rgba(248,81,73,0.3); } }
 
-/* 排行榜 */
 .leaderboard { margin-top: 2rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.2rem; }
 .leaderboard h4 { margin-bottom: 0.8rem; font-size: 1rem; color: var(--accent-blue); }
 .leaderboard .stat { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.9rem; }
@@ -136,7 +119,6 @@ a:hover { text-decoration: underline; }
 .hall-of-shame th, .hall-of-shame td { padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border-color); text-align: left; }
 .hall-of-shame th { color: var(--accent-yellow); }
 
-/* ========== 响应式 ========== */
 @media (max-width: 768px) {
   .navbar { padding: 0.8rem 1.2rem; }
   .menu-toggle { display: block; }

@@ -5,22 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>人类审核机器局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
-      authDomain: "absurd-lab.firebaseapp.com",
-      projectId: "absurd-lab",
-      storageBucket: "absurd-lab.firebasestorage.app",
-      messagingSenderId: "989176389764",
-      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    window.db = db;
-    window.firestoreHelpers = { doc, setDoc, increment };
-  </script>
+<script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .verification-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 500px; margin: 2rem auto; width: 90%; }
     .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.5rem 0; }
@@ -135,15 +120,13 @@
         document.querySelectorAll('.grid-item').forEach(item => { item.style.pointerEvents = 'none'; item.style.filter = 'blur(1px)'; });
         refreshLink.style.pointerEvents = 'none'; refreshLink.style.color = 'var(--text-secondary)';
         if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) showEasterEgg(AD_LIST[Math.floor(Math.random() * AD_LIST.length)]);
+        // AI判定时计数
+        if (window.incrementStat) window.incrementStat('human_verification');
       }
     });
 
     refreshLink.addEventListener('click', e => { e.preventDefault(); document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected')); generateGrid(); });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.incrementStat) window.incrementStat('human_verification');
-      generateGrid();
-    });
+    generateGrid();
   </script>
 </body>
 </html>

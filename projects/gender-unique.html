@@ -5,22 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>性别绝不同款注册局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-    import { getFirestore, doc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
-      authDomain: "absurd-lab.firebaseapp.com",
-      projectId: "absurd-lab",
-      storageBucket: "absurd-lab.firebasestorage.app",
-      messagingSenderId: "989176389764",
-      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    window.db = db;
-    window.firestoreHelpers = { doc, setDoc, increment };
-  </script>
+<script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .rule-hint { background-color: rgba(88,166,255,0.05); border-left: 3px solid var(--accent-blue); padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem; display: flex; gap: 0.5rem; align-items: flex-start; border-radius: var(--radius); }
     .submit-btn { width: 100%; margin-top: 0.5rem; background-color: var(--accent-blue); color: #fff; border: none; padding: 0.7rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 1rem; }
@@ -125,9 +110,7 @@
       showConflictCard(selectedGender);
       failCount++;
       if (failCount >= 3) { document.getElementById('registerBtn').disabled = true; document.getElementById('registerBtn').textContent = '世界已满'; showAd(); }
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
+      // 性别撞车计数
       if (window.incrementStat) window.incrementStat('gender_unique');
     });
   </script>

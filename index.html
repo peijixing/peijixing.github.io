@@ -54,7 +54,6 @@
     <h1 class="page-title">// 离谱发明实验室</h1>
     <p class="page-subtitle">以下所有项目均通过国际反逻辑认证，请谨慎体验。</p>
 
-    <!-- 实时统计 -->
     <div class="stats-container">
       <div class="stats-title">📊 离谱人气统计</div>
       <div class="stats-grid">
@@ -91,7 +90,6 @@
     </div>
   </div>
 
-  <!-- 联系弹窗 -->
   <div class="contact-overlay" id="contactOverlay">
     <div class="contact-modal">
       <div class="contact-close" id="contactClose">✕</div>
@@ -100,65 +98,19 @@
       <img src="assets/images/wechat-contact.webp" alt="微信二维码">
       <div class="wechat-id-box">
         <span class="wechat-label">微信号：</span>
-        <code class="wechat-id" id="wechatId">mrpeijixing</code>
+        <code class="wechat-id" id="wechatId">你的真实微信号</code>
         <button class="btn btn-sm copy-wechat-btn" id="copyWechatBtn">复制</button>
       </div>
       <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.5rem;">📱 手机用户点击“复制”后，打开微信添加朋友</p>
     </div>
   </div>
 
-  <!-- Firebase 读取统计 -->
+  <!-- 公共 Firebase 初始化 -->
+  <script type="module" src="assets/firebase-init.js"></script>
+  <!-- 统计读取（独立模块） -->
   <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-    import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrag9I2Jhy7VtHCabGWCw4Pt6AoJ0Hgjo",
-      authDomain: "absurd-lab.firebaseapp.com",
-      projectId: "absurd-lab",
-      storageBucket: "absurd-lab.firebasestorage.app",
-      messagingSenderId: "989176389764",
-      appId: "1:989176389764:web:f656f6db4e31de39bc22d1"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    window.db = db;
-    window.firestoreHelpers = { collection, getDocs };
-  </script>
+    import { getDocs, collection } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
 
-  <script src="assets/ads.js"></script>
-  <script src="assets/utils.js"></script>
-  <script src="assets/ad-banner.js"></script>
-  <script src="assets/donate.js"></script>
-  <script src="assets/stats.js"></script>
-  <script src="assets/share-button.js"></script>
-
-  <script>
-    // 汉堡菜单
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-      navLinks.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
-    }
-
-    // 联系弹窗
-    const contactLink = document.getElementById('contactLink');
-    const contactOverlay = document.getElementById('contactOverlay');
-    const contactClose = document.getElementById('contactClose');
-    contactLink.addEventListener('click', e => { e.preventDefault(); contactOverlay.classList.add('active'); });
-    contactClose.addEventListener('click', () => contactOverlay.classList.remove('active'));
-    contactOverlay.addEventListener('click', e => { if (e.target === contactOverlay) contactOverlay.classList.remove('active'); });
-
-    // 复制微信号
-    const copyWechatBtn = document.getElementById('copyWechatBtn');
-    const wechatId = document.getElementById('wechatId');
-    copyWechatBtn.addEventListener('click', () => {
-      copyToClipboard(wechatId.textContent.trim(), success => {
-        if (success) { copyWechatBtn.textContent = '已复制'; copyWechatBtn.classList.add('copied'); setTimeout(() => { copyWechatBtn.textContent = '复制'; copyWechatBtn.classList.remove('copied'); }, 1500); }
-      });
-    });
-
-    // 更新统计数字
     function updateStatsUI(data) {
       document.getElementById('statPassword').textContent = data.password_unique || 0;
       document.getElementById('statHuman').textContent = data.human_verification || 0;
@@ -166,7 +118,51 @@
       document.getElementById('statSlide').textContent = data.slide_verify || 0;
       document.getElementById('statGender').textContent = data.gender_unique || 0;
     }
-    if (window.getStats) window.getStats(updateStatsUI); else updateStatsUI({});
+
+    async function loadStats() {
+      try {
+        const snapshot = await getDocs(collection(window.db, 'stats'));
+        const stats = {};
+        snapshot.forEach(doc => stats[doc.id] = doc.data().count || 0);
+        updateStatsUI(stats);
+      } catch (e) {
+        console.error('首页统计读取失败', e);
+        updateStatsUI({});
+      }
+    }
+
+    loadStats();
+  </script>
+
+  <script src="assets/ads.js"></script>
+  <script src="assets/utils.js"></script>
+  <script src="assets/ad-banner.js"></script>
+  <script src="assets/donate.js"></script>
+  <!-- 首页不再需要 stats.js，因为只读取，已在上方模块中实现 -->
+  <script src="assets/share-button.js"></script>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+      navLinks.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+    }
+
+    const contactLink = document.getElementById('contactLink');
+    const contactOverlay = document.getElementById('contactOverlay');
+    const contactClose = document.getElementById('contactClose');
+    contactLink.addEventListener('click', e => { e.preventDefault(); contactOverlay.classList.add('active'); });
+    contactClose.addEventListener('click', () => contactOverlay.classList.remove('active'));
+    contactOverlay.addEventListener('click', e => { if (e.target === contactOverlay) contactOverlay.classList.remove('active'); });
+
+    const copyWechatBtn = document.getElementById('copyWechatBtn');
+    const wechatId = document.getElementById('wechatId');
+    copyWechatBtn.addEventListener('click', () => {
+      copyToClipboard(wechatId.textContent.trim(), success => {
+        if (success) { copyWechatBtn.textContent = '已复制'; copyWechatBtn.classList.add('copied'); setTimeout(() => { copyWechatBtn.textContent = '复制'; copyWechatBtn.classList.remove('copied'); }, 1500); }
+      });
+    });
   </script>
 </body>
 </html>
