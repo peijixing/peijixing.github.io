@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>反逻辑进度条生成器 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-<script type="module" src="../assets/firebase-init.js"></script>
+  <script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .progress-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 500px; margin: 2rem auto; text-align: center; }
     .progress { height: 30px; background-color: var(--bg-primary); border-radius: 15px; overflow: hidden; margin: 1.5rem 0; }
@@ -99,7 +99,8 @@
       startBtn.disabled = true; pauseBtn.disabled = true; cancelBtn.disabled = true; speedBtn.disabled = true;
       randomJoke.textContent = '人生就是这样，越想放弃越容易成功。';
       showAd();
-      // 下载翻车计数
+      // 统计
+      console.log('触发 progress_bar 统计');
       if (window.incrementStat) window.incrementStat('progress_bar');
     }
     function toggleSpeed() {

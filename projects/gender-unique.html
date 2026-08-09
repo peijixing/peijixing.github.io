@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>性别绝不同款注册局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-<script type="module" src="../assets/firebase-init.js"></script>
+  <script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .rule-hint { background-color: rgba(88,166,255,0.05); border-left: 3px solid var(--accent-blue); padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem; display: flex; gap: 0.5rem; align-items: flex-start; border-radius: var(--radius); }
     .submit-btn { width: 100%; margin-top: 0.5rem; background-color: var(--accent-blue); color: #fff; border: none; padding: 0.7rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 1rem; }
@@ -110,7 +110,8 @@
       showConflictCard(selectedGender);
       failCount++;
       if (failCount >= 3) { document.getElementById('registerBtn').disabled = true; document.getElementById('registerBtn').textContent = '世界已满'; showAd(); }
-      // 性别撞车计数
+      // 统计
+      console.log('触发 gender_unique 统计');
       if (window.incrementStat) window.incrementStat('gender_unique');
     });
   </script>

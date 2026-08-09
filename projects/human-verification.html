@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>人类审核机器局 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-<script type="module" src="../assets/firebase-init.js"></script>
+  <script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .verification-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 500px; margin: 2rem auto; width: 90%; }
     .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.5rem 0; }
@@ -120,7 +120,8 @@
         document.querySelectorAll('.grid-item').forEach(item => { item.style.pointerEvents = 'none'; item.style.filter = 'blur(1px)'; });
         refreshLink.style.pointerEvents = 'none'; refreshLink.style.color = 'var(--text-secondary)';
         if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) showEasterEgg(AD_LIST[Math.floor(Math.random() * AD_LIST.length)]);
-        // AI判定时计数
+        // 统计
+        console.log('触发 human_verification 统计');
         if (window.incrementStat) window.incrementStat('human_verification');
       }
     });

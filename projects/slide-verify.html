@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>捉迷藏滑块验证 | 离谱发明实验室</title>
   <link rel="stylesheet" href="../assets/style.css">
-<script type="module" src="../assets/firebase-init.js"></script>
+  <script type="module" src="../assets/firebase-init.js"></script>
   <style>
     .login-box { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 400px; margin: 2rem auto; }
     .submit-btn { width: 100%; margin-top: 1rem; }
@@ -163,7 +163,8 @@
         document.getElementById('copyAdBtn').addEventListener('click', () => copyToClipboard(randomAd.code, s => alert(s ? '已复制，请到对应的 App 查看' : '复制失败')));
       }
       sliderTrack.style.display = 'none'; verifyBox.querySelector('p').style.display = 'none'; document.querySelector('.verify-hint').style.display = 'none'; giveUpBtn.style.display = 'none';
-      // 滑块放弃计数
+      // 统计
+      console.log('触发 slide_verify 统计');
       if (window.incrementStat) window.incrementStat('slide_verify');
     }
 
