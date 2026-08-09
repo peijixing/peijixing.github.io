@@ -99,8 +99,6 @@
       startBtn.disabled = true; pauseBtn.disabled = true; cancelBtn.disabled = true; speedBtn.disabled = true;
       randomJoke.textContent = '人生就是这样，越想放弃越容易成功。';
       showAd();
-      // 统计
-      console.log('触发 progress_bar 统计');
       if (window.incrementStat) window.incrementStat('progress_bar');
     }
     function toggleSpeed() {
@@ -121,6 +119,11 @@
     cancelBtn.addEventListener('click', cancelDownload);
     speedBtn.addEventListener('click', toggleSpeed);
     updateUI();
+
+    // 页面浏览计数
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.incrementStat) window.incrementStat('progress_bar');
+    });
   </script>
 </body>
 </html>

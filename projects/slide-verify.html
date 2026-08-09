@@ -163,12 +163,15 @@
         document.getElementById('copyAdBtn').addEventListener('click', () => copyToClipboard(randomAd.code, s => alert(s ? '已复制，请到对应的 App 查看' : '复制失败')));
       }
       sliderTrack.style.display = 'none'; verifyBox.querySelector('p').style.display = 'none'; document.querySelector('.verify-hint').style.display = 'none'; giveUpBtn.style.display = 'none';
-      // 统计
-      console.log('触发 slide_verify 统计');
       if (window.incrementStat) window.incrementStat('slide_verify');
     }
 
     overlay.addEventListener('click', e => { if (e.target === overlay) hideVerify(); });
+
+    // 页面浏览计数
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.incrementStat) window.incrementStat('slide_verify');
+    });
   </script>
 </body>
 </html>

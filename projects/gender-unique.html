@@ -110,8 +110,11 @@
       showConflictCard(selectedGender);
       failCount++;
       if (failCount >= 3) { document.getElementById('registerBtn').disabled = true; document.getElementById('registerBtn').textContent = '世界已满'; showAd(); }
-      // 统计
-      console.log('触发 gender_unique 统计');
+      if (window.incrementStat) window.incrementStat('gender_unique');
+    });
+
+    // 页面浏览计数
+    window.addEventListener('DOMContentLoaded', function() {
       if (window.incrementStat) window.incrementStat('gender_unique');
     });
   </script>

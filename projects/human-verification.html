@@ -120,14 +120,17 @@
         document.querySelectorAll('.grid-item').forEach(item => { item.style.pointerEvents = 'none'; item.style.filter = 'blur(1px)'; });
         refreshLink.style.pointerEvents = 'none'; refreshLink.style.color = 'var(--text-secondary)';
         if (typeof AD_LIST !== 'undefined' && AD_LIST.length > 0) showEasterEgg(AD_LIST[Math.floor(Math.random() * AD_LIST.length)]);
-        // 统计
-        console.log('触发 human_verification 统计');
         if (window.incrementStat) window.incrementStat('human_verification');
       }
     });
 
     refreshLink.addEventListener('click', e => { e.preventDefault(); document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected')); generateGrid(); });
     generateGrid();
+
+    // 页面浏览计数
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.incrementStat) window.incrementStat('human_verification');
+    });
   </script>
 </body>
 </html>
